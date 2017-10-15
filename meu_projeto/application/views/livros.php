@@ -8,51 +8,44 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 portfolio-item">
+            <div class="col-lg-4 col-md-6 col-sm-4 portfolio-item">
                 <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <!--<div class="titulo_livro">Assine todos os livros</div>-->
-                    <!--<img src="img/capa_livro.png" class="img-responsive" alt="">-->
-                    <img src="assets/img/tess2.png" class="img-responsive" alt="">
+                    <img src="assets/uploads/tess2.png" class="img-responsive" alt="">
                 </a>
             </div>
-            <div class="col-sm-4 portfolio-item">
+            <div class="col-lg-4 col-md-6 col-sm-4 portfolio-item">
                 <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <!--<div class="titulo_livro">Escolha vários os livros</div>-->
-                    <!-- <img src="img/capa_livro.png" class="img-responsive" alt="">-->
-                    <img src="img/botao.png" class="img-responsive" alt="">
+                    <img src="assets/uploads/1-2-3-joao.png" class="img-responsive" alt="">
                 </a>
             </div>
-            <div class="col-sm-4 portfolio-item">
+            <div class="col-lg-4 col-md-6 col-sm-4 portfolio-item">
                 <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <!-- <div class="titulo_livro">Romanos</div> -->
-                    <img src="img/botao.png" class="img-responsive" alt="">
+                    <img src="assets/uploads/1- 2-Pedro.png" class="img-responsive" alt="">
                 </a>
             </div>
-            <div class="col-sm-4 portfolio-item">
+            <div class="col-lg-4 col-md-6 col-sm-4 portfolio-item">
                 <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <!-- <div class="titulo_livro">1º Coríntios</div>
-                     <img src="img/capa_livro.png" class="img-responsive" alt="">-->
-                    <img src="img/botao.png" class="img-responsive" alt="">
+                    <img src="assets/uploads/1-2-Timoteo.png" class="img-responsive" alt="">
                 </a>
             </div>
             <div class="col-sm-4 portfolio-item">
@@ -62,9 +55,7 @@
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <!--<div class="titulo_livro">2º Coríntios</div>
-                    <img src="img/capa_livro.png" class="img-responsive" alt="">-->
-                    <img src="img/botao.png" class="img-responsive" alt="">
+                    <img src="assets/uploads/Tito-Filemom-Judas.png" class="img-responsive" alt="">
                 </a>
             </div>
             <div class="col-sm-4 portfolio-item">

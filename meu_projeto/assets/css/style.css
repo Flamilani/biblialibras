@@ -37,8 +37,12 @@ section h2 {
     background: #fff;
 }
 
-.modal-body h2, #portfolio h2 {
+.modal-body h2, h2 {
     font: 36px GoudyCatalog BT;
+}
+
+.navbar-custom {
+    font-family: GoudyCatalog BT;
 }
 
 .loginBtn {

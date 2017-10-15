@@ -1,5 +1,4 @@
-<div class="container">
-    <h2>Carousel Example</h2>
+
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -11,16 +10,13 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <img src="la.jpg" alt="Los Angeles" style="width:100%; height: 100px;">
+                <img src="assets/uploads/banner_biblia.jpg" alt="Banner" style="width:100%;">
+                <div class="carousel-caption">
+                    <h3>A Bíblia em Libras</h3>
+                    <p>Promoção</p>
+                </div>
             </div>
 
-            <div class="item">
-                <img src="chicago.jpg" alt="Chicago" style="width:100%; height: 100px;">
-            </div>
-
-            <div class="item">
-                <img src="ny.jpg" alt="New york" style="width:100%; height: 100px;">
-            </div>
         </div>
 
         <!-- Left and right controls -->
@@ -33,4 +29,4 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-</div>
+
