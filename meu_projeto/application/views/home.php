@@ -9,7 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <div class="col-lg-12">
                 <!--  <img class="img-responsive" src="img/book.png" alt="">-->
-                <iframe width="640" height="360" src="https://www.youtube.com/embed/UcnvqZw0EEw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/UcnvqZw0EEw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+            </div>
                 <div class="intro-text">
                     <h1 class="name">
                         <img src="assets/img/logoBBL.png" alt="Logo A Bíblia em Libras" />
