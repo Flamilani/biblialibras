@@ -8,14 +8,13 @@
     <meta name="author" content="">
     <title>Painel Administrativo - A Bíblia em Libras</title>
     <!-- Bootstrap Core CSS -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="assets/sb-admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="assets/sb-admin/dist/css/sb-admin-2.css" rel="stylesheet">
-    <!-- Morris Charts CSS -->
-    <link href="assets/sb-admin/vendor/morrisjs/morris.css" rel="stylesheet">
-
+    <?php echo link_tag('assets/bootstrap/css/bootstrap.min.css'); ?>
+    <!-- MetisMenu CSS -->    
+    <?php echo link_tag('assets/sb-admin/vendor/metisMenu/metisMenu.min.css'); ?>
+    <!-- Custom CSS -->    
+    <?php echo link_tag('assets/sb-admin/dist/css/sb-admin-2.css'); ?>
+    <!-- Morris Charts CSS -->   
+    <?php echo link_tag('assets/sb-admin/vendor/morrisjs/morris.css'); ?>
     <?php echo link_tag('assets/font-awesome/css/font-awesome.min.css'); ?>
 
 

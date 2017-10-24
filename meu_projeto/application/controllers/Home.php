@@ -13,7 +13,7 @@ class Home extends CI_Controller {
         $this->load->view('inc/header');        
         $this->load->view('modals/modals');
         $this->load->view('home');
-        $this->load->view('banner');
+       // $this->load->view('banner');
         $this->load->view('livros');
         $this->load->view('sobre');
         $this->load->view('funciona');

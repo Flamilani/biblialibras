@@ -9,9 +9,7 @@ class Login extends CI_Controller {
 
     public function logar() {
         redirect('area/area');
-        ?> <script>
-            alert("Teste");
-        </script> <?php
+        
     }
 
     public function logout() {

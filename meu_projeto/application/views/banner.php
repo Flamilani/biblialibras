@@ -1,5 +1,5 @@
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -16,7 +16,18 @@
                     <p>Promoção</p>
                 </div>
             </div>
-
+            <!-- <div class="item">
+               <div class="embed-responsive embed-responsive-4by3">
+                <iframe style="height: 300px" src="https://www.youtube.com/embed/UcnvqZw0EEw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+            </div>
+ -->
+ <div class="item">
+<div class="embed-responsive embed-responsive-16by9 boxVideo">
+ <iframe src="https://player.vimeo.com/video/238961111" width="640" height="340" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/238961111/871cfa03e0">Comp 2</a> from <a href="https://vimeo.com/user11533692">Manhaes</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+</div>
+</div>
         </div>
 
         <!-- Left and right controls -->

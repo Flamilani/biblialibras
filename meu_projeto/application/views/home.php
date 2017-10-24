@@ -7,21 +7,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <header>
     <div class="container" id="maincontent" tabindex="-1">
         <div class="row">
-            <div class="col-lg-12">
+                  
+            <div class="col-xs-12 col-md-6 col-lg-6">
                 <!--  <img class="img-responsive" src="img/book.png" alt="">-->
-            <div class="embed-responsive embed-responsive-16by9">
+            <div class="boxVideo">
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/UcnvqZw0EEw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
             </div>
+        </div>
+         <div class="col-xs-12 col-md-6 col-lg-6">
                 <div class="intro-text">
                     <h1 class="name">
                         <img src="assets/img/logoBBL.png" alt="Logo A Bíblia em Libras" />
 
                     </h1>
                     <hr class="star-light">
-                    <span class="skills">Aprenda a Palavra de Deus através da Libras</span>
+                    <span class="skills">Tenha a Palavra de Deus em Libras</span>
                 </div>
+                <br />
+                <span class="page-scroll">
+                      <a href="#about" class="btn btn-warning" style="margin-right: 10px;">Sobre</a>
+                </span>
+              
+                <a data-toggle="modal" data-target="#modalInscricao" href="#" class="btn btn-primary">Assinar</a>
+              
             </div>
-        </div>
+                   </div>
     </div>
 </header>
 
