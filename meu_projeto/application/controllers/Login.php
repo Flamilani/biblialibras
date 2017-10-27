@@ -7,9 +7,21 @@ class Login extends CI_Controller {
         $this->load->model("users_model");
     }
 
-    public function logar() {
-        redirect('area/area');
-        
+   public function logar() {
+        $email = $this->input->post('email');
+        $senha = md5($this->input->post('senha'));
+        $status = 1;
+        $perfil = 1;
+        $usuario = $this->users_model->verificar($email, $senha, $status, $perfil);
+        if ($usuario) {
+            $this->session->set_userdata("logado", $usuario);
+            $this->session->set_flashdata("success", "Logado com sucesso");
+            redirect('area/area');
+        } else {
+            $this->session->set_flashdata("danger", "Usuário ou senha incorreta");
+            $this->session->sess_destroy();
+            redirect('home');
+        }
     }
 
     public function logout() {

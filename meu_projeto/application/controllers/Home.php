@@ -22,6 +22,15 @@ class Home extends CI_Controller {
         $this->load->view('inc/html-footer');
     }
 
+    public function construcao()
+    {
+        $this->load->view('inc/html-header');
+        $this->load->view('inc/header');    
+        $this->load->view('construcao');       
+        $this->load->view('inc/footer');
+        $this->load->view('inc/html-footer');
+    }
+
     public function users()
     {
         $this->load->view('inc/html-header');

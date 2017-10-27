@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/proj_biblia/meu_projeto';
-// $config['base_url'] = 'https://abibliaemlibras.com.br';
+// $config['base_url'] = 'https://abibliaemlibras.com.br/teste';
 
 /*
 |--------------------------------------------------------------------------

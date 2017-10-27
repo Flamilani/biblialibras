@@ -12,7 +12,7 @@ section {
 }
 
 section h2 {
-    padding-bottom: 50px !important;
+    padding-bottom: 40px !important;
 }
 
 #portfolio .portfolio-item .portfolio-link .caption {
@@ -41,10 +41,6 @@ section h2 {
     font: 36px GoudyCatalog BT;
 }
 
-.navbar-custom {
-    font-family: GoudyCatalog BT;
-}
-
 .loginBtn {
     margin-top: 7px;
     margin-left: 10px;
@@ -54,6 +50,11 @@ section h2 {
 
 header {
     background-color: #64a3c6 !important;
+}
+
+.facebook {
+    padding: 30px;    
+    padding-bottom: 0px;
 }
 
 div#maincontent.container {
@@ -70,6 +71,24 @@ div#maincontent.container {
     height: auto;
 }
 
+/* LIVROS */
+
+.thumbnail {
+    padding: 20px !important;
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    margin-bottom: 0px !important;
+
+}
+
+.thumbnail .caption h2{
+    padding-bottom: 20px !important;
+}
+
+.thumbnail p {
+    margin-top: 10px;
+}
+
 .titulo_livro {
     position: absolute;
     top: 50px;
@@ -82,6 +101,16 @@ div#maincontent.container {
     margin: 50px;
     text-align: center;
     z-index: 1 !important;
+}
+
+.btnComprar {
+    background-color: green;
+    font-size: 20px;
+}
+
+.btnComprar:hover {
+    background-color: #30f738;
+    color: green !important;
 }
 
 .img-responsive {
@@ -100,12 +129,12 @@ section.funciona {
     color: #fff;
 }
 
-@media (min-width: 1200px) and (max-width: 1200px) {
+@media only screen and (min-width: 1200px) and (max-width: 1200px) {
     .container {
         width: 750px;
     }
 }
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
     .navbar-brand img {
         margin: 5px;
         margin-left: 20px;
@@ -196,7 +225,16 @@ section.funciona {
     .nav.navbar-nav.navbar-right {
         font-size: 10px !important;
     }
+
 }
+
+@media only screen and (max-width: 767px) {
+
+    div#maincontent.container {
+        padding-top: 100px !important;
+    }
+}
+
 
 iframe[src*=vimeo] {
     width: 100%;
@@ -226,4 +264,8 @@ iframe[src*=vimeo] {
     padding: 10px;
     max-height: 300px;
     height: 100%;
+}
+
+.clear {
+    clear: both;
 }

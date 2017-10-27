@@ -46,3 +46,11 @@
         </div>
     </div>
 </footer>
+
+<script type="text/javascript">
+    var app = angular.module('meuApp', []);
+    app.controller('meuCtrl', function($scope){
+
+    $scope.filtro = "";   
+});
+</script>

@@ -8,8 +8,9 @@ class Area extends CI_Controller {
     }
 
     public function index() {
-
+		$this->load->view('area/inc/html-header');
         $this->load->view('area/area');
+        $this->load->view('area/inc/html-footer');
 
     }
 

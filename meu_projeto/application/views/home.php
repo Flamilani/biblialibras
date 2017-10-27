@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-
 <!-- Header -->
 <header>
     <div class="container" id="maincontent" tabindex="-1">
@@ -29,8 +28,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </span>
               
                 <a data-toggle="modal" data-target="#modalInscricao" href="#" class="btn btn-primary">Assinar</a>
-              
+             <div class="facebook">
+              <div class="fb-like" data-href="https://abibliaemlibras.com.br" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+          </div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.10';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
             </div>
+
                    </div>
     </div>
 </header>

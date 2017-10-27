@@ -8,22 +8,25 @@
             </div>
             <div class="modal-body">
                     <?php echo form_open(base_url('home/logar'), array('id'=>'form_login')); ?>
+                    <?php echo validation_errors(); ?>
+                                    <?php $email = array('name' => 'acessoemail', 'id' => 'acessoemail', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'E-mail', 'data-error' => 'Informe seu e-mail.', 'required' => 'required'); ?>
+                                    <?php $senha = array('name' => 'acessosenha','id' => 'acessosenha', 'type' => 'password', 'class' => 'form-control', 'placeholder' => 'Senha', 'data-error' => 'Informe sua senha', 'required' => 'required'); ?>
+                                    <?php $button = array('name' => 'btn_login', 'id' => 'btn_login', 'type' => 'submit', 'class' => 'btn btn-primary', 'value' => 'Acessar'); ?>
+                                    <?php $anchor = array('href'=>base_url('esqueci-minha-senha'), 'value'=>'Esqueci minha senha', 'type'=>'button', 'class'=>'btn btn-warning btn-sm btn-block');  ?>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label for="email">E-mail</label>
-                            <input type="email" class="form-control" placeholder="E-mail" id="acessoemail" required data-validation-required-message="Favor digite seu e-mail.">
-                            <p class="help-block text-danger"></p>
+                             <?php echo form_input($email); ?>      
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label for="senha">Senha</label>
-                            <input type="password" class="form-control" placeholder="Senha" id="acessosenha" required data-validation-required-message="Favor digite sua senha.">
-                            <p class="help-block text-danger"></p>
+                              <?php echo form_password($senha); ?>    
                         </div>
                     </div>
                     <br />
-                    <button type="submit" class="btn btn-primary">Acessar</button>
+                  <?php echo form_submit($button); ?>
                 <?php form_close(); ?>
             </div>
             <div class="modal-footer">
