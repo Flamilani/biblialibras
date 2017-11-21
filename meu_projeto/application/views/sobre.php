@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>Sobre a Bíblia em Libras</h2>
+                <?php echo $sobre[0]->titulo; ?>
                 <br />
                 <!-- <hr class="star-light">-->
             </div>

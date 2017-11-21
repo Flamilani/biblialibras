@@ -1,82 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
+<div class="fundoAdmin">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
+                <div class="login-panel panel panel-info">
                     <div class="panel-heading">
-                        <h3 class="panel-title text-center">Acesso ao Painel Admin.</h3>
+                        <h3 class="panel-title text-center">Acesso ao Painel Administrativo</h3>
                     </div>
+                         
                     <div class="panel-body">
-                        <form role="form">
+                <?php  $login = array('name' => 'email', 'type' => 'email', 'id'=> 'email', 'class' => 'form-control', 'placeholder' => 'Email', 'data-error' => 'Informe seu e-mail.', 'required' => 'required'); ?>
+                <?php  $senha = array('name'=>'senha', 'type' => 'password', 'id'=> 'senha', 'class' => 'form-control', 'placeholder' => 'Senha', 'data-error' => 'Mínimo de seis (6) dígitos.', 'pattern' => '.{6,12}', 'title' => 'Informe sua Senha [de 6 a 12 caracteres!]'); ?>
+                    <?php $button = array('name'=> 'acessar', 'id' => 'btnAcessar', 'value'=> 'Acessar', 'class'=> 'btn btn-primary btn-block btn-flat'); ?>
+                    <?php echo form_open(base_url('admin/login/logar_admin'), array('id'=>'form_login')); ?>
                             <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus required>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Senha" name="senha" type="password" value="" required>
-                                </div>
-                                <!-- <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
-                                </div> -->
-                                <!-- Change this to a button or input when using this as a form -->
-                                <a href="home" class="btn btn-lg btn-success btn-block">Acessar</a>
+                                 <div class="form-group has-feedback">
+                                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                  <?php echo form_input($login); ?>       
+                                        </div>
+                              <div class="form-group has-feedback">
+                                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                 <?php echo form_password($senha); ?>      
+                                        </div>                       
+                                <?php echo form_submit($button); ?>          
                             </fieldset>
-                        </form>
+                        <?php form_close(); ?>
                     </div>
                 </div>
+                <?php if($this->session->flashdata('alert')) { ?>
+                <div class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times; </button>
+                    <i class="icon fa fa-warning"></i> Login e/ou senha são incorretos!</div>
+            <?php } ?>
+          <?php if($this->session->flashdata('success')) { ?>
+                <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="icon fa fa-success"></i>Saiu da sessão com sucesso.</div>
+            <?php } ?>
             </div>
         </div>
     </div>
-
-    <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
-
-</body>
-
-</html>
+</div>

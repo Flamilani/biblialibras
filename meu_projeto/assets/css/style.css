@@ -3,8 +3,8 @@
     src: local("GoudyCat.ttf"), url("GoudyCat.ttf");
 }
 
-a.active, a:active, a:focus, a:hover {
-    color: #ffeb3b !important;
+a:hover {
+    color: #00CCFF !important;
 }
 
 section {
@@ -64,6 +64,10 @@ div#maincontent.container {
 
 .navbar-brand {
     padding: 0px !important;
+}
+
+.navbar-brand.admin {
+    padding: 15px !important;
 }
 
 .navbar-brand img {
@@ -268,4 +272,42 @@ iframe[src*=vimeo] {
 
 .clear {
     clear: both;
+}
+
+.error404 {
+    margin-top: 120px;
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: center;
+}
+
+ /* ADMIN */
+
+ .fundoAdmin {
+   /* background-color: #2C3E50; */
+ }
+
+ .perfil {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    text-align: center;
+ }
+
+ .perfil p {
+    margin-bottom: 3px !important;
+ }
+
+ .exibeImg {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100px;
+    margin-bottom: 10px;
+}
+
+ .imgNormal {
+    max-width: 100%;
+    max-height: 250px;
+    margin-bottom: 10px;
 }

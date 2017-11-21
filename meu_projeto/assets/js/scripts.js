@@ -1,7 +1,11 @@
-$(function () {
+$(function () {	
     $("#cartBtn").mousedown(function() {
         $('#panelCart').fadeToggle('slow');
     });
+
+   
+ //	$('#valor').mask('000.000.000.000.000,00', {reverse: true});
+
 });
 
 function toggleCart() {
@@ -13,4 +17,12 @@ function toggleCart() {
     } else {
         cart.style.display = "none";
     }
+}
+
+function confirmarExclusao(id) {
+	if(!confirm("Confirma deletar este registro ID " + id + "?")) {
+		return false;
+	} else {
+		return true;
+	}
 }

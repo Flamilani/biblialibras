@@ -10,7 +10,7 @@ class Livros_model extends CI_Model {
         parent::__construct();
     } 
     
-    public function lista_Livros() {
+    public function admin_Livros() {
         $query = $this->db->get($this->table);
         if ($query->num_rows() > 0):
             return $query->result();
@@ -19,6 +19,79 @@ class Livros_model extends CI_Model {
         endif;
     }
 
+    public function home_Livros() {
+        $query = $this->db->where('status', 1);
+        $query = $this->db->get($this->table);
+        if ($query->num_rows() > 0):
+            return $query->result();
+        else:
+            return null;
+        endif;
+    }
+
+
+     public function countLivros() {  
+        $query = $this->db->where('status', 1);     
+        $query = $this->db->get($this->table);
+        $rows = $query->num_rows();
+        if ($rows > 0):
+            return $rows;
+        else:
+            return 0;
+        endif;
+    }   
+
+     public function countAdminLivros() {            
+        $query = $this->db->get($this->table);
+        $rows = $query->num_rows();
+        if ($rows > 0):
+            return $rows;
+        else:
+            return 0;
+        endif;
+    }   
+
+    public function detalheLivro($id) {
+        $this->db->where('id_livro', $id);
+        return $this->db->get($this->table)->result();
+    }
+
+     public function adicionarLivros($titulo, $conteudo, $imagem, $valor, $status, $ordem) {      
+        $data['titulo'] = $titulo;     
+        $data['conteudo'] = $conteudo;      
+        $data['imagem'] = $imagem;      
+        $data['valor'] = $valor;      
+        $data['ordem'] = $ordem;      
+        $data['status'] = $status;      
+        return $this->db->insert($this->table, $data);
+    }
+
+        public function alterar_livro_status($id, $status) {
+        $data['status'] = $status;
+        $this->db->where('id_livro', $id);
+        return $this->db->update($this->table, $data);
+    }
+
+     public function gravar_alteracoes($id, $titulo, $conteudo, $valor, $status, $ordem) {
+        $data['titulo'] = $titulo;
+        $data['conteudo'] = $conteudo;
+        $data['valor'] = $valor;
+        $data['status'] = $status;
+        $data['ordem'] = $ordem;
+        $this->db->where('id_livro', $id);
+        return $this->db->update($this->table, $data);
+    }
+ 
+     public function gravar_imagem($id, $imagem) {
+        $data['imagem'] = $imagem;        
+        $this->db->where('id_livro', $id);
+        return $this->db->update($this->table, $data);
+    }
+
+     public function deletar($id) {
+        $this->db->where('id_livro', $id);
+        return $this->db->delete($this->table);
+    }
     
 
 }
