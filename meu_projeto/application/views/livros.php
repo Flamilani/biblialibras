@@ -2,13 +2,13 @@
 <section id="portfolio">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-12 text-center front">
                 <h3>Livros e Planos</h3>
               <!--   <hr class="star-primary"> -->
             </div>
         </div>
         <div class="row">
-  <div class="col-md-8"><h3><?php echo $count_livros; ?> livros</h3>  </div>
+  <div class="col-md-8 front"><h3><?php echo $count_livros; ?> livros</h3>  </div>
   <div class="col-md-4"> 
  <div class="input-group">
      <input type="text" class="form-control" id="livro" placeholder="Busca livro" ng-model="filtro" />
@@ -23,7 +23,7 @@
   <div ng-repeat="filter:filtro">
      <?php if (!empty($lista_livros)): ?>                    
           <?php foreach ($lista_livros as $livro): ?>
-        <?php $rowsCap = $this->db->query("SELECT * FROM livros WHERE id_livro = '{$livro->id_livro}'"); ?>
+        <?php $rowsCap = $this->db->query("SELECT * FROM capitulos WHERE id_livro = '{$livro->id_livro}'"); ?>
                   <?php $countCap = $rowsCap->result(); ?>                     
              <div class="col-lg-4 col-md-6 col-sm-4 portfolio-item">
     <div class="thumbnail text-center">
@@ -36,7 +36,7 @@
                 <img src="<?php echo base_url('assets/uploads/' . $livro->imagem); ?>" class="img-responsive" alt="">
                 </a>
                 <p><?php echo $livro->titulo; ?></p>
-       <p><?php echo count($countCap); ?> capítulos | 36 vídeos</p>
+       <p><?php echo count($countCap); ?> <?php plural(count($countCap), 'capítulo', 'capítulos'); ?> | 36 vídeos</p>
       <div class="caption">
         <h2><?php echo reais($livro->valor); ?></h2>
         <p><a href="#" class="btn btn-primary btnComprar" role="button">Comprar</a></p>

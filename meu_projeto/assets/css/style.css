@@ -3,8 +3,10 @@
     src: local("GoudyCat.ttf"), url("GoudyCat.ttf");
 }
 
+
 a:hover {
-    color: #00CCFF !important;
+    color: #23527c !important;
+    text-decoration: none;
 }
 
 section {
@@ -37,7 +39,7 @@ section h2 {
     background: #fff;
 }
 
-.modal-body h2, h2 {
+.front h2, .front h3 {
     font: 36px GoudyCatalog BT;
 }
 
@@ -75,13 +77,17 @@ div#maincontent.container {
     height: auto;
 }
 
+.navbar.areaUsuario {
+    margin-bottom: 0px !important;
+}
+
 /* LIVROS */
 
 .thumbnail {
-    padding: 20px !important;
-    padding-right: 5px !important;
-    padding-left: 5px !important;
-    margin-bottom: 0px !important;
+    padding: 10px !important;
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    margin-bottom: 10px !important;
 
 }
 
@@ -310,4 +316,45 @@ iframe[src*=vimeo] {
     max-width: 100%;
     max-height: 250px;
     margin-bottom: 10px;
+}
+
+.caixa_livro {
+    display: none;
+}
+
+/* ÁREA DO USUÁRIO */
+
+.concluido {
+    background-color: lawngreen !important;
+    color: forestgreen !important;
+}
+
+.btnConcluido {
+    margin: 0 auto;
+    display: block;
+}
+
+.fundoArea {
+    background-color: #efefef;
+
+}
+
+.progress {
+   border: 1px solid #337ab7;
+}
+
+.progress-bar {
+    color: #000;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.fundoLoad {
+    background: url('../../assets/img/Loading_icon.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tituloCap {
+    line-height: 53px;
 }

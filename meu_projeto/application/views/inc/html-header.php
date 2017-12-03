@@ -15,6 +15,11 @@
     <?php echo link_tag('assets/font-awesome/css/font-awesome.min.css'); ?>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+            <?php echo link_tag('assets/fonts/glyphicons-halflings-regular.eot'); ?>       
+        <?php echo link_tag('assets/fonts/glyphicons-halflings-regular.svg'); ?>       
+        <?php echo link_tag('assets/fonts/glyphicons-halflings-regular.ttf'); ?>       
+        <?php echo link_tag('assets/fonts/glyphicons-halflings-regular.woff'); ?>       
+        <?php echo link_tag('assets/fonts/glyphicons-halflings-regular.woff2'); ?>    
     <?php echo link_tag('assets/shadowbox/shadowbox.css'); ?>       
     <?php echo link_tag('assets/css/sweet-alert.css'); ?>    
     <script src="<?php echo base_url('assets/jquery/jquery.min.js') ?>"></script>

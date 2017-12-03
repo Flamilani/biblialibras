@@ -41,6 +41,16 @@ class Users_model extends CI_Model {
         endif;
     }   
 
+
+    public function verificar($email, $senha, $status, $perfil) {
+        $this->db->where("email", $email);
+        $this->db->where("senha", $senha);
+        $this->db->where("status", $status);
+        $this->db->where("perfil", $perfil);
+        $usuario = $this->db->get($this->table)->row_array();
+        return $usuario;
+    }
+
     
 
 }

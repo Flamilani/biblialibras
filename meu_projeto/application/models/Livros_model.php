@@ -5,10 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Livros_model extends CI_Model {
 
     var $table = 'livros';    
+    var $id = 'id_livro';   
 
     public function __construct() {
         parent::__construct();
-    } 
+    }  
     
     public function admin_Livros() {
         $query = $this->db->get($this->table);
@@ -20,6 +21,7 @@ class Livros_model extends CI_Model {
     }
 
     public function home_Livros() {
+        $query = $this->db->order_by('ordem', 'ASC');
         $query = $this->db->where('status', 1);
         $query = $this->db->get($this->table);
         if ($query->num_rows() > 0):
@@ -27,6 +29,14 @@ class Livros_model extends CI_Model {
         else:
             return null;
         endif;
+    }
+
+    public function lista_Livros() {
+        $this->db->order_by('ordem', 'DESC');
+        $this->db->select('*');
+        $this->db->from('livros l');
+        $this->db->join('capitulos c', 'l.id_livro = c.id_livro', 'inner');
+        return $this->db->get()->result();
     }
 
 
@@ -52,7 +62,7 @@ class Livros_model extends CI_Model {
     }   
 
     public function detalheLivro($id) {
-        $this->db->where('id_livro', $id);
+        $this->db->where($this->id, $id);
         return $this->db->get($this->table)->result();
     }
 
@@ -68,7 +78,7 @@ class Livros_model extends CI_Model {
 
         public function alterar_livro_status($id, $status) {
         $data['status'] = $status;
-        $this->db->where('id_livro', $id);
+        $this->db->where($this->id, $id);
         return $this->db->update($this->table, $data);
     }
 
@@ -78,20 +88,21 @@ class Livros_model extends CI_Model {
         $data['valor'] = $valor;
         $data['status'] = $status;
         $data['ordem'] = $ordem;
-        $this->db->where('id_livro', $id);
+        $this->db->where($this->id, $id);
         return $this->db->update($this->table, $data);
     }
  
      public function gravar_imagem($id, $imagem) {
         $data['imagem'] = $imagem;        
-        $this->db->where('id_livro', $id);
+        $this->db->where($this->id, $id);
         return $this->db->update($this->table, $data);
     }
 
      public function deletar($id) {
-        $this->db->where('id_livro', $id);
+        $this->db->where($this->id, $id);
         return $this->db->delete($this->table);
     }
+ 
     
 
 }

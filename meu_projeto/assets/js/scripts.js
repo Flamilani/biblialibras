@@ -26,3 +26,9 @@ function confirmarExclusao(id) {
 		return true;
 	}
 }
+
+$(function () { 
+    $('#cadastro_livro').click(function(){       
+        $('.caixa_livro').slideToggle("slow");
+    });
+});

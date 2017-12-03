@@ -7,13 +7,14 @@
                 <h4 class="modal-title" id="myModalLabel">Acesso à área do Usuário</h4>
             </div>
             <div class="modal-body">
-         <?php echo form_open(base_url('home/logar'), array('id'=>'form_login')); ?>   
-                  <?php echo validation_errors(); ?>
+     <?php echo validation_errors(); ?>
     <?php $email = array('name' => 'user_email', 'id' => 'user_email', 'type' => 'email', 'class' => 'form-control', 'placeholder' => 'E-mail', 'data-error' => 'Informe seu e-mail.', 'required' => 'required'); ?>
     <?php $senha = array('name' => 'user_senha','id' => 'user_senha', 'type' => 'password', 'class' => 'form-control', 'placeholder' => 'Senha', 'data-error' => 'Informe sua senha', 'required' => 'required'); ?>
     <?php $button = array('name' => 'btn_login', 'id' => 'btn_login', 'type' => 'submit', 'class' => 'btn btn-primary', 'value' => 'Acessar'); ?>
     <?php $anchor = array('href'=>base_url('esqueci-minha-senha'), 'value'=>'Esqueci minha senha', 'type'=>'button', 'class'=>'btn btn-warning btn-sm btn-block');  ?>
    
+         <?php echo form_open(base_url('home/logar'), array('id'=>'form_acesso')); ?>   
+  
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label for="email">E-mail</label>
@@ -47,95 +48,138 @@
                 <h4 class="modal-title" id="myModalInscricao">Assinatura</h4>
             </div>
             <div class="modal-body">
-
-                <form name="Inscricao" id="inscricaoForm">
+        <?php echo validation_errors('<div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-warning"></i>', '</div>'); ?> 
+  <?php $nome = array('name' => 'nome', 'id' => 'nome', 'type' => 'nome', 'class' => 'form-control', 'placeholder' => 'Nome Completo', 'data-error' => 'Informe seu nome.', 'required' => 'required'); ?>
+    <?php $data = array('name' => 'data_nasc', 'id' => 'data_nasc', 'type' => 'data', 'class' => 'form-control', 'placeholder' => 'Data de Nascimento', 'data-error' => 'Informe sua data de nascimento.', 'required' => 'required'); ?>
+ <?php $cpf = array('name' => 'cpf', 'id' => 'cpf', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'CPF', 'data-error' => 'Informe seu nº de CPF.', 'required' => 'required'); ?>
+  <?php $email = array('name' => 'user_email', 'id' => 'user_email', 'type' => 'email', 'class' => 'form-control', 'placeholder' => 'E-mail', 'data-error' => 'Informe seu e-mail.', 'required' => 'required'); ?>
+  <?php $telefone    = array('name' => 'telefone', 'id' => 'telefone', 'type' => 'tel', 'class' => 'form-control', 'placeholder' => 'Seu número de telefone', 'data-error' => 'Informe seu nº de telefone.', 'required' => 'required'); ?>
+    <?php $celular    = array('name' => 'celular', 'id' => 'celular', 'type' => 'tel', 'class' => 'form-control', 'placeholder' => 'Seu número de Whatsapp', 'data-error' => 'Informe seu nº de Whatsapp.', 'required' => 'required'); ?>
+  <?php $senha = array('id' => 'inputPassword', 'type' => 'password', 'class' => 'form-control', 'placeholder' => 'Digite sua senha', 'data-error' => 'Mínimo de seis (6) dígitos.', 'pattern' => '.{6,12}', 'title' => 'Informe sua Senha [de 6 a 12 caracteres!]'); ?>
+      <?php $confsenha = array('name' => 'senha','id' => 'inputConfirm', 'type' => 'password', 'class' => 'form-control', 'placeholder' => 'Confirme sua senha', 'data-match' => '#inputPassword','data-match-error'=>'As senhas não são iguais.'); ?>
+    <?php $cep = array('data-toggle'=>'tooltip', 'data-placement'=>'top', 'title'=>'Digite um CEP abaixo para pesquisar os dados que serão preenchidos automaticamente!', 'name' => 'cep', 'id' => 'cep', 'type' => 'text', 'class' => 'cep form-control', 'placeholder' => 'CEP', 'data-error' => 'Informe seu CEP.', 'required' => 'required'); ?>
+    <?php $tipo = array('data-cep'=>'tipo_logradouro', 'name' => 'tipo', 'id' => 'input-demo-tipo_logradouro', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'Tipo');
+        $endereco   = array('data-cep'=>'logradouro', 'name' => 'endereco', 'id' => 'input-demo-logradouro', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'Endereço', 'data-error' => 'Informe seu endereço.', 'required' => 'required');
+        $numero     = array('name' => 'numero', 'id' => 'input-demo-logradouro', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'Digite seu login', 'data-error' => 'Informe nº de endereço.', 'required' => 'required');
+        $compl      = array('name' => 'compl', 'id' => 'input-demo-logradouro', 'type' => 'text',  'class' => 'form-control', 'placeholder' => 'Complemento');
+        $bairro     = array('data-cep'=>'bairro', 'name' => 'bairro', 'id' => 'input-demo-bairro', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'Bairro', 'data-error' => 'Informe seu e-mail.', 'required' => 'required');
+        $cidade     = array('data-cep'=>'cidade', 'name' => 'cidade', 'id' => 'input-demo-cidade', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'Sua cidade', 'data-error' => 'Informe sua cidade.', 'required' => 'required');
+        $estado     = array('data-cep'=>'uf', 'name' => 'estado', 'id' => 'input-demo-uf', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'Estado de sua cidade', 'data-error' => 'Informe seu estado.', 'required' => 'required');
+ ?>
+  <?php $btnAssinar = array('name' => 'btn_assinar', 'id' => 'btn_assinar', 'type' => 'submit', 'class' => 'btn btn-primary', 'value' => 'Assinar');
+    $btnReset = array('type' => 'reset', 'class' => 'btn btn-danger', 'value' => 'Cancelar'); ?>         
+         <?php echo form_open(base_url('home/assinar'), array('id'=>'SendAssinatura')); ?>   
                     <div class="row">
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="nome">Nome Completo</label>
-                            <input type="text" class="form-control" placeholder="Nome Completo" id="nome" required data-validation-required-message="Favor digite seu nome completo.">
-                            <p class="help-block text-danger"></p>
-                        </div>
+                              <div class="form-group has-feedback">              
+                            <?php echo form_label('Nome', 'nome') . form_input($nome); ?>
+                             <span class="help-block with-errors"></span>
+                            </div>                      
+                         </div>
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="email">Data de Nascimento</label>
-                            <input type="data" class="form-control" placeholder="Data de Nascimento" id="dataNasc" required data-validation-required-message="Favor digite sua data de nascimento.">
-                            <p class="help-block text-danger"></p>
+                           <div class="form-group has-feedback">  
+                     <?php echo form_label('Data de Nascimento', 'data_nasc'); ?>   
+                            <?php echo form_input($data); ?>   
+                         <span class="help-block with-errors"></span>
+                      </div> 
                         </div>
                     </div>
                      <div class="row">
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="nome">CPF</label>
-                            <input type="text" class="form-control" placeholder="CPF" id="cpf" required data-validation-required-message="Favor digite seu CPF.">
-                            <p class="help-block text-danger"></p>
+                           <div class="form-group has-feedback">                    
+                     <?php echo form_label('CPF', 'cpf') . form_input($cpf); ?>        
+                    <span class="glyphicon form-control-feedback"></span>
+                    <span class="help-block with-errors"></span>
+                             </div>       
                         </div>
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="email">E-mail</label>
-                            <input type="email" class="form-control" placeholder="E-mail" id="email" required data-validation-required-message="Favor digite seu e-mail.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="email">Telefone</label>
-                            <input type="tel" class="form-control" placeholder="Telefone" id="telefone" required data-validation-required-message="Favor digite seu telefone.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="email">WhatsApp</label>
-                            <input type="tel" class="form-control" placeholder="WhatsApp" id="whatsapp" required data-validation-required-message="Favor digite seu número de WhatsApp.">
-                            <p class="help-block text-danger"></p>
+                            <div class="form-group has-feedback">                    
+                     <?php echo form_label('E-mail', 'email') . form_input($email); ?>        
+                    <span class="glyphicon form-control-feedback"></span>
+                    <span class="help-block with-errors"></span>
+                     </div>   
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="senha">Senha</label>
-                            <input type="password" class="form-control" placeholder="Senha" id="senha" required data-validation-required-message="Favor digite sua senha.">
-                            <p class="help-block text-danger"></p>
+                           <div class="form-group has-feedback">  
+                   <?php echo form_label('Telefone', 'telefone') . form_input($telefone); ?>
+                    <span class="help-block with-errors"></span>
+                    </div>  
                         </div>
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="confsenha">Confirme Senha</label>
-                            <input type="password" class="form-control" placeholder="Confirme Senha" id="confsenha" required data-validation-required-message="Favor confirme sua senha.">
-                            <p class="help-block text-danger"></p>
+                           <div class="form-group has-feedback">  
+                    <?php echo form_label('Whatsapp', 'celular') . form_input($celular); ?>
+                     <span class="help-block with-errors"></span>
+                </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
+                            <div class="form-group has-feedback">   
+                     <?php echo form_label('Senha', 'inputPassword') . form_input($senha); ?>      
+                         <span class="help-block with-errors"></span>                     
+                        </div>
+                        </div>
+                        <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
+                             <div class="form-group has-feedback">  
+                        <?php echo form_label('Confirme a Senha', 'inputConfirm') . form_input($confsenha); ?>      
+                    <span class="glyphicon form-control-feedback"></span>
+                    <span class="help-block with-errors"></span>
+                </div>
                         </div>
                     </div>
                       <div class="row control-group">               
                     <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="cep">CEP</label>
-                           <input type="text" class="form-control" placeholder="CEP" id="cep">
+                          <div class="form-group has-feedback">                      
+                <?php echo form_label('CEP', 'cep'); ?>
+                    <small><a href="http://www.buscacep.correios.com.br/sistemas/buscacep/" title="Busca CEP" class="" target="_blank"> - Esqueci CEP</a></small>
+                        <?php echo form_input($cep); ?>      
+                    <span class="help-block with-errors"></span>
+                </div>  
                         </div>
                    </div>
                        <div class="row">
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="nome">Endereço</label>
-                            <input type="text" class="form-control" placeholder="Endereço" id="endereco">
+                           <div class="form-group has-feedback">              
+                <?php echo form_label('Endereço', 'endereco') . form_input($endereco); ?>
+                    <span class="help-block with-errors"></span>
+                </div> 
 
                         </div>                    
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-3 col-lg-3">
-                            <label for="nome">Número</label>
-                            <input type="text" class="form-control" placeholder="Número" id="endereco">
-
+                           <div class="form-group has-feedback">              
+                    <?php echo form_label('Número', 'numero') . form_input($numero); ?>          
+                    <span class="help-block with-errors"></span>
+                        </div>    
                         </div>
                          <div class="form-group floating-label-form-group controls col-xs-12 col-md-3 col-lg-3">
-                            <label for="nome">Compl.</label>
-                            <input type="text" class="form-control" placeholder="Compl." id="endereco">
-
+                            <div class="form-group">  
+                <?php echo form_label('Compl.', 'compl') . form_input($compl); ?>                  
+                </div>  
                         </div>
                     </div>
                         <div class="row">
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
-                            <label for="nome">Bairro</label>
-                            <input type="text" class="form-control" placeholder="Bairro" id="bairro">
-
+                             <div class="form-group has-feedback">                    
+                     <?php echo form_label('Bairro', 'bairro') . form_input($bairro); ?>       
+                    <span class="help-block with-errors"></span>
+                </div>   
                         </div>                    
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-3 col-lg-3">
-                            <label for="nome">Cidade</label>
-                            <input type="text" class="form-control" placeholder="Cidade" id="cidade">
-
+                            <div class="form-group has-feedback">                    
+                     <?php echo form_label('Cidade', 'cidade') . form_input($cidade); ?>       
+                    <span class="help-block with-errors"></span>
+                </div>    
                         </div>
                          <div class="form-group floating-label-form-group controls col-xs-12 col-md-3 col-lg-3">
-                            <label for="nome">UF</label>
-                            <input type="text" class="form-control" placeholder="UF" id="uf">
+                          <div class="form-group has-feedback">                    
+                     <?php echo form_label('Estado', 'estado') . form_input($estado); ?>     
+                    <span class="help-block with-errors"></span></div>  
 
                         </div>
                     </div>
@@ -190,10 +234,10 @@
                             </select>
                         </div>
                    </div>
-                    <button type="submit" class="btn btn-primary">Assinar</button>
-                    <button type="reset" class="btn btn-warning">Limpar</button>
 
-                </form>
+               <?php echo form_submit($btnAssinar); ?>
+               <?php echo form_reset($btnReset); ?>
+                <?php form_close(); ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -202,3 +246,26 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        
+         $('.cep').cep();        
+         $('#SendAssinatura').validator();        
+         $("#data_nasc").mask("00/00/0000");
+         $("#celular").mask("(00) 00000-0000");
+         $("#cpf").mask("000.000.000-00", {reverse: true});
+         $("#data_nasc").mask("00/00/0000");
+         
+         
+            $('#data_pagam').datepicker({
+                 autoclose: true,
+                 format: "dd/mm/yyyy",
+                 language: "pt-BR"
+          });
+
+          
+       
+       
+    });
+
+</script>

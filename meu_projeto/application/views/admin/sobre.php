@@ -8,7 +8,129 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-             <?php if($this->session->flashdata('success')) { ?>
+           <?php if(isset($sobre[0]->id_sobre) && $sobre[0]->id_sobre != null && $sobre[0]->id_sobre != ''): ?>
+   <?php if($this->session->flashdata('success')) { ?>
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="icon fa fa-success"></i>A página Sobre foi atualizada com sucesso!</div>
+            <?php } else if($this->session->flashdata('deletar')) { ?>
+                   <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="icon fa fa-success"></i>A página Sobre foi deletada com sucesso!</div>
+           <?php } ?>
+                <?php echo validation_errors('<div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-warning"></i> ', '</div>'); ?>          
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                           Atualizar Página Sobre
+                        </div>
+                        <div class="panel-body">
+  <?php $titulo = array('name' => 'titulo', 'id' => 'titulo', 'type' => 'text', 'titulo', 'value' => $sobre[0]->titulo, 'class' => 'form-control', 'placeholder' => 'Título');
+    $conteudo = array('name' => 'editor1', 'type' => 'text', 'id' => 'editor1', 'value' => $sobre[0]->conteudo, 'class' => 'form-control', 'rows' => '3');
+    $video = array('name' => 'video', 'id' => 'video', 'value' => $sobre[0]->video, 'rows' => '4', 'cols' => '60', 'class'=>'form-control');
+     $button = array('name' => 'btn_adicionar', 'id' => 'btn_adicionar', 'type' => 'submit', 'class' => 'btn btn-warning', 'value' => 'Salvar como Rascunho');
+     $buttonPubl = array('name' => 'btn_publicar', 'id' => 'btn_publicar', 'type' => 'submit', 'class' => 'btn btn-success', 'value' => 'Atualizar');
+    $reset = array('type' => 'submit', 'class' => 'btn btn-danger', 'value' => 'Limpar'); ?>
+
+         <?php echo form_open_multipart('admin/sobre/gravar_alteracoes') . form_hidden('id_sobre',$sobre[0]->id_sobre); ?>
+                             <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                             <?php echo form_label('Título', 'titulo') . form_input($titulo); ?>
+                               </div>
+                           </div>                              
+                            </div>                           
+                             <div class="row">
+                            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="midia" class="control-label">Mídia</label>                    
+                        <select name="midia" class="form-control" id="midia">
+                            <option value="default" name="imagem_video">Selecione Mídia</option>                    
+                    <?php if(isset($sobre[0]->midia) && $sobre[0]->midia == 'imagem'): ?>
+                    <option value="imagem" name="imagem" selected>Imagem</option>
+                     <option value="video" name="video">Vídeo</option>
+                            <?php else: ?>
+                    <option value="imagem" name="imagem">Imagem</option>
+                    <option value="video" name="video" selected>Vídeo</option>
+                            <?php endif; ?>
+                        </select>                  
+                </div>
+                     </div>
+                     </div>
+                   <div class="row">
+                   <div class="col-md-6">
+                <div class="imagem opcao">
+                    <div class="form-group">
+                    <span class="glyphicon glyphicon-picture"></span> 
+                        <?php echo form_label('Imagem', 'imagem') ?>
+                        <input type="file" class="form-control" name="userfile" />
+                </div>              
+                </div>
+                   </div>
+                   </div>
+                 <div class="row">
+                   <div class="col-md-6">
+                <div class="video opcao">
+                    <div class="form-group">                                                
+                            <span class="glyphicon glyphicon-facetime-video"></span> 
+                                <?php echo form_label('Vídeo', 'video') . form_textarea($video); ?>                           
+                        </div>
+                    </div> 
+                </div>  
+                 </div> 
+                  <div class="row">
+                   <div class="col-md-6">
+                
+                    <div class="form-group">
+                      <?php if ($sobre[0]->midia == 'imagem'): ?>
+                     <div class="panel panel-default">
+                        <div class="panel-heading">Imagem Atual</div>
+              <div class="panel-body">
+   <img class="exibeImg imgNormal" src="<?php echo base_url('assets/uploads/' . $sobre[0]->imagem); ?>" id="img_upload" alt="" />  
+       </div>   
+     </div> 
+     <?php else: ?> 
+<div class="panel panel-default">
+                        <div class="panel-heading">Vídeo Atual</div>
+              <div class="panel-body">
+                 <div class="boxVideo">
+  <?php echo $sobre[0]->video; ?>
+</div>
+       </div>   
+     </div> 
+     <?php endif; ?>
+                </div>              
+               
+                   </div>
+                   </div>     
+                  <div class="row">
+                             <div class="col-lg-12 col-md-12">  
+        <div class="form-group">             
+                 <?php echo form_label('Conteúdo', 'editor1') . form_textarea($conteudo); ?>
+        </div>                                      
+</div>   
+</div>                   
+       <?php echo form_submit($buttonPubl); ?>
+       <?php echo form_submit($button); ?>
+       <?php echo form_reset($reset); ?>
+      <?php form_close(); ?>          
+                                                      
+                           
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+
+            </div>
+            <!-- /.row -->
+           <?php else: ?>
+ <?php if($this->session->flashdata('success')) { ?>
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <i class="icon fa fa-success"></i>A página Sobre foi adicionada com sucesso!</div>
@@ -30,7 +152,7 @@
   <?php $titulo = array('name' => 'titulo', 'id' => 'titulo', 'type' => 'text', 'titulo', 'value' => set_value('titulo'), 'class' => 'form-control', 'placeholder' => 'Título');
     $conteudo = array('name' => 'editor1', 'type' => 'text', 'id' => 'editor1', 'value' => set_value('editor1'), 'class' => 'form-control', 'rows' => '3');
     $video = array('name' => 'video', 'id' => 'video', 'value' => set_value('video'), 'rows' => '4', 'cols' => '60', 'class'=>'form-control');
-     $button = array('name' => 'btn_adicionar', 'id' => 'btn_adicionar', 'type' => 'submit', 'class' => 'btn btn-primary', 'value' => 'Adicionar');
+     $button = array('name' => 'btn_adicionar', 'id' => 'btn_adicionar', 'type' => 'submit', 'class' => 'btn btn-warning', 'value' => 'Salvar como Rascunho');
      $buttonPubl = array('name' => 'btn_publicar', 'id' => 'btn_publicar', 'type' => 'submit', 'class' => 'btn btn-success', 'value' => 'Publicar');
     $reset = array('type' => 'submit', 'class' => 'btn btn-danger', 'value' => 'Limpar'); ?>
 
@@ -98,6 +220,9 @@
 
             </div>
             <!-- /.row -->
+           <?php endif; ?>
+
+            
         </div>
         <!-- /#page-wrapper -->
 
@@ -134,11 +259,11 @@
         {
             var current_element = $(this);
             var id = $(current_element).attr('data');
-            url = "<?php echo base_url() . 'admin/livros/alterar_status' ?>";
+            url = "<?php echo base_url() . 'admin/sobre/alterar_status' ?>";
             $.ajax({
                 type: "POST",
                 url: url,
-                data: {"id_livro": id, "status": status},
+                data: {"id_sobre": id, "status": status},
                 success: function (data) {
                     location.reload();
                 }});
