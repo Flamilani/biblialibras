@@ -113,7 +113,7 @@
                                 <tbody>
                                     <?php if (!empty($livros)): ?>                    
                             <?php foreach ($livros as $livro): ?>
- <?php $rowsCap = $this->db->query("SELECT * FROM capitulos WHERE id_livro = {$livro->id_livro}"); ?>
+ <?php $rowsCap = $this->db->query("SELECT * FROM videos WHERE id_livro = {$livro->id_livro}"); ?>
                      <?php $countCap = $rowsCap->result(); ?>
                                 <tr class="odd gradeX">
                                 <td><?php echo $livro->id_livro; ?><?php echo form_hidden($livro->id_livro); ?></td>

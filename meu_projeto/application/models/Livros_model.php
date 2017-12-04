@@ -35,7 +35,7 @@ class Livros_model extends CI_Model {
         $this->db->order_by('ordem', 'DESC');
         $this->db->select('*');
         $this->db->from('livros l');
-        $this->db->join('capitulos c', 'l.id_livro = c.id_livro', 'inner');
+        $this->db->join('videos c', 'l.id_livro = c.id_livro', 'inner');
         return $this->db->get()->result();
     }
 

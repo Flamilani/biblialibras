@@ -332,6 +332,7 @@ iframe[src*=vimeo] {
 .btnConcluido {
     margin: 0 auto;
     display: block;
+    margin-top: 10px;
 }
 
 .fundoArea {
@@ -357,4 +358,13 @@ iframe[src*=vimeo] {
 
 .tituloCap {
     line-height: 53px;
+}
+
+.over {
+    overflow: auto;
+    overflow-x: hidden;
+    height: 350px;
+    padding: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }

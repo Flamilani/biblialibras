@@ -1,7 +1,7 @@
    
     	
 <div class="container">
-   <div class="page-header front">
+   <div class="front">
   <h2>Meus Livros (<?php echo $count_livros; ?>)</h2>
 </div>
     <div class="row display-flex">

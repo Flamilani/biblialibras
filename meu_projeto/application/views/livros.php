@@ -23,7 +23,7 @@
   <div ng-repeat="filter:filtro">
      <?php if (!empty($lista_livros)): ?>                    
           <?php foreach ($lista_livros as $livro): ?>
-        <?php $rowsCap = $this->db->query("SELECT * FROM capitulos WHERE id_livro = '{$livro->id_livro}'"); ?>
+        <?php $rowsCap = $this->db->query("SELECT * FROM videos WHERE id_livro = '{$livro->id_livro}'"); ?>
                   <?php $countCap = $rowsCap->result(); ?>                     
              <div class="col-lg-4 col-md-6 col-sm-4 portfolio-item">
     <div class="thumbnail text-center">

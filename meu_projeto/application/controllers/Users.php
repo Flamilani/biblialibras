@@ -5,36 +5,10 @@ class Users extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model("users_model");
-
-         if(!$this->session->userdata('logadmin')) {
-            redirect(base_url('admin/login'));
-        }
+        $this->load->model("users_model");        
     }
 
-   public function index()	{ 
-        // $this->output->enable_profiler(TRUE);
-            $data['count_users'] = $this->users_model->countAdminUsers();   
-            $data['users'] = $this->users_model->admin_Users();    
-            $this->load->view('admin/inc/html-header');
-            $this->load->view('admin/inc/header');
-            $this->load->view('admin/usuarios', $data);
-            $this->load->view('admin/inc/footer');
-            $this->load->view('admin/inc/html-footer');
-	}
-
-     public function usuarios($id)    { 
-           // $this->output->enable_profiler(TRUE);
-            $data['count_capitulos'] = $this->videos_model->countAdminVideos($id);
-            $data['capitulos'] = $this->videos_model->admin_Videos($id);    
-            $this->load->view('admin/inc/html-header');
-            $this->load->view('admin/inc/header');
-            $this->load->view('admin/capitulos', $data);
-            $this->load->view('admin/inc/footer');
-            $this->load->view('admin/inc/html-footer');
-    }
-
-     public function alterar($id) {
+    public function alterar($id) {
         $data['livro'] = $this->users_model->detalheUser($id);
         $this->load->view('admin/inc/html-header');
         $this->load->view('admin/inc/header');
@@ -196,7 +170,7 @@ class Users extends CI_Controller {
      public function registrar() {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('nome', 'Nome', 'required|min_length[2]');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.user_email]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
         if ($this->form_validation->run() == FALSE) {
             $this->index();
         } else {
@@ -210,6 +184,101 @@ class Users extends CI_Controller {
             } else {
                $this->session->set_flashdata("error", "Erro ao assinar.");
             }
+        }
+    }
+
+     public function envio() {
+        $this->load->library('email');
+
+        // Check for validation
+        $this->form_validation->set_rules('nome', 'Nome', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('sobrenome', 'Sobrenome', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
+        $this->form_validation->set_rules('celular', 'Celular', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('senha', 'Senha', 'trim|required|xss_clean');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('inc/html-header');
+            $this->load->view('inc/header');
+            $this->load->view('home');
+            $this->load->view('inc/footer');
+            $this->load->view('inc/html-footer');
+        } else {
+
+            // Storing submitted values
+
+            $nome = $this->input->post('nome');
+            $sobrenome = $this->input->post('sobrenome');            
+            $receiver_email = $this->input->post('email');
+            $celular = $this->input->post('celular');
+            
+            $assunto = 'Assinatura da Bíblia em Libras';
+
+            $sender_email = 'flaviomilani83@gmail.com';
+
+            // Load email library and passing configured values to email library 
+            $this->email->set_newline("\r\n");
+
+            // Sender email address
+            $this->email->from($sender_email, $nome);
+            // Receiver email address
+            $this->email->to($receiver_email);
+            // Subject of email
+            $this->email->subject($assunto);
+            // Message in email
+            // $this->email->message($mensagem);
+
+            $body = '<table style="padding: 5px; border: 1px solid #000;" cellspacing="0">' .
+                    '<caption>' . $assunto . '</caption>' .
+                    '<tr><td><b>Nome</b></td><td>' . $nome . ' ' . $sobrenome . '</td></tr>' .                  
+                    '<tr><td><b>Celular</b></td><td>' . $celular . '</td></tr>' .                   
+                    '<tr><td><b>E-mail</b></td><td>' . $receiver_email . '</td></tr>' .                  
+                    '</table>';
+
+            $this->email->message($body);
+
+            if ($this->email->send()) {
+                $data['message_display'] = 'Assinatura foi efetuada com sucesso.';
+            } else {
+                $data['message_display'] = '<p class="error_msg">Erro ao enviar</p>';
+                print_r($this->email->print_debugger());
+            }
+//            $this->load->view('inc/html-header');
+//            $this->load->view('inc/header');
+//            $this->load->view('registro_enviado', $data);
+//            $this->load->view('inc/footer');
+//            $this->load->view('inc/html-footer');
+        }
+    }   
+
+    public function enviar_email_confirmacao($dados) {
+        $mensagem = $this->load->view('emails/confirmar_assinatura', $dados, TRUE);
+        $this->load->library('email');
+        $this->email->from("flaviomilani83@gmail.com", $dados['nome']);
+        $this->email->to($dados['email']);
+        $this->email->subject(utf8_decode("Confirme seu registro - RSB"));
+        $this->email->message($mensagem);
+        if ($this->email->send()) {
+            $this->load->view('inc/html-header');
+            $this->load->view('inc/header');
+            $this->load->view('registro_enviado');
+            $this->load->view('inc/footer');
+            $this->load->view('inc/html-footer');
+        } else {
+            print_r($this->email->print_debugger());
+        }
+    }
+
+    public function confirmar($hashEmail) {
+        $dados['status'] = 1;
+        $this->db->where('md5(email)', $hashEmail);
+        if ($this->db->update('users', $dados)) {
+            $this->load->view('inc/html-header');
+            $this->load->view('inc/header');
+            $this->load->view('registro_liberado');
+            $this->load->view('inc/footer');
+            $this->load->view('inc/html-footer');
+        } else {
+            echo "Houve um erro ao cofirmar seu registro";
         }
     }
 

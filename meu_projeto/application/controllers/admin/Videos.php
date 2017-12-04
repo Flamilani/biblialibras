@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Capitulos extends CI_Controller {
+class Videos extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model("capitulos_model");
+        $this->load->model("videos_model");
 
          if(!$this->session->userdata('logadmin')) {
             redirect(base_url('admin/login'));
@@ -15,19 +15,19 @@ class Capitulos extends CI_Controller {
    public function index($id)	{ 
            // $this->output->enable_profiler(TRUE);
            //$data['count_capitulos'] = $this->capitulos_model->countAdminCapitulos();   
-            $data['capitulos'] = $this->capitulos_model->admin_Capitulos($id);    
+            $data['videos'] = $this->videos_model->admin_Videos($id);    
             $this->load->view('admin/inc/html-header');
             $this->load->view('admin/inc/header');
-            $this->load->view('admin/capitulos', $data);
+            $this->load->view('admin/videos', $data);
             $this->load->view('admin/inc/footer');
             $this->load->view('admin/inc/html-footer');
 	}
 
      public function alterar($id) {
-        $data['livro'] = $this->capitulos_model->detalheCapitulo($id);
+        $data['livro'] = $this->capitulos_model->detalheVideo($id);
         $this->load->view('admin/inc/html-header');
         $this->load->view('admin/inc/header');
-        $this->load->view('admin/alterar_capitulo', $data);
+        $this->load->view('admin/alterar_video', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
     }
@@ -168,7 +168,7 @@ class Capitulos extends CI_Controller {
 
             $ordem = $this->input->post('ordem');
 
-            if ($this->capitulos_model->gravar_alteracoes($id, $titulo, $conteudo, $valor, $status, $ordem)) {
+            if ($this->videos_model->gravar_alteracoes($id, $titulo, $conteudo, $valor, $status, $ordem)) {
                 $this->session->set_flashdata("success", "O livro foi alterado com sucesso.");
                 redirect(base_url('admin/livros/alterar/' . $id));
             } else {
@@ -178,8 +178,8 @@ class Capitulos extends CI_Controller {
     }
 
     public function deletar($id) {
-        $data = $this->capitulos_model->detalheCapitulo($id);
-        if ($this->capitulos_model->deletar($id)) {
+        $data = $this->videos_model->detalheCapitulo($id);
+        if ($this->videos_model->deletar($id)) {
             if (file_exists('assets/uploads/' . $data[0]->imagem) && $data[0]->imagem) {
                 unlink('assets/uploads/' . $data[0]->imagem);
             }

@@ -233,5 +233,3 @@
 </script>
 
 
-<?php 
-require 'modal_login.php'; ?>

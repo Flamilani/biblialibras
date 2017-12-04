@@ -6,7 +6,7 @@ class Livros extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model("livros_model");
-        $this->load->model("capitulos_model");
+        $this->load->model("videos_model");
 
          if(!$this->session->userdata('logadmin')) {
             redirect(base_url('admin/login'));
@@ -27,9 +27,9 @@ class Livros extends CI_Controller {
 
      public function capitulos($id)    { 
            // $this->output->enable_profiler(TRUE);
-            $data['count_capitulos'] = $this->capitulos_model->countAdminCapitulos($id);
-            $data['capitulos'] = $this->capitulos_model->admin_Capitulos($id);    
-            $data['titulo_livro'] = $this->capitulos_model->titulo_livro_id($id);    
+            $data['count_capitulos'] = $this->videos_model->countAdminVideos($id);
+            $data['capitulos'] = $this->videos_model->admin_Videos($id);    
+            $data['titulo_livro'] = $this->videos_model->titulo_livro_id($id);    
             $this->load->view('admin/inc/html-header');
             $this->load->view('admin/inc/header');
             $this->load->view('admin/capitulos', $data);
@@ -176,7 +176,7 @@ class Livros extends CI_Controller {
                     $status = 0;
                 }
 
-                if($this->capitulos_model->adicionar_capitulo($capitulo, $conteudo, $video, $id_livro, $status, $ordem)) {
+                if($this->videos_model->adicionar_capitulo($capitulo, $conteudo, $video, $id_livro, $status, $ordem)) {
                     $this->session->set_flashdata("success", "O capítulo foi adicionado com sucesso.");
                     $dados['user_nome'] = $this->input->post('user_nome');
                     $dados['user_email'] = $this->input->post('user_email');
@@ -201,7 +201,7 @@ class Livros extends CI_Controller {
     public function alterar_status_cap() {
         $status = $this->input->post('status');
         $id = $this->input->post('id_capitulo');
-        return $this->capitulos_model->alterar_capitulo_status($id, $status);
+        return $this->videos_model->alterar_capitulo_status($id, $status);
     }
 
 

@@ -31,46 +31,7 @@
      <?php echo substr(porcento(count($countHist), count($countCap)),0,5); ?>%
   </div>
 </div>
-<div class="bs-example">
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. What is HTML?</a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <p>HTML stands for HyperText Markup Language. HTML is the main markup language for describing the structure of Web pages. <a href="https://www.tutorialrepublic.com/html-tutorial/" target="_blank">Learn more.</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. What is Bootstrap?</a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <p>Bootstrap is a powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank">Learn more.</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. What is CSS?</a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <p>CSS stands for Cascading Style Sheet. CSS allows you to specify various style properties for a given HTML element such as colors, backgrounds, fonts etc. <a href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank">Learn more.</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 			<div class="list-group">
        
           <?php if (!empty($lista_capitulos)): ?>                    
@@ -89,15 +50,15 @@
             	 <div class="col-xs-12 col-md-8 col-lg-8">
        <?php $q = $this->db->query("SELECT * FROM videos WHERE md5(id_livro) = '{$livroUrl}' AND md5(id_video) = '{$capUrl}' AND status = 1"); ?>
         <?php foreach($q->result() as $dado): ?>
-          <h3 class="front">
-                     <?php echo $dado->titulo; ?></h3>
+          <h4 class="front" style="text-align: center; margin-top: 0px; margin-bottom: 5px;">
+                     <?php echo $dado->titulo; ?></h4>
                    <?php endforeach; ?>
             	 	 <div class="boxVideo fundoLoad">              
                        <?php foreach($q->result() as $dado): ?>
                      <?php echo $dado->video; ?> 
                    <?php endforeach; ?>
                
-            </div><br> 
+            </div>
 
   <?php $qy = $this->db->query("SELECT * FROM historico_livro WHERE md5(id_livro) = '{$livroUrl}' AND md5(id_video) = '{$capUrl}'"); ?> 
    <?php $res = $qy->result(); ?>   

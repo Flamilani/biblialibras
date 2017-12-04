@@ -6,7 +6,7 @@
     <meta id="viewport" name="viewport" content="width=device-width, user-scalable=no">
     <meta name="description" content="a Biblia em Libras">
     <meta name="author" content="Gilmar">
-    <title>A Bíblia em Libras</title>
+    <title>Área do Usuário - A Bíblia em Libras</title>
     <!-- Bootstrap Core CSS -->
     <?php echo link_tag('assets/bootstrap/css/bootstrap.min.css'); ?>
     <?php echo link_tag('assets/css/freelancer.min.css'); ?>

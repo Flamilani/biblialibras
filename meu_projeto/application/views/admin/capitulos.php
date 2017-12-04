@@ -104,7 +104,7 @@
                             <?php foreach ($capitulos as $capitulo): ?>
                                 <tr class="odd gradeX">
                                 <td><?php echo $capitulo->id_capitulo; ?><?php echo form_hidden($capitulo->id_capitulo); ?></td>
-                                        <td><?php echo $capitulo->capitulo; ?></td>
+                                        <td><?php echo $capitulo->titulo; ?></td>
                                         <td><?php echo $capitulo->conteudo; ?></td>
                                           
                                           <td class="text-center">
