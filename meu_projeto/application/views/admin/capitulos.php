@@ -1,9 +1,8 @@
-<div id="page-wrapper">
+  <div id="page-wrapper">
             <div class="row">
 
                 <div class="col-lg-12">
-<h3 class="page-header"><a href="<?php echo base_url('admin/livros'); ?>">Livros</a> > Capítulos do livro 
-  <?php echo $titulo_livro[0]->titulo; ?> </h3>
+                    <h3 class="page-header"><a href="<?php echo base_url("admin/livros") ?>">Livros</a> > Capítulos de <?php echo $livro[0]->titulo; ?> - ID <?php echo $livro[0]->id_livro; ?></h3> 
 
                 </div>
                 <!-- /.col-lg-12 -->
@@ -12,12 +11,8 @@
              <?php if($this->session->flashdata('success')) { ?>
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <i class="icon fa fa-success"></i>O capítulo foi adicionado com sucesso!</div>
-            <?php } else if($this->session->flashdata('deletar')) { ?>
-                   <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <i class="icon fa fa-success"></i>O capítulo foi deletado com sucesso!</div>
-           <?php } ?>
+                    <i class="icon fa fa-success"></i>O capítulo foi alterado com sucesso!</div>
+            <?php } ?>
                 <?php echo validation_errors('<div class="alert alert-warning alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <i class="icon fa fa-warning"></i> ', '</div>'); ?>          
@@ -25,46 +20,46 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                        <button class="btn btn-info" id="cadastro_livro">Cadastrar Capítulo</button>
+                           Configurar Capítulo
                         </div>
-                        <div class="panel-body caixa_livro">
-  <?php $titulo = array('name' => 'titulo', 'id' => 'titulo', 'type' => 'text', 'titulo', 'value' => set_value('titulo'), 'class' => 'form-control', 'placeholder' => 'Título');
-    $valor = array('name' => 'valor', 'type' => 'text', 'id' => 'valor', 'value' => set_value('valor'), 'class' => 'form-control', 'placeholder' => '0,00');
-    $conteudo = array('name' => 'editor1', 'type' => 'text', 'id' => 'editor1', 'value' => set_value('editor1'), 'class' => 'form-control', 'rows' => '3');
-   $ordem = array('name' => 'ordem', 'type' => 'number', 'id' => 'ordem', 'value' => set_value('ordem'), 'class' => 'form-control', 'placeholder' => '0');
-     $button = array('name' => 'btn_adicionar', 'id' => 'btn_adicionar', 'type' => 'submit', 'class' => 'btn btn-warning', 'value' => 'Salvar como rascunho');
+                        <div class="panel-body">
+                             <?php 
+    $titulo = array('name' => 'titulo', 'type' => 'text', 'id' => 'titulo', 'value' => $livro[0]->titulo, 'class' => 'form-control', 'placeholder' => 'Título');
+    $valor = array('name' => 'valor', 'id' => 'valor', 'value' => $livro[0]->valor, 'class' => 'form-control', 'placeholder' => '0,00');    
+    $ordem = array('name' => 'ordem', 'type' => 'number', 'id' => 'ordem', 'value' => $livro[0]->ordem, 'class' => 'form-control', 'placeholder' => '0');
+    $capitulo = array('name' => 'capitulos', 'type' => 'number', 'id' => 'capitulos', 'min'=>'1', 'max'=>'50', 'value' => $livro[0]->capitulos, 'class' => 'form-control', 'placeholder' => '0');
+     $conteudo = array('name' => 'editor1', 'id' => 'editor1', 'value' => $livro[0]->conteudo, 'rows' => '10', 'cols' => '80'); 
+      $button = array('name' => 'btn_adicionar', 'id' => 'btn_adicionar', 'type' => 'submit', 'class' => 'btn btn-warning', 'value' => 'Salvar como rascunho');
      $buttonPubl = array('name' => 'btn_publicar', 'id' => 'btn_publicar', 'type' => 'submit', 'class' => 'btn btn-success', 'value' => 'Publicar'); ?>
-<?php $url = $this->uri->segment(4); ?>
-  <?php echo form_open_multipart('admin/livros/adicionarCapitulo') . form_hidden('id_livro', $url); ?>
-  
+     <?php echo form_open('admin/livros/gravar_alteracoes') . form_hidden('id_livro',$livro[0]->id_livro); ?>
                              <div class="row">
                               <div class="col-md-6">
-                                <div class="form-group">
-                             <?php echo form_label('Título', 'titulo') . form_input($titulo); ?>
-                               </div>
+                                     <div class="form-group">
+                                   <?php echo form_label('Capítulo', 'id_capitulo') ?> <br>
+                             <select class="form-control" name="id_capitulo" id="id_capitulo">
+                                   <option value="0">Selecione</option>    
+                                   <?php     
+                                      $count = $count_videos[0]->capitulos;
+                                   for($i = 1; $i <= $count; $i++) { ?>
+                                   <option value="<?php echo $i; ?>"> Capítulo <?php echo $i; ?></option>
+                                       <?php } ?>
+                                        </select>
+                                    </div>
                            </div>
                               <div class="col-md-6"> 
-                                <div class="form-group">
-                                            <label>Ordem (Apenas números)</label>
-                                            <?php echo form_input($ordem); ?>                                            
-                                        </div>     
+                               <div class="form-group">
+                                   <?php echo form_label('Vídeo', 'video') ?> <br>
+                             <select class="form-control" name="id_video" id="id_video">
+                                   <option value="0">Selecione</option>    
+                                   <?php     
+                                      foreach ($videos as $video): ?>
+                    <option value="<?php echo $video->id_video; ?>"><?php echo $video->titulo; ?></option>
+                                       <?php endforeach; ?>
+                                        </select>
+                                    </div>     
                                     </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-6"> 
-                                <div class="form-group">
-                                     <?php echo form_label('Vídeo', 'video') ?> <br>
-                                   <textarea class="form-control" name="video" id="video" cols="66" rows="5"></textarea>
-                                    </div>
-                                </div>                            
-                            </div>       
-                  <div class="row">
-                             <div class="col-lg-12 col-md-12">  
-        <div class="form-group">             
-                 <?php echo form_label('Conteúdo', 'editor1') . form_textarea($conteudo); ?>
-        </div>                                      
-</div>   
-</div>                   
+                            </div>                          
+                      
        <?php echo form_submit($buttonPubl); ?>
        <?php echo form_submit($button); ?>
       <?php form_close(); ?>          
@@ -75,80 +70,37 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
+
+     <?php $url = $this->uri->segment(4); ?>
+      <div class="col-lg-6">
+        
+    <?php foreach ($capitulos as $titulo): ?>
+            <div id="<?php echo $titulo->id_capitulo; ?>" class="list-group-item list-group-item-info"><b style="font-size: 17px;">Capítulo <?php echo $titulo->capitulo; ?></b> 
+      <div class="pull-right"><a class="btn btn-xs btn-danger" title="Remover" href="<?php echo base_url("admin/livros/deletar_capitulo/" . $titulo->id_capitulo) ?>"><span class="glyphicon glyphicon-remove"></span></a></div></div>
+            <div class="list-group">   
+<?php $exibe_videos = $this->db->query("SELECT * FROM livros l INNER JOIN videos v on l.id_livro = v.id_livro WHERE l.id_livro = '{$url}' AND v.id_capitulo =  {$titulo->capitulo} AND l.status = 1"); ?>
+       <?php foreach ($exibe_videos->result() as $video): ?>  
+      <div class="list-group-item"><?php echo $video->titulo; ?></div>
+
+          <?php endforeach; ?>         
+    </div>
+  <?php endforeach; ?>
+         </div>
                 </div>
                 <!-- /.col-lg-12 -->
 
-              <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           <?php echo $count_capitulos; ?> <?php plural($count_capitulos, 'Capítulo', 'Capítulos') ?>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-            <table width="100%" class="tabela1 table table-striped table-bordered table-hover" id="tabela1">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Título</th>
-                                        <th>Conteúdo</th>
-                                        <th>Vídeo</th>
-                                        <th>Ordem</th>
-                                        <th>Status</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (!empty($capitulos)): ?>                    
-                            <?php foreach ($capitulos as $capitulo): ?>
-                                <tr class="odd gradeX">
-                                <td><?php echo $capitulo->id_capitulo; ?><?php echo form_hidden($capitulo->id_capitulo); ?></td>
-                                        <td><?php echo $capitulo->titulo; ?></td>
-                                        <td><?php echo $capitulo->conteudo; ?></td>
-                                          
-                                          <td class="text-center">
-     <?php if(isset($capitulo->video) && $capitulo->video != null): ?>
-          <a href="<?php echo base_url('admin/livros/alterar_imagem/' . $capitulo->id_capitulo); ?>" title="Editar" class="btn btn-sm btn-success">Alterar Vídeo</a>
-   <?php else: ?>
-
-   <a href="<?php echo base_url('admin/livros/alterar_imagem/' . $capitulo->id_capitulo); ?>" title="Editar" class="btn btn-sm btn-primary">Inserir Vídeo</a>
- <?php endif; ?>
-                                          </td>
-                                          <td class="text-center"><?php echo $capitulo->ordem; ?></td>
-                                            <td class="text-center">
-       <b data="<?php echo $capitulo->id_capitulo; ?>" class="status_checks btn btn-sm <?php echo ($capitulo->status) ? 'btn-success' : 'btn-warning' ?>"><?php echo ($capitulo->status) ? 'Ativo <span title="Ativo" class="glyphicon glyphicon-ok"></span>' : 'Inativo <span title="Inativo" class="glyphicon glyphicon-minus"></span>' ?></b>                                            
-                                          </td>
-                                        <td class="text-center">
-            <a href="<?php echo base_url('admin/livros/alterar/' . $capitulo->id_capitulo); ?>" title="Editar" class="btn btn-sm btn-primary"><b><i class="fa fa-edit"></i></b></a>
-
-  <a href="<?php echo base_url('admin/livros/deletar/' . $capitulo->id_capitulo); ?>" onclick="return confirmarExclusao(<?php echo $capitulo->id_capitulo; ?>)" title="Deletar" class="btn btn-sm btn-danger"><b><i class="fa fa-trash-o"></i></b></a>
-                                      </td>
-                                    </tr>   
-                                         <?php endforeach; ?>
-                                      <?php endif; ?>                
-                                   </tbody>
-                            </table>
-                             </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            </div>
+              </div>
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
 
-<!-- Uso de Modal-->
-<?php require_once('modal/modal_deletar.php'); ?>
-<!-- Uso de Modal-->
 
 <script type="text/javascript">
     $(document).ready(function () {
 
-      $('#valor').mask('0.000,00', {reverse: true});
+    $('#valor').mask('0000,00', {reverse: true});
+
+    $("#capitulos").mask("00");
 
       Shadowbox.init();
 
@@ -162,68 +114,20 @@
         {
             var current_element = $(this);
             var id = $(current_element).attr('data');
-            url = "<?php echo base_url() . 'admin/livros/alterar_status_cap' ?>";
+            url = "<?php echo base_url() . 'admin/livros/alterar_status' ?>";
             $.ajax({
                 type: "POST",
                 url: url,
-                data: {"id_capitulo": id, "status": status},
+                data: {"id_livro": id, "status": status},
                 success: function (data) {
                     location.reload();
                 }});
         }
     });
 
-           var base_url = "<?= base_url(); ?>";
+           var base_url = "<?= base_url(); ?>";    
     
-    $(function () {
-        $('.confirma_exclusao').on('click', function (e) {
-            e.preventDefault();
-
-            var nome = $(this).data('nome');
-            var id = $(this).data('id');
-
-            $('#modal_confirmation').data('nome', nome);
-            $('#modal_confirmation').data('id', id);
-            $('#modal_confirmation').modal('show');
-        });
-
-        $('#modal_confirmation').on('show.bs.modal', function () {
-            var nome = $(this).data('nome');
-            $('#nome_exclusao').text(nome);
-            var id = $(this).data('id');
-            $('#id_exclusao').text(id);
-        });
-
-        $('#btn_excluir').click(function () {
-            var id = $('#modal_confirmation').data('id');
-            document.location.href = base_url + "admin/posts/deletar/" + id;
-        });
-    });
         
-          $('.tabela1').DataTable({
-            language: {
-                processing: "Processando",
-                search: "Pesquisa",
-                lengthMenu: "Exibindo _MENU_ registros",
-                info: "Exibição de registro _START_ a _END_ em _TOTAL_ registros",
-                infoEmpty: "Exibição de registros 0 &agrave; 0 em 0 registros",
-                infoFiltered: "(Filtrado de _MAX_ registros em total)",
-                infoPostFix: "",
-                loadingRecords: "Carregando...",
-                zeroRecords: "Nenhum registro a exibir.",
-                emptyTable: "Não há registros disponíveis na tabela",
-                paginate: {
-                    first: "<<",
-                    previous: "<",
-                    next: ">",
-                    last: ">>"
-                },
-                aria: {
-                    sortAscending: ": Permite classificar a coluna em ordem crescente",
-                    sortDescending: ": Permite classificar a coluna em ordem decrescente"
-                }
-            }
-        });
     });
 
 </script>

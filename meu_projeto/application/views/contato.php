@@ -1,7 +1,7 @@
 
 <!-- Contact Section -->
-<section id="contact">
-    <div class="container">
+
+    <div class="container headTop ladosTela">
         <div class="row">
             <div class="col-lg-12 text-center front">
                 <h2>Entre em contato conosco</h2>
@@ -9,78 +9,87 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                      <?php echo form_open(base_url('home/logar'), array('id'=>'form_login')); ?>           
-                        <ul class="nav navbar-nav navbar-right">                   
-                            <li class="dropdown">                        
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acesso <strong class="caret"></strong></a>
-                                <ul class="dropmenu dropdown-menu">
-                                    <?php echo validation_errors(); ?>
-                                    <?php $email = array('name' => 'user_email', 'id' => 'user_email', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'E-mail', 'data-error' => 'Informe seu e-mail.', 'required' => 'required'); ?>
-                                    <?php $senha = array('name' => 'user_senha','id' => 'user_senha', 'type' => 'password', 'class' => 'form-control', 'placeholder' => 'Senha', 'data-error' => 'Informe sua senha', 'required' => 'required'); ?>
-                                    <?php $button = array('name' => 'btn_login', 'id' => 'btn_login', 'type' => 'submit', 'class' => 'btn btn-primary btn-block', 'value' => 'Acessar'); ?>
-                                    <?php $anchor = array('href'=>base_url('esqueci-minha-senha'), 'value'=>'Esqueci minha senha', 'type'=>'button', 'class'=>'btn btn-warning btn-sm btn-block');  ?>
-                                    <li style="margin-bottom: 10px; text-align: center;">  
-                                        <b style="padding-top: 3px; padding-bottom: 3px;" class="text-blue">Acesso à Área <br />do Cliente</b>
-                                    </li>
-                                    <li style="margin-bottom: 10px;">   
-                                        <?php echo form_input($email); ?>      
-                                    </li>
-                                    <li style="margin-bottom: 10px;">               
-                                       <?php echo form_password($senha); ?>      
-                                    </li>                         
-                                    <li>
-                                       <?php echo form_submit($button); ?>
-                                    </li>
-                                    <li class="divider"></li>-->
-                                        <li>
-                                        <?php form_submit($anchor); ?>
-                                    </li>                                
-                                   
-                                </ul>                        
-                            </li>                   
-                        </ul>
-                     <?php form_close(); ?>   
-                <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-                <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                <form name="sentMessage" id="contactForm" novalidate>
+            <div class="col-lg-8 col-lg-offset-2">           
+                   <?php if($this->session->flashdata('success')) { ?>
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="icon fa fa-success"></i>Sua mensagem foi enviada com sucesso.</div>
+            <?php } ?>           
+        <?php echo validation_errors('<div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-warning"></i>', '</div>'); ?>       
+        <?php
+        $nome = array('name' => 'nome', 'id' => 'nome', 'type' => 'text', 'class' => 'form-control', 'value' => (isset($this->session->userdata('user')->nome) ? $this->session->userdata('user')->nome : set_value('nome')), 'placeholder' => 'Nome', 'data-error' => 'Informe seu nome.', 'required' => 'required');
+        $celular = array('name' => 'celular', 'id' => 'celular', 'type' => 'text', 'class' => 'form-control', 'value' => (isset($this->session->userdata('user')->celular) ? $this->session->userdata('user')->celular : set_value('celular')), 'placeholder' => 'Celular', 'data-error' => 'Informe seu nº de celular.', 'required' => 'required');
+        $email = array('name' => 'email', 'id' => 'email', 'type' => 'email', 'class' => 'form-control', 'value' => (isset($this->session->userdata('user')->email) ? $this->session->userdata('user')->email : set_value('email')), 'placeholder' => 'E-mail', 'data-error' => 'Informe seu e-mail.', 'required' => 'required');
+        $button = array('name' => 'btn_enviar', 'id' => 'btn_enviar', 'type' => 'submit', 'class' => 'btn btn-success', 'value' => 'Enviar');
+        $reset = array('type' => 'reset', 'class' => 'btn btn-warning', 'value' => 'Cancelar');
+        $form = array('id' => 'SendContato'); ?>       
+        <?php echo form_open(base_url('home/envio'), $form); ?>   
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label for="name">Nome</label>
-                            <input type="text" class="form-control" placeholder="Nome" id="name" required data-validation-required-message="Favor digite seu nome.">
-                            <p class="help-block text-danger"></p>
+                                <div class="form-group has-feedback">              
+                            <?php echo form_label('Nome', 'nome') . form_input($nome); ?>
+                             <span class="help-block with-errors"></span>
+                            </div>                      
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label for="email">E-mail</label>
-                            <input type="email" class="form-control" placeholder="E-mail" id="email" required data-validation-required-message="Favor digite seu e-mail.">
-                            <p class="help-block text-danger"></p>
+                      <div class="form-group has-feedback">                    
+                     <?php echo form_label('E-mail', 'email') . form_input($email); ?>        
+                    <span class="glyphicon form-control-feedback"></span>
+                    <span class="help-block with-errors"></span>
+                     </div>   
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label for="celular">Celular</label>
-                            <input type="tel" class="form-control" placeholder="Celular" id="celular" required data-validation-required-message="Favor digite seu número de celular.">
-                            <p class="help-block text-danger"></p>
+                            <div class="form-group has-feedback">  
+                    <?php echo form_label('Whatsapp', 'celular') . form_input($celular); ?>
+                     <span class="help-block with-errors"></span>
+                </div>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <br>
+                        <div class="form-group controls col-xs-12 col-md-6 col-lg-6">
+                            <div class="form-group has-feedback">  
+                          <label for="assunto">Assunto</label>
+                        <select class="form-control" name="assunto" required>
+                            <option value="" selected disabled> Selecione um assunto </option>
+                            <option value="Duvida"> Dúvida </option>
+                            <option value="Critica"> Crítica </option>
+                            <option value="Sugestao"> Sugestão </option>
+                        </select>
+                    </div>
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label for="message">Mensagem</label>
-                            <textarea rows="5" class="form-control" placeholder="Mensagem" id="message" required data-validation-required-message="Favor digite sua mensagem."></textarea>
-                            <p class="help-block text-danger"></p>
+                             <div class="form-group has-feedback"> 
+                        <label class="control-label">Mensagem</label>
+                        <textarea class="form-control" name="mensagem" rows="5" placeholder="Sua mensagem" data-error="Digite uma mensagem." required></textarea>
+                         <span class="help-block with-errors"></span>
+                    </div>  
                         </div>
                     </div>
                     <br>
-                    <div id="success"></div>
+                   
                     <div class="row">
-                        <div class="form-group col-xs-12">
-                            <button type="submit" class="btn btn-success btn-lg">Enviar</button>
-                        </div>
+                        <div class="form-group col-xs-12">                                         
+                        <?php echo form_submit($button) . '  ' . form_reset($reset); ?>
                     </div>
-                </form>
+                    </div>
+              <?php form_close(); ?>   
             </div>
         </div>
     </div>
-</section>
+<script>
+    $(document).ready(function () {
+         $('#SendContato').validator();   
+
+          $("#celular").mask("(00) 00000-0000");     
+             });
+
+</script>

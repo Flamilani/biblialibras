@@ -13,10 +13,10 @@
                     <h3>Redes Sociais</h3>
                     <ul class="list-inline">
                         <li>
-                            <a href="https://www.facebook.com/ABibliaEmLibras" target="_blank" class="social"><img src="assets/img/facebook.png"></a>
+                            <a href="https://www.facebook.com/ABibliaEmLibras" target="_blank" class="social"><img src="<?php echo base_url('assets/img/facebook.png'); ?>"></a>
                         </li>
                        <li>
-                           <a href="#" class="social"><img src="assets/img/youtube.png"></a>
+                           <a href="#" class="social"><img src="<?php echo base_url('assets/img/youtube.png'); ?>"></a>
                         </li>
                         <!--  <li>
                             <a href="#" class="btn-social btn-outline"><span class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
@@ -40,7 +40,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Todos os direitos autoriais &copy; A Bíblia em Libras - <?php echo date('Y'); ?>
+                    Todos os direitos autoriais &copy; A Bíblia em Libras - <?php echo date('Y'); ?> - Desenvolvido por Flavio Milani
                 </div>
             </div>
         </div>

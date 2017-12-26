@@ -89,13 +89,92 @@ function tipo_pagam($tipo) {
 function FormPerfil($perfil){
     switch ($perfil) {
      case 1:
-        echo "Usuário";
+        echo "Admin";
         break;
     case 2:
-        echo "Cliente";
+        echo "Usuário";
         break;
-     case 3:
-        echo "Admin";
+    }
+}
+
+function FormPerfil_SO($id){
+    switch ($id) {
+     case 1:
+        echo "Surdo";
+        break;
+    case 2:
+        echo "Ouvinte";
+        break;    
+    default:
+        echo "Total";
+        break;
+}
+}
+
+function FormEscolar($id){
+    switch ($id) {
+     case 1:
+        echo "Ensino Fundamental";
+        break;
+    case 2:
+        echo "Ensino Médio";
+        break;  
+    case 3:
+        echo "Ensino Superior";
+        break;  
+    default:
+        echo "Total";
+        break;
+}
+}
+
+function FormIgreja($id){
+    switch ($id) {
+     case 1:
+        echo "Evangélica";
+        break;
+    case 2:
+        echo "Católica";
+        break;  
+    case 3:
+        echo "Outra";
+        break;  
+    default:
+        echo "Total";
+        break;
+}
+}
+
+function FormFuncao($id){
+    switch ($id) {
+     case 1:
+        echo "Pastor";
+        break;
+    case 2:
+        echo "Professor";
+        break;  
+    case 3:
+        echo "Estudante";
+        break;  
+    default:
+        echo "Total";
+        break;
+}
+}
+
+function FormSaber($id){
+    switch ($id) {
+     case 1:
+        echo "Google";
+        break;
+    case 2:
+        echo "Facebook";
+        break;  
+    case 3:
+        echo "Indicação de Amigo";
+        break;  
+    default:
+        echo "Total";
         break;
 }
 }
@@ -103,15 +182,12 @@ function FormPerfil($perfil){
 function FormPerfilLabel($perfil){
     switch ($perfil) {
         case 1:
-            echo "<span style='font-size: 12px' class='label label-warning'>Usuário</span>";
+            echo "<span style='font-size: 12px' class='label label-info'>Admin</span>";
             break;
         case 2:
-            echo "<span style='font-size: 12px' class='label label-info'>Cliente</span>";
+            echo "<span style='font-size: 12px' class='label label-success'>Usuário</span>";
             break;
-        case 3:
-            echo "Admin";
-            break;
-    }
+   }
 }
 
 
@@ -152,3 +228,31 @@ function formStatus($status) {
     }
 }
 
+if (!function_exists('formata_preco'))
+{
+    function formata_preco($valor)
+    {
+        $negativo = false;
+        $preco = "";
+        $valor = intval(trim($valor));
+            if ($valor < 0) {
+                $negativo = true;
+                $valor = abs($valor);
+        }
+        $valor = strrev($valor);
+        while (strlen($valor) < 3) {
+            $valor .= "0";
+        }
+        for ($i = 0; $i < strlen($valor); $i++) {
+            if ($i == 2)    {
+                $preco .= ",";
+            }
+            if (($i <> 2) AND (($i+1)%3 == 0))  {
+                $preco .= ".";
+            }
+            $preco .= substr($valor, $i , 1);
+        }
+        $preco = strrev($preco);
+        return ($negativo ? "-" : "") . $preco;
+    }
+}

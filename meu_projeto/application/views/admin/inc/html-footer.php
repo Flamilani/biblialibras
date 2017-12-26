@@ -14,12 +14,19 @@
 <!-- Morris Charts JavaScript -->
 <script src="<?php echo base_url('assets/sb-admin/vendor/raphael/raphael.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/sb-admin/vendor/morrisjs/morris.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/sb-admin/data/morris-data.js') ?>"></script>
+
 <script src="<?php echo base_url('assets/plugins/ckeditor/ckeditor.js') ?>"></script>
 <script src="<?php echo base_url('assets/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/shadowbox/shadowbox.js') ?>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo base_url('assets/sb-admin/dist/js/sb-admin-2.js') ?>"></script>
+    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/excanvas.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.js') ?>"></script>
+    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.pie.js') ?>"></script>
+    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.resize.js') ?>"></script>
+    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.time.js') ?>"></script>
+    <script src="<?php echo base_url('assets/sb-admin/vendor/flot-tooltip/jquery.flot.tooltip.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/sb-admin/data/flot-data.js') ?>"></script>
 </body>
 </html>

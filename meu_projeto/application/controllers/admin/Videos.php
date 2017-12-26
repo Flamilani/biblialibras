@@ -6,6 +6,7 @@ class Videos extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model("videos_model");
+        $this->load->helper('text');
 
          if(!$this->session->userdata('logadmin')) {
             redirect(base_url('admin/login'));
@@ -13,29 +14,35 @@ class Videos extends CI_Controller {
     }
 
    public function index($id)	{ 
+    $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
+        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
            // $this->output->enable_profiler(TRUE);
            //$data['count_capitulos'] = $this->capitulos_model->countAdminCapitulos();   
             $data['videos'] = $this->videos_model->admin_Videos($id);    
             $this->load->view('admin/inc/html-header');
-            $this->load->view('admin/inc/header');
+            $this->load->view('admin/inc/header', $data_perfil);
             $this->load->view('admin/videos', $data);
             $this->load->view('admin/inc/footer');
             $this->load->view('admin/inc/html-footer');
 	}
 
      public function alterar($id) {
+        $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
+        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
         $data['livro'] = $this->capitulos_model->detalheVideo($id);
         $this->load->view('admin/inc/html-header');
-        $this->load->view('admin/inc/header');
+        $this->load->view('admin/inc/header', $data_perfil);
         $this->load->view('admin/alterar_video', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
     }
 
     public function alterar_imagem($id) {
+        $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
+        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
         $data['livro'] = $this->capitulos_model->detalheLivro($id);
         $this->load->view('admin/inc/html-header');
-        $this->load->view('admin/inc/header');
+        $this->load->view('admin/inc/header', $data_perfil);
         $this->load->view('admin/alterar_imagem_livro', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
@@ -89,7 +96,7 @@ class Videos extends CI_Controller {
                 $status = 0;
             }
            
-            if ($this->capitulos_model->adicionarCapitulo($titulo, $conteudo, $imagem, $valor, $status, $ordem)) {
+            if ($this->videos_model->adicionarVideo($titulo, $conteudo, $imagem, $valor, $status, $ordem)) {
                 $this->session->set_flashdata("success", "O livro foi adicionado com sucesso.");
                 redirect(base_url('admin/livros'));
             } else {
@@ -138,7 +145,7 @@ class Videos extends CI_Controller {
                 unlink('assets/uploads/' . $data[0]->imagem);
             }  
 
-            if ($this->capitulos_model->gravar_imagem($id, $imagem)) {
+            if ($this->videos_model->gravar_imagem($id, $imagem)) {
                 $this->session->set_flashdata("success", "A imagem foi atualizada com sucesso.");
                 redirect(base_url('admin/livros/alterar_imagem/' . $id));
             } else {
@@ -147,6 +154,36 @@ class Videos extends CI_Controller {
         }
     }
 
+    public function adicionarVideo() {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'Capítulo', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->index();
+        } else {
+               $titulo = $this->input->post('titulo');    
+                $conteudo = $this->input->post('editor1');
+                $video = $this->input->post('video');       
+                $id_livro = $this->input->post('id_livro');
+                $ordem = $this->input->post('ordem');
+                $id_capitulo = $this->input->post('id_capitulo');
+
+                if ($this->input->post('btn_publicar') == true) {
+                    $status = 1;
+                } else {
+                    $status = 0;
+                }
+
+                if($this->videos_model->adicionar_video($titulo, $conteudo, $video, $id_livro, $status, $ordem, $id_capitulo)) {
+                    $this->videos_model->adicionar_video_capitulo($id_capitulo, $id_livro, $status);
+                    $this->session->set_flashdata("success", "O vídeo foi adicionado com sucesso.");
+                redirect(base_url('admin/livros/videos/' . $id_livro));
+                }
+
+             else {
+                $this->session->set_flashdata("error", "Erro ao adicionar.");
+            }
+        }
+    }
 
  
         public function gravar_alteracoes() {
@@ -177,17 +214,5 @@ class Videos extends CI_Controller {
         }
     }
 
-    public function deletar($id) {
-        $data = $this->videos_model->detalheCapitulo($id);
-        if ($this->videos_model->deletar($id)) {
-            if (file_exists('assets/uploads/' . $data[0]->imagem) && $data[0]->imagem) {
-                unlink('assets/uploads/' . $data[0]->imagem);
-            }
-            $this->session->set_flashdata("deletar", "O livro foi deletado com sucesso.");
-            redirect(base_url('admin/livros'));
-        } else {
-            echo "Erro ao excluir o livro";
-        }
-    }
-
+   
 }

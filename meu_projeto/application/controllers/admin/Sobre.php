@@ -6,6 +6,7 @@ class Sobre extends CI_Controller {
     public function __construct() {
         parent::__construct();   
         $this->load->model('sobre_model');
+        $this->load->model('users_model');
 
       if(!$this->session->userdata('logadmin')) {
             redirect(base_url('admin/login'));
@@ -13,9 +14,11 @@ class Sobre extends CI_Controller {
     }
 
     public function index() {    
+        $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
+        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
         $data['sobre'] = $this->sobre_model->admin_Sobre();
         $this->load->view('admin/inc/html-header');
-        $this->load->view('admin/inc/header');
+        $this->load->view('admin/inc/header', $data_perfil);
         $this->load->view('admin/sobre', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
@@ -23,7 +26,6 @@ class Sobre extends CI_Controller {
     }
 
         public function gravarSobre() {
-        $this->output->enable_profiler(TRUE);
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'Título', 'required|min_length[3]');  
 
@@ -83,7 +85,6 @@ class Sobre extends CI_Controller {
     }
 
    public function gravar_alteracoes() {
-        $this->output->enable_profiler(TRUE);
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'Título', 'required|min_length[3]');  
 

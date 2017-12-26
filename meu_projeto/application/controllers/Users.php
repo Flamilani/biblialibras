@@ -12,16 +12,15 @@ class Users extends CI_Controller {
         $data['livro'] = $this->users_model->detalheUser($id);
         $this->load->view('admin/inc/html-header');
         $this->load->view('admin/inc/header');
-        $this->load->view('admin/alterar_usuario', $data);
+        $this->load->view('admin/perfil', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
     }
 
-    public function alterar_imagem($id) {
-        $data['livro'] = $this->livros_model->detalheLivro($id);
+    public function alterar_senha($id) {
         $this->load->view('admin/inc/html-header');
         $this->load->view('admin/inc/header');
-        $this->load->view('admin/alterar_imagem_livro', $data);
+        $this->load->view('admin/alterar_senha');
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
     }  
@@ -30,6 +29,8 @@ class Users extends CI_Controller {
        // $this->output->enable_profiler(TRUE);
         $this->load->library('form_validation');
         $this->form_validation->set_rules('nome', 'Nome', 'required|min_length[3]');  
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');  
+        $this->form_validation->set_rules('cpf', 'CPF', 'required|is_unique[users.cpf]');  
 
         $path = "assets/uploads";
 
@@ -171,13 +172,35 @@ class Users extends CI_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('nome', 'Nome', 'required|min_length[2]');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+        $this->form_validation->set_rules('cpf', 'CPF', 'required|is_unique[users.cpf]');  
         if ($this->form_validation->run() == FALSE) {
-            $this->index();
+            $this->load->view('inc/html-header');
+            $this->load->view('inc/header');
+            $this->load->view('assinatura_enviada');
+            $this->load->view('inc/footer');
+            $this->load->view('inc/html-footer');
         } else {
             $dados['nome'] = $this->input->post('nome');
+            $dados['sobrenome'] = $this->input->post('sobrenome');
             $dados['email'] = $this->input->post('email');
-            $dados['senha'] = $this->input->post('senha');
+            $dados['senha'] = md5($this->input->post('senha', TRUE));     
+            $dados['telefone'] = $this->input->post('telefone');
             $dados['celular'] = $this->input->post('celular');
+            $dados['data_nasc'] = $this->input->post('data_nasc');
+            $dados['cpf'] = $this->input->post('cpf');
+            $dados['tipo'] = $this->input->post('tipo');
+            $dados['endereco'] = $this->input->post('endereco');
+            $dados['numero'] = $this->input->post('numero');
+            $dados['compl'] = $this->input->post('compl');
+            $dados['bairro'] = $this->input->post('bairro');
+            $dados['cidade'] = $this->input->post('cidade');
+            $dados['estado'] = $this->input->post('estado');
+            $dados['cep'] = $this->input->post('cep');
+            $dados['perfil_so'] = $this->input->post('perfil_so');
+            $dados['escolaridade'] = $this->input->post('escolaridade');
+            $dados['igreja'] = $this->input->post('igreja');
+            $dados['funcao'] = $this->input->post('funcao');
+            $dados['saber'] = $this->input->post('saber');
             if ($this->users_model->registrar($dados)) {
                 $this->enviar_email_confirmacao($dados);
                 $this->envio();
@@ -199,7 +222,7 @@ class Users extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('inc/html-header');
             $this->load->view('inc/header');
-            $this->load->view('home');
+            $this->load->view('assinatura_enviada');
             $this->load->view('inc/footer');
             $this->load->view('inc/html-footer');
         } else {
@@ -255,12 +278,12 @@ class Users extends CI_Controller {
         $this->load->library('email');
         $this->email->from("flaviomilani83@gmail.com", $dados['nome']);
         $this->email->to($dados['email']);
-        $this->email->subject(utf8_decode("Confirme seu registro - RSB"));
+        $this->email->subject(utf8_decode("Confirme sua assinatura - A Bíblia em Libras"));
         $this->email->message($mensagem);
         if ($this->email->send()) {
             $this->load->view('inc/html-header');
             $this->load->view('inc/header');
-            $this->load->view('registro_enviado');
+            $this->load->view('assinatura_enviada');
             $this->load->view('inc/footer');
             $this->load->view('inc/html-footer');
         } else {

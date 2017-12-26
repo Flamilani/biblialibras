@@ -25,15 +25,14 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                           Atualizar Página Sobre
+                           Atualizar Página Sobre <b style="font-size: 15px;" class="pull-right label <?php echo ($sobre[0]->status) ? 'label-success' : 'label-warning' ?>"><?php echo ($sobre[0]->status) ? 'Ativo' : 'Inativo' ?></b>
                         </div>
                         <div class="panel-body">
   <?php $titulo = array('name' => 'titulo', 'id' => 'titulo', 'type' => 'text', 'titulo', 'value' => $sobre[0]->titulo, 'class' => 'form-control', 'placeholder' => 'Título');
     $conteudo = array('name' => 'editor1', 'type' => 'text', 'id' => 'editor1', 'value' => $sobre[0]->conteudo, 'class' => 'form-control', 'rows' => '3');
     $video = array('name' => 'video', 'id' => 'video', 'value' => $sobre[0]->video, 'rows' => '4', 'cols' => '60', 'class'=>'form-control');
      $button = array('name' => 'btn_adicionar', 'id' => 'btn_adicionar', 'type' => 'submit', 'class' => 'btn btn-warning', 'value' => 'Salvar como Rascunho');
-     $buttonPubl = array('name' => 'btn_publicar', 'id' => 'btn_publicar', 'type' => 'submit', 'class' => 'btn btn-success', 'value' => 'Atualizar');
-    $reset = array('type' => 'submit', 'class' => 'btn btn-danger', 'value' => 'Limpar'); ?>
+     $buttonPubl = array('name' => 'btn_publicar', 'id' => 'btn_publicar', 'type' => 'submit', 'class' => 'btn btn-success', 'value' => 'Atualizar'); ?>
 
          <?php echo form_open_multipart('admin/sobre/gravar_alteracoes') . form_hidden('id_sobre',$sobre[0]->id_sobre); ?>
                              <div class="row">
@@ -52,9 +51,12 @@
                     <?php if(isset($sobre[0]->midia) && $sobre[0]->midia == 'imagem'): ?>
                     <option value="imagem" name="imagem" selected>Imagem</option>
                      <option value="video" name="video">Vídeo</option>
-                            <?php else: ?>
+                              <?php elseif(isset($sobre[0]->midia) && $sobre[0]->midia == 'video'): ?>
                     <option value="imagem" name="imagem">Imagem</option>
                     <option value="video" name="video" selected>Vídeo</option>
+                  <?php else: ?>
+                      <option value="imagem" name="imagem">Imagem</option>
+                    <option value="video" name="video">Vídeo</option>
                             <?php endif; ?>
                         </select>                  
                 </div>
@@ -85,14 +87,14 @@
                    <div class="col-md-6">
                 
                     <div class="form-group">
-                      <?php if ($sobre[0]->midia == 'imagem'): ?>
+                    <?php if(isset($sobre[0]->midia) && $sobre[0]->midia == 'imagem'): ?>
                      <div class="panel panel-default">
                         <div class="panel-heading">Imagem Atual</div>
               <div class="panel-body">
    <img class="exibeImg imgNormal" src="<?php echo base_url('assets/uploads/' . $sobre[0]->imagem); ?>" id="img_upload" alt="" />  
        </div>   
      </div> 
-     <?php else: ?> 
+           <?php elseif(isset($sobre[0]->midia) && $sobre[0]->midia == 'video'): ?>
 <div class="panel panel-default">
                         <div class="panel-heading">Vídeo Atual</div>
               <div class="panel-body">
@@ -101,6 +103,7 @@
 </div>
        </div>   
      </div> 
+       <?php else: ?>
      <?php endif; ?>
                 </div>              
                
@@ -115,7 +118,6 @@
 </div>                   
        <?php echo form_submit($buttonPubl); ?>
        <?php echo form_submit($button); ?>
-       <?php echo form_reset($reset); ?>
       <?php form_close(); ?>          
                                                       
                            

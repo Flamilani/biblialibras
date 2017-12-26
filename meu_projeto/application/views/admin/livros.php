@@ -2,8 +2,8 @@
             <div class="row">
  <?php echo $this->session->userdata('nome'); ?>
                 <div class="col-lg-12">
-                    <h3 class="page-header">Livros</h3>
-
+                    <h3 class="page-header">Livros<div class="pull-right"><a class="btn btn-success" href="">Visualizar</a></div></h3>
+                  
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -31,8 +31,8 @@
                         <div class="panel-body caixa_livro">
   <?php $titulo = array('name' => 'titulo', 'id' => 'titulo', 'type' => 'text', 'titulo', 'value' => set_value('titulo'), 'class' => 'form-control', 'placeholder' => 'Título');
     $valor = array('name' => 'valor', 'type' => 'text', 'id' => 'valor', 'value' => set_value('valor'), 'class' => 'form-control', 'placeholder' => '0,00');
-    $conteudo = array('name' => 'editor1', 'type' => 'text', 'id' => 'editor1', 'value' => set_value('editor1'), 'class' => 'form-control', 'rows' => '3');
-   $ordem = array('name' => 'ordem', 'type' => 'number', 'id' => 'ordem', 'value' => set_value('ordem'), 'class' => 'form-control', 'placeholder' => '0');
+      $capitulo = array('name' => 'capitulos', 'type' => 'number', 'id' => 'capitulos', 'min'=> str_pad(13, 3, "0", STR_PAD_LEFT), 'max'=>'999', 'value' => set_value('capitulos'), 'class' => 'form-control', 'placeholder' => '0');
+   $ordem = array('name' => 'ordem', 'type' => 'number', 'id' => 'ordem', 'value' => '000', 'class' => 'form-control', 'placeholder' => '000');
      $button = array('name' => 'btn_adicionar', 'id' => 'btn_adicionar', 'type' => 'submit', 'class' => 'btn btn-warning', 'value' => 'Salvar como rascunho');
      $buttonPubl = array('name' => 'btn_publicar', 'id' => 'btn_publicar', 'type' => 'submit', 'class' => 'btn btn-success', 'value' => 'Publicar'); ?>
 
@@ -66,14 +66,17 @@
                            </div>
                                </div>
                            </div>
-                            </div>       
-                  <div class="row">
-                             <div class="col-lg-12 col-md-12">  
-        <div class="form-group">             
-                 <?php echo form_label('Conteúdo', 'editor1') . form_textarea($conteudo); ?>
-        </div>                                      
-</div>   
-</div>                   
+                            </div>  
+                             <div class="row">
+                              <div class="col-md-6"> 
+                                <div class="form-group">
+                                     <?php echo form_label('Capítulos', 'capitulos') ?>
+                                            <?php echo form_input($capitulo); ?>
+                                    </div>
+                                </div>
+                            
+                            </div>          
+                       
        <?php echo form_submit($buttonPubl); ?>
        <?php echo form_submit($button); ?>
       <?php form_close(); ?>          
@@ -99,12 +102,12 @@
             <table width="100%" class="tabela1 table table-striped table-bordered table-hover" id="tabela1">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Título</th>
-                                        <th>Conteúdo</th>
-                                        <th>Capítulos</th>
-                                        <th>Valor</th>
+                                        <!-- <th>ID</th> -->
                                         <th>Ordem</th>
+                                        <th>Título</th>
+                                        <th>Capítulos</th>
+                                        <th>Vídeos</th>
+                                        <th>Valor</th>
                                         <th>Imagem</th>
                                         <th>Status</th>
                                         <th>Ações</th>
@@ -115,13 +118,18 @@
                             <?php foreach ($livros as $livro): ?>
  <?php $rowsCap = $this->db->query("SELECT * FROM videos WHERE id_livro = {$livro->id_livro}"); ?>
                      <?php $countCap = $rowsCap->result(); ?>
-                                <tr class="odd gradeX">
-                                <td><?php echo $livro->id_livro; ?><?php echo form_hidden($livro->id_livro); ?></td>
-                                        <td><?php echo $livro->titulo; ?></td>
-                                        <td><?php echo $livro->conteudo; ?></td>
-    <td class="text-center"><a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/livros/capitulos/' . $livro->id_livro . '/' . clear($livro->titulo)); ?>"><?php echo count($countCap); ?> <?php plural(count($countCap), 'capítulo', 'capítulos') ?></a></td>
-                                        <td class="text-center"><?php echo reais($livro->valor); ?></td>
-                                          <td class="text-center"><?php echo $livro->ordem; ?></td>
+                                <tr class="odd gradeX">                               
+       <td class="text-center"><?php echo form_hidden($livro->id_livro); ?><?php echo $livro->ordem; ?></td>
+                                        <td><?php echo $livro->titulo; ?></td>                   
+                                        <td class="text-center">
+    <?php $rowsCapLivro = $this->db->query("SELECT * FROM capitulo WHERE id_livro = {$livro->id_livro}"); ?>
+     <?php $countCapLivro = $rowsCapLivro->result(); ?>                                   
+    <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/livros/capitulos/' . $livro->id_livro); ?>"><?php echo count($countCapLivro); ?> / <?php echo $livro->capitulos; ?> <?php plural($livro->capitulos, 'cap.', 'caps.') ?></a>
+                                          </td>
+    <td class="text-center">
+      <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/livros/videos/' . $livro->id_livro); ?>"><?php echo count($countCap); ?> <?php plural(count($countCap), 'vídeo', 'vídeos') ?></a>
+    </td>
+                                        <td class="text-center"><?php echo reais($livro->valor); ?></td>  
                                           <td class="text-center">
      <?php if(isset($livro->imagem) && $livro->imagem != null): ?>
        <img class="exibeImg" src="<?php echo base_url('assets/uploads/' . $livro->imagem); ?>" id="img_upload" alt="" />   
@@ -161,13 +169,24 @@
 <!-- Uso de Modal-->
 
 <script type="text/javascript">
+
+var el = document.getElementById('ordem');
+var updatetext = function(){
+  el.value = ('000' + el.value).slice(-3);
+}
+  
+el.addEventListener("keyup", updatetext , false); 
+
     $(document).ready(function () {
 
-      $('#valor').mask('0.000,00', {reverse: true});
+    $('#valor').mask('0000,00', {reverse: true});
+
+      $("#capitulos").mask("000");
+
+      
 
       Shadowbox.init();
 
-        CKEDITOR.replace('editor1');
 
         $(document).on('click', '.status_checks', function ()
            {

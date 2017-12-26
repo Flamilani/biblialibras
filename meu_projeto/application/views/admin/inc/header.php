@@ -9,9 +9,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand admin" href="index.html">Painel Admin. - A Bíblia em Libras</a>
+            <a class="navbar-brand admin" href="<?php echo  base_url('admin/home'); ?>">Painel Admin. - A Bíblia em Libras</a>
         </div>
         <!-- /.navbar-header -->
+      <ul class="nav navbar-nav">   
+        <li><a href="<?php echo base_url("home") ?>">Ver Site</a></li>
+
+      </ul>    
 
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
@@ -211,13 +215,13 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li class="perfil">
                         <p><?php echo $this->session->userdata('admin')->nome; ?></p>
-                        <p>flavio@gmail.com</p>
+                        <p><?php echo $this->session->userdata('admin')->email; ?></p>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> Meu Perfil</a>
+                    <li><a href="<?php echo base_url('admin/usuarios/perfil/' . $perfil[0]->id); ?>"><i class="fa fa-user fa-fw"></i> Meu Perfil</a>
                     </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
+                    <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li> -->
                     <li class="divider"></li>
                     <li><a href="<?php echo base_url('admin/logout'); ?>"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                     </li>
@@ -255,19 +259,23 @@
                                 <a href="<?php echo base_url("admin/sobre") ?>">Sobre</a>
                             </li> 
                             <li>
-                                <a href="<?php echo base_url("admin/funciona") ?>">Como Funciona</a>
+                                <a href="<?php echo base_url("admin/funciona") ?>">Funciona</a>
                             </li>
-                             <li>
-                                <a href="<?php echo base_url("admin/livros") ?>">Livros</a>
-                            </li>
+                             
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                    <a href="<?php echo base_url("admin/livros") ?>"><i class="fa fa-book fa-fw"></i> Livros</a>
+                    </li>
+                     <li>
+                        <a href="<?php echo base_url("admin/usuarios") ?>"><i class="fa fa-user fa-fw"></i> Usuários</a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                        <a href="<?php echo base_url("admin/pedidos") ?>"><i class="fa fa-table fa-fw"></i> Pedidos</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url("admin/pagamentos") ?>"><i class="fa fa-edit fa-fw"></i> Pagamentos</a>
                     </li>          
                   
                 </ul>

@@ -37,20 +37,27 @@ class Funciona_model extends CI_Model {
         return $this->db->insert($this->table, $data);
     }
 
-     public function adicionarFunciona($titulo, $conteudo, $status) {      
+      public function adicionarFunciona($titulo, $conteudo, $midia, $imagem, $video, $status) {      
         $data['titulo'] = $titulo;     
         $data['conteudo'] = $conteudo;      
+        $data['midia'] = $midia;      
+        $data['imagem'] = $imagem;      
+        $data['video'] = $video;      
         $data['status'] = $status;      
         return $this->db->insert($this->table, $data);
     }
 
-     public function gravar_alteracoes($id, $titulo, $conteudo, $status) {
+        public function gravar_alteracoes($id, $titulo, $conteudo, $midia, $imagem, $video, $status) {
        $data['titulo'] = $titulo;     
         $data['conteudo'] = $conteudo;      
+        $data['midia'] = $midia;      
+        $data['imagem'] = $imagem;      
+        $data['video'] = $video;      
         $data['status'] = $status;     
         $this->db->where('id_funciona', $id);
         return $this->db->update($this->table, $data);
     }
+
 
 
 }

@@ -11,7 +11,6 @@ class Livro extends CI_Controller {
     }
 
    public function index()	{
-          // $this->output->enable_profiler(TRUE);
             $data['lista_capitulos'] = $this->capitulos_model->capitulo_livros();                
             $this->load->view('area/inc/html-header');
             $this->load->view('area/inc/header');
