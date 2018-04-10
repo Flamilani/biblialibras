@@ -12,9 +12,10 @@ class Videos_model extends CI_Model {
     } 
     
     public function admin_Videos($id) {
-        $query = $this->db->join('capitulo cp', 'videos.id_capitulo = cp.id_capitulo', 'inner');
-        $query = $this->db->select('*, cp.capitulo as cap, videos.status as status_video');
-        $query = $this->db->where('videos.id_livro', $id);
+      //  $query = $this->db->join('capitulo cp', 'videos.id_capitulo = cp.id_capitulo', 'inner');
+       // $query = $this->db->select('*, cp.capitulo as cap, videos.status as status_video');
+         $query = $this->db->select('*');
+        $query = $this->db->where('id_livro', $id);
         $query = $this->db->get($this->table);
         if ($query->num_rows() > 0):
             return $query->result();
@@ -70,13 +71,13 @@ class Videos_model extends CI_Model {
     }   
     
       public function video_livros($id, $user) {
-        $this->db->where('p.id_livro', $id);
+        $this->db->where('l.id_livro', $id);
         $this->db->where('p.id_user', $user);
         $this->db->where('p.status', 1);
         $this->db->select('*');
         $this->db->from('livros l');
         $this->db->join('videos c', 'l.id_livro = c.id_livro', 'inner');
-        $this->db->join('pedidos p', 'l.id_livro = p.id_livro', 'inner');
+      //  $this->db->join('pedidos p', 'l.id_livro = p.id_livro', 'inner');
         return $this->db->get()->result();
     }    
 
@@ -104,14 +105,16 @@ class Videos_model extends CI_Model {
     }    
 
      public function video_livrosMD($id, $user) {
-        $this->db->where('p.id_livro', $id);
+        $this->db->order_by('c.id_video', 'ASC');
+        $this->db->where('ip.id_livro', $id);
         $this->db->where('p.id_user', $user);
         $this->db->where('p.status', 1);
         $this->db->where('c.status', 1);
         $this->db->select('*');
         $this->db->from('livros l');
         $this->db->join('videos c', 'l.id_livro = c.id_livro', 'inner');
-        $this->db->join('pedidos p', 'l.id_livro = p.id_livro', 'inner');
+        $this->db->join('itens_pedidos ip', 'ip.id_livro = l.id_livro', 'inner');
+        $this->db->join('pedidos p', 'p.id_pedido = ip.id_pedido', 'inner');
         return $this->db->get()->result();
     }    
 
@@ -126,9 +129,18 @@ class Videos_model extends CI_Model {
         return $this->db->get()->result();
     }    
 
+   /*  public function titulo_video($id, $cap) {
+        $this->db->where('id_livro', $id);
+        $this->db->where('status', 1);
+        $this->db->where('id_capitulo', $cap);
+        $this->db->select('*');
+        $this->db->from('videos');
+        return $this->db->get()->result();
+    }    */
+
       public function titulo_capitulo_admin($id) {
         $query = $this->db->where('id_livro', $id);
-        $query = $this->db->get('capitulo');
+        $query = $this->db->get('videos');
         if ($query->num_rows() > 0):
             return $query->result();
         else:
@@ -148,9 +160,10 @@ class Videos_model extends CI_Model {
     
 
       public function titulo_capitulo($id) {
-       // $this->db->join('videos c', 'cp.id_capitulo = c.id_capitulo', 'inner');
-        $query = $this->db->where('id_livro', $id);
-        $query = $this->db->get('capitulo');
+        $query = $this->db->order_by("c.capitulo", "asc");
+        $query = $this->db->join('livros l', 'l.id_livro = c.id_livro', 'inner');
+        $query = $this->db->where('c.id_livro', $id);
+        $query = $this->db->get('capitulo c');
         if ($query->num_rows() > 0):
             return $query->result();
         else:
@@ -159,6 +172,7 @@ class Videos_model extends CI_Model {
     }
 
     public function titulo_capitulo_home($id) {
+        $query = $this->db->order_by("capitulo", "asc");
         $query = $this->db->where('id_livro', $id);
         $query = $this->db->get('capitulo');
         if ($query->num_rows() > 0):
@@ -169,14 +183,13 @@ class Videos_model extends CI_Model {
     }
 
      public function livros_user($user) {
-        $this->output->enable_profiler(TRUE);
         $this->db->where('p.id_user', $user);
         $this->db->where('p.status', 1);
         $this->db->where('l.status', 1);
         $this->db->select('*');
         $this->db->from('livros l');
        // $this->db->join('capitulos c', 'l.id_livro = c.id_livro', 'inner');
-       // $this->db->join('itens_pedidos ip', 'l.id_livro = ip.id_livro', 'inner');
+        $this->db->join('itens_pedidos ip', 'l.id_livro = ip.id_livro', 'inner');
         $this->db->join('pedidos p', 'ip.id_pedido = p.id_pedido', 'inner');
         return $this->db->get()->result();
     }    
@@ -258,6 +271,13 @@ class Videos_model extends CI_Model {
         return $this->db->update($this->table, $data);
     }
 
+    public function gravar_video_livro($id_video, $id_capitulo) {
+        $data['id_capitulo'] = $id_capitulo;        
+        $this->db->where($this->id, $id_video);
+        return $this->db->update($this->table, $data);
+    }
+
+
      public function deletar($id) {
         $this->db->where($this->id, $id);
         return $this->db->delete($this->table);
@@ -268,14 +288,28 @@ class Videos_model extends CI_Model {
         return $this->db->delete('capitulo');
     }
 
-      public function marcar_concluido($livro, $capitulo, $user, $visto) {      
+    public function marcar_concluido($livro, $capitulo, $user, $visto, $data_visto) {      
         $data['id_livro'] = $livro;     
         $data['id_video'] = $capitulo;      
         $data['id_user'] = $user;      
         $data['visto_status'] = $visto;
+        $data['data_visto'] = $data_visto;
         return $this->db->insert('historico_livro', $data);
     }
 
+    public function desmarcar($id) {    
+        $this->db->where('id_hist', $id);
+        return $this->db->delete('historico_livro');
+    }
+
+    public function iniciar($user, $id_livro, $id_assinatura, $status, $data_inicial) {      
+        $data['id_user'] = $user;      
+        $data['id_assinatura'] = $id_assinatura;     
+        $data['id_livro'] = $id_livro;     
+        $data['status_acesso'] = $status;       
+        $data['data_inicial'] = $data_inicial;       
+        return $this->db->insert('acesso_livro', $data);
+    }
     
 
 }

@@ -1,7 +1,7 @@
 <!-- About Section -->
 <?php if(isset($funciona[0]->status) && $funciona[0]->status == 1): ?>
 <section class="funciona" id="funciona">
-    <div class="container headPage">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center front">
                 <h2><?php echo $funciona[0]->titulo; ?></h2>                
@@ -29,5 +29,13 @@
     </div>
 </section>
 <?php else: ?>
+<?php endif; ?>
 
-    <?php endif; ?>
+<?php if($this->uri->segment(2) == 'funciona') { ?>
+<script>
+     $(document).ready(function() {       
+        $('.funciona').addClass("cima");
+     });
+</script>     
+
+<?php } ?>

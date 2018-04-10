@@ -176,7 +176,7 @@ class Users extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('inc/html-header');
             $this->load->view('inc/header');
-            $this->load->view('assinatura_enviada');
+            $this->load->view('cadastro');
             $this->load->view('inc/footer');
             $this->load->view('inc/html-footer');
         } else {
@@ -188,7 +188,6 @@ class Users extends CI_Controller {
             $dados['celular'] = $this->input->post('celular');
             $dados['data_nasc'] = $this->input->post('data_nasc');
             $dados['cpf'] = $this->input->post('cpf');
-            $dados['tipo'] = $this->input->post('tipo');
             $dados['endereco'] = $this->input->post('endereco');
             $dados['numero'] = $this->input->post('numero');
             $dados['compl'] = $this->input->post('compl');
@@ -201,9 +200,12 @@ class Users extends CI_Controller {
             $dados['igreja'] = $this->input->post('igreja');
             $dados['funcao'] = $this->input->post('funcao');
             $dados['saber'] = $this->input->post('saber');
+            $dados['acesso'] = $this->input->post('acesso');
+            $dados['termos'] = $this->input->post('termos');
+            $dados['sexo'] = $this->input->post('sexo');
             if ($this->users_model->registrar($dados)) {
-                $this->enviar_email_confirmacao($dados);
                 $this->envio();
+                $this->enviar_email_confirmacao($dados);
             } else {
                $this->session->set_flashdata("error", "Erro ao assinar.");
             }
@@ -213,38 +215,46 @@ class Users extends CI_Controller {
      public function envio() {
         $this->load->library('email');
 
-        // Check for validation
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('sobrenome', 'Sobrenome', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
-        $this->form_validation->set_rules('celular', 'Celular', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('senha', 'Senha', 'trim|required|xss_clean');
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('inc/html-header');
-            $this->load->view('inc/header');
-            $this->load->view('assinatura_enviada');
-            $this->load->view('inc/footer');
-            $this->load->view('inc/html-footer');
-        } else {
-
             // Storing submitted values
+
+             // Storing submitted values
+            $email_principal = 'contato@abibliaemlibras.com.br';
 
             $nome = $this->input->post('nome');
             $sobrenome = $this->input->post('sobrenome');            
             $receiver_email = $this->input->post('email');
             $celular = $this->input->post('celular');
+           
+            $telefone = $this->input->post('telefone');
+            $celular = $this->input->post('celular');
+            $data_nasc = $this->input->post('data_nasc');
+            $cpf = $this->input->post('cpf');
+            $endereco = $this->input->post('endereco');
+            $numero = $this->input->post('numero');
+            $compl = $this->input->post('compl');
+            $bairro = $this->input->post('bairro');
+            $cidade = $this->input->post('cidade');
+            $estado = $this->input->post('estado');
+            $cep = $this->input->post('cep');
+            $perfil_so = $this->input->post('perfil_so');
+            $escolaridade = $this->input->post('escolaridade');
+            $igreja = $this->input->post('igreja');
+            $funcao = $this->input->post('funcao');
+            $saber = $this->input->post('saber');
             
-            $assunto = 'Assinatura da Bíblia em Libras';
+            $assunto = 'Cadastro da Bíblia em Libras';
 
-            $sender_email = 'flaviomilani83@gmail.com';
+            $sender_email = $email_principal;
 
             // Load email library and passing configured values to email library 
             $this->email->set_newline("\r\n");
 
             // Sender email address
-            $this->email->from($sender_email, $nome);
+            $this->email->from($email_principal, $nome);
             // Receiver email address
             $this->email->to($receiver_email);
+            $this->email->to('gilmarmanhaes@hotmail.com');
+            $this->email->to($email_principal);
             // Subject of email
             $this->email->subject($assunto);
             // Message in email
@@ -254,36 +264,40 @@ class Users extends CI_Controller {
                     '<caption>' . $assunto . '</caption>' .
                     '<tr><td><b>Nome</b></td><td>' . $nome . ' ' . $sobrenome . '</td></tr>' .                  
                     '<tr><td><b>Celular</b></td><td>' . $celular . '</td></tr>' .                   
-                    '<tr><td><b>E-mail</b></td><td>' . $receiver_email . '</td></tr>' .                  
+                    '<tr><td><b>Telefone</b></td><td>' . $telefone . '</td></tr>' .                   
+                    '<tr><td><b>E-mail</b></td><td>' . $receiver_email . '</td></tr>' .
+                    '<tr><td><b>Data Nasc.</b></td><td>' . $data_nasc . '</td></tr>' .                  
+                    '<tr><td><b>CPF</b></td><td>' . $cpf . '</td></tr>' .                  
+                    '<tr><td><b>Endereço</b></td><td>' . $endereco .  ', ' . $numero . ' - ' . $compl . '</td></tr>' .               
+                    '<tr><td><b>Bairro</b></td><td>' . $bairro . '</td></tr>' .                  
+                    '<tr><td><b>Cidade</b></td><td>' . $cidade . ' - ' . $estado . '</td></tr>' .                  
+                    '<tr><td><b>CEP</b></td><td>' . $cep . '</td></tr>' .                  
                     '</table>';
 
             $this->email->message($body);
 
             if ($this->email->send()) {
-                $data['message_display'] = 'Assinatura foi efetuada com sucesso.';
+                $this->session->set_flashdata("success", "Cadastro foi efetuado com sucesso.");
+                //$data['message_display'] = 'Cadastro foi efetuado com sucesso.';
             } else {
                 $data['message_display'] = '<p class="error_msg">Erro ao enviar</p>';
                 print_r($this->email->print_debugger());
             }
-//            $this->load->view('inc/html-header');
-//            $this->load->view('inc/header');
-//            $this->load->view('registro_enviado', $data);
-//            $this->load->view('inc/footer');
-//            $this->load->view('inc/html-footer');
-        }
+
     }   
 
     public function enviar_email_confirmacao($dados) {
-        $mensagem = $this->load->view('emails/confirmar_assinatura', $dados, TRUE);
+        $mensagem = $this->load->view('emails/confirmar_cadastro', $dados, TRUE);
         $this->load->library('email');
-        $this->email->from("flaviomilani83@gmail.com", $dados['nome']);
+        $this->email->from("contato@abibliaemlibras.com.br", $dados['nome']);
         $this->email->to($dados['email']);
-        $this->email->subject(utf8_decode("Confirme sua assinatura - A Bíblia em Libras"));
+        $this->email->to("contato@abibliaemlibras.com.br");
+        $this->email->subject(utf8_decode("Confirme seu cadastro - A Bíblia em Libras"));
         $this->email->message($mensagem);
         if ($this->email->send()) {
             $this->load->view('inc/html-header');
             $this->load->view('inc/header');
-            $this->load->view('assinatura_enviada');
+            $this->load->view('cadastro_enviado');
             $this->load->view('inc/footer');
             $this->load->view('inc/html-footer');
         } else {
@@ -297,7 +311,7 @@ class Users extends CI_Controller {
         if ($this->db->update('users', $dados)) {
             $this->load->view('inc/html-header');
             $this->load->view('inc/header');
-            $this->load->view('registro_liberado');
+            $this->load->view('cadastro_liberado');
             $this->load->view('inc/footer');
             $this->load->view('inc/html-footer');
         } else {

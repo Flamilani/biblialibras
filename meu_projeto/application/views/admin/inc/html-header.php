@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Painel Administrativo - A Bíblia em Libras</title>
+    <link rel="shortcut icon" href="<?php echo base_url('assets/img/icone_mao.png'); ?>">
     <!-- Bootstrap Core CSS -->
     <?php echo link_tag('assets/bootstrap/css/bootstrap.min.css'); ?>
     <?php echo link_tag('assets/css/style.css'); ?>
@@ -24,8 +25,11 @@
      <?php echo link_tag('assets/shadowbox/shadowbox.css'); ?>  
       <?php echo link_tag('assets/plugins/datatables/dataTables.bootstrap.css'); ?>
 <!-- jQuery -->
-<script src="<?php echo base_url('assets/jquery/jquery.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/sb-admin/vendor/jquery/jquery.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/jquery/jquery-ui.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.forms.js') ?>"></script>
+    <!-- Flot Charts JavaScript -->
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

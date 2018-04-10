@@ -5,6 +5,8 @@
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap-notify.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap-lightbox.min.js') ?>"></script>
+<!-- datepicker -->
+<script src="<?php echo base_url('assets/plugins/datepicker/bootstrap-datepicker.js') ?>"></script>
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap-datepicker.pt-BR.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap-select.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/sweet-alert.js') ?>"></script>
@@ -20,13 +22,13 @@
 <script src="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/shadowbox/shadowbox.js') ?>"></script>
 <!-- Custom Theme JavaScript -->
+<script src="<?php echo base_url('assets/sb-admin/vendor/flot/excanvas.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.js') ?>"></script>
+<script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.pie.js') ?>"></script>
+<script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.resize.js') ?>"></script>
+<script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.time.js') ?>"></script>
+<script src="<?php echo base_url('assets/sb-admin/vendor/flot-tooltip/jquery.flot.tooltip.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/sb-admin/data/flot-data.js') ?>"></script>
 <script src="<?php echo base_url('assets/sb-admin/dist/js/sb-admin-2.js') ?>"></script>
-    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/excanvas.min.js') ?>"></script>
-    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.js') ?>"></script>
-    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.pie.js') ?>"></script>
-    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.resize.js') ?>"></script>
-    <script src="<?php echo base_url('assets/sb-admin/vendor/flot/jquery.flot.time.js') ?>"></script>
-    <script src="<?php echo base_url('assets/sb-admin/vendor/flot-tooltip/jquery.flot.tooltip.min.js') ?>"></script>
-    <script src="<?php echo base_url('assets/sb-admin/data/flot-data.js') ?>"></script>
 </body>
 </html>

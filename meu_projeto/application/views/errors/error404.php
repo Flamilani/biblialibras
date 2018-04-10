@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<div class="container lados">
 <div class="content error404">
 <h1>Erro 404</h1>
 <div class="row conteudo text-center">    
@@ -9,4 +10,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 <div class="clear"></div>    
+</div>
 </div>

@@ -70,6 +70,14 @@ class Livros_model extends CI_Model {
         return $this->db->get()->result();
     }
 
+    public function plano_Livros() {
+        $this->db->order_by('ordem', 'DESC');
+        $this->db->select('*');
+        $this->db->from('livros l');
+        $this->db->join('videos c', 'l.id_livro = c.id_livro', 'inner');
+        return $this->db->get()->result();
+    }
+
     public function livro_id($id) {
         $this->db->where('l.id_livro', $id);
         $this->db->select('*, l.titulo as tema');
@@ -132,31 +140,68 @@ class Livros_model extends CI_Model {
         endif;
     }
 
+        public function dados_capitulos($id) {
+         $this->db->where("id_capitulo", $id);
+         return $this->db->get("capitulo");
+    }
 
-     public function adicionarLivros($titulo, $conteudo, $imagem, $valor, $status, $ordem, $capitulos) {      
+        public function dados_livros($id) {
+         $this->db->where("id_planos", $id);
+         return $this->db->get("plano_livro");
+    }
+
+
+     public function adicionarLivros($titulo, $sigla, $imagem, $valor, $status, $ordem) {      
         $data['titulo'] = $titulo;     
-        $data['conteudo'] = $conteudo;      
+        $data['sigla'] = $sigla;     
         $data['imagem'] = $imagem;      
         $data['valor'] = $valor;      
         $data['ordem'] = $ordem;      
         $data['status'] = $status;      
-        $data['capitulos'] = $capitulos;      
         return $this->db->insert($this->table, $data);
     }
 
-        public function alterar_livro_status($id, $status) {
+    public function adicionarCapitulo($capitulo, $livro) {      
+        $data['capitulo'] = $capitulo;     
+        $data['id_livro'] = $livro;      
+        $data['status'] = 1;      
+        return $this->db->insert('capitulo', $data);
+    }
+
+    public function salvar($id = null, $dados = null) {      
+      return $this->db->where("id_video", $id)->update("videos", $dados);              
+    }
+
+    public function gravar_video_id($id, $id_capitulo) {
+        $data['capitulo'] = $id_capitulo;
+        $this->db->where('id_capitulo', $id);
+        return $this->db->update('capitulo', $data);
+    }
+
+        public function remover_video_capitulo($id) {
+        $data['id_capitulo'] = 0;
+        $this->db->where('id_video', $id);
+        return $this->db->update('videos', $data);
+    }
+
+    public function alterar_capitulo_video($id, $capitulo) {
+        $data['id_capitulo'] = $capitulo;
+        $this->db->where('id_video', $id);
+        return $this->db->update('videos', $data);
+    }
+
+    public function alterar_livro_status($id, $status) {
         $data['status'] = $status;
         $this->db->where($this->id, $id);
         return $this->db->update($this->table, $data);
     }
 
-     public function gravar_alteracoes($id, $titulo, $conteudo, $valor, $status, $ordem, $capitulos) {
+     public function gravar_alteracoes($id, $titulo, $sigla, $valor, $status, $ordem) {
         $data['titulo'] = $titulo;
-        $data['conteudo'] = $conteudo;
+        $data['sigla'] = $sigla;
         $data['valor'] = $valor;
         $data['status'] = $status;
         $data['ordem'] = $ordem;
-        $data['capitulos'] = $capitulos;
         $this->db->where($this->id, $id);
         return $this->db->update($this->table, $data);
     }
@@ -171,7 +216,8 @@ class Livros_model extends CI_Model {
         $this->db->where($this->id, $id);
         return $this->db->delete($this->table);
     }
- 
+
+
     
 
 }

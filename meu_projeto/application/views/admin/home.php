@@ -1,7 +1,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Dashboard</h1>
+                <h1 class="page-header"><i class="fa fa-dashboard fa-fw"></i> Dashboard</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -39,12 +39,12 @@
                             <div class="col-xs-9 text-right">
                                 <div class="huge"><?php echo $count_ativos; ?></div>
                                 <div>
-                                <?php plural($count_ativos, 'Usuário Ativo', 'Usuários Ativos') ?>                      
+                                <?php plural($count_ativos, 'Usuário', 'Usuários') ?>                      
                               </div>
                             </div>
                         </div>
                     </div>
-                    <a href="<?php echo base_url("admin/users") ?>">
+                    <a href="<?php echo base_url("admin/usuarios") ?>">
                         <div class="panel-footer">
                             <span class="pull-left">Mais Detalhes</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -61,12 +61,12 @@
                                 <i class="fa fa-pencil-square-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge"><?php echo $count_users; ?></div>
-                                <div><?php plural($count_users, 'Assinatura', 'Assinaturas') ?></div>
+                                <div class="huge"><?php echo $count_assinaturas; ?></div>
+                                <div><?php plural($count_assinaturas, 'Assinatura', 'Assinaturas') ?></div>
                             </div>
                         </div>
                     </div>
-                    <a href="<?php echo base_url("admin/users") ?>">
+                    <a href="<?php echo base_url("admin/assinaturas") ?>">
                         <div class="panel-footer">
                             <span class="pull-left">Mais Detalhes</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -80,15 +80,15 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-support fa-5x"></i>
+                                <i class="fa fa-usd fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge"><?php echo $count_pedidos; ?></div>
-                                <div><?php plural($count_pedidos, 'Pedido', 'Pedidos') ?></div>
+                                <div class="huge"><?php echo $count_pagos; ?></div>
+                                <div><?php plural($count_pagos, 'Pagamento', 'Pagamentos') ?></div>
                             </div>
                         </div>
                     </div>
-                    <a href="<?php echo base_url("admin/pedidos") ?>">
+                    <a href="<?php echo base_url("admin/pagamentos") ?>">
                         <div class="panel-footer">
                             <span class="pull-left">Mais Detalhes</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -120,12 +120,6 @@
         <td><?php echo $nivel->qtd; ?></td>     
         </tr>  
     <?php endforeach; ?>
-         <?php foreach ($totalEscolar as $totalEsc): ?>
-        <tr>
-            <td class="info"><b><?php echo FormEscolar($totalEsc->total); ?></b></td>
-            <td class="info"><?php echo $totalEsc->total; ?></td>
-        </tr>
-         <?php endforeach; ?>
     </table>
   </div>
 </div>
@@ -143,12 +137,6 @@
        <td><?php echo $ig->qtd; ?></td>
         </tr>
     <?php endforeach; ?>
-     <?php foreach ($totalIgreja as $totalIg): ?>
-        <tr>
-            <td class="info"><b><?php echo FormIgreja($totalIg->total); ?></b></td>
-            <td class="info"><?php echo $totalIg->total; ?></td>
-        </tr>
-         <?php endforeach; ?>
     </table>
   </div>
 </div>
@@ -165,13 +153,7 @@
         <td><b><?php echo FormFuncao($f->funcao); ?></b></td>
        <td><?php echo $f->qtd; ?></td>
         </tr>
-    <?php endforeach; ?>
-     <?php foreach ($totalFuncao as $totalFun): ?>
-        <tr>
-            <td class="info"><b><?php echo FormFuncao($totalFun->total); ?></b></td>
-            <td class="info"><?php echo $totalFun->total; ?></td>
-        </tr>
-         <?php endforeach; ?>
+    <?php endforeach; ?> 
     </table>
   </div>
 </div>
@@ -189,12 +171,6 @@
        <td><?php echo $sb->qtd; ?></td>
         </tr>
     <?php endforeach; ?>
-     <?php foreach ($totalSaber as $totalSab): ?>
-        <tr>
-            <td class="info"><b><?php echo FormSaber($totalSab->total); ?></b></td>
-            <td class="info"><?php echo $totalSab->total; ?></td>
-        </tr>
-         <?php endforeach; ?>
     </table>
   </div>
 </div>
@@ -212,16 +188,44 @@
        <td><?php echo $perf->qtd; ?></td>
         </tr>
     <?php endforeach; ?>
-     <?php foreach ($totalPerfil as $totalPerf): ?>
-        <tr>
-            <td class="info"><b><?php echo FormPerfil_SO($totalPerf->total); ?></b></td>
-            <td class="info"><?php echo $totalPerf->total; ?></td>
-        </tr>
-         <?php endforeach; ?>
     </table>
   </div>
 </div>
+
             </div>
+                 <div class="col-lg-3 col-md-6">
+                     <div class="panel panel-primary">
+                         <div class="panel-heading">
+                             <h3 class="panel-title">Uso para Acesso</h3>
+                         </div>
+                         <div class="panel-body">
+                             <table class="table table-striped">
+                                 <?php foreach ($acessos as $acesso): ?>
+                                     <tr>
+                                         <td><b><?php echo FormAcesso($acesso->acesso); ?></b></td>
+                                         <td><?php echo $acesso->qtd; ?></td>
+                                     </tr>
+                                 <?php endforeach; ?>                              
+                             </table>
+                         </div>
+                     </div>
+
+                 </div>
+                            <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Pie Chart Example
+                        </div>
+                       
+                        <div class="panel-body">
+                            <div class="flot-chart">
+                                <div class="flot-chart-content" id="flot-pie-chart"></div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                   
+                </div> 
         </div>
         <!-- /.row -->
 

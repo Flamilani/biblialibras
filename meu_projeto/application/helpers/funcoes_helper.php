@@ -29,8 +29,12 @@ function FormData($data){
     return date('d/m/Y', strtotime($data));
 }
 
+function FormDataP($data){
+    return date('d/m/y', strtotime($data));
+}
+
 function FormDataHora($data){
-    return date('d/m/Y \à\s H:i', strtotime($data));
+    return date('d/m/Y \à\s H:i:s', strtotime($data));
 }
 
 function FormHora($data){
@@ -39,16 +43,16 @@ function FormHora($data){
 
 function getDateDiff($start, $end = "NOW", $return = 'days') {
 
-    //Transforma a data inicial em time    
+    //Transforma a data inicial em time
     $sdate = strtotime($start);
 
-    //Transforma a data final em time    
+    //Transforma a data final em time
     $edate = strtotime($end);
 
-    //Faz o cálculo para achar a diferença em dias    
+    //Faz o cálculo para achar a diferença em dias
     $pday = ($edate - $sdate) / 86400;
 
-    //Faz o cálculo para achar a diferença em menses    
+    //Faz o cálculo para achar a diferença em menses
     $pmonth = $pday / 30;
 
     if ($return == 'days')
@@ -59,6 +63,21 @@ function getDateDiff($start, $end = "NOW", $return = 'days') {
 
     return $r[0];
 }
+
+function tipo_assunto($tipo) {
+        switch ($tipo) {
+     case 1:
+        echo "D&uacute;vida";
+        break;
+    case 2:
+        echo "Cr&iacute;tica";
+        break;
+    case 3:
+        echo "Sugest&atilde;o";
+        break;
+}
+}
+
 
 
 function tipo_conta($tipo) {
@@ -75,16 +94,31 @@ function tipo_conta($tipo) {
 function tipo_pagam($tipo) {
         switch ($tipo) {
      case 1:
-        echo "Boleto";
-        break;
-    case 2:
-        echo "TED";
-        break;
-    case 3:
         echo "Depósito Bancário";
         break;
+    case 2:
+        echo "PagSeguro";
+        break;
+    case 3:
+        echo "Boleto";
+        break;
 }
 }
+
+function FormPeriodo($id){
+    switch ($id) {
+     case 'year':
+        echo "ano";
+        break;
+    case 'month':
+        echo "meses";
+        break;
+    case 'day':
+        echo "dias";
+        break;
+    }
+}
+
 
 function FormPerfil($perfil){
     switch ($perfil) {
@@ -104,11 +138,11 @@ function FormPerfil_SO($id){
         break;
     case 2:
         echo "Ouvinte";
-        break;    
-    default:
-        echo "Total";
         break;
-}
+    default:
+        echo "Nenhum";
+        break;
+    }
 }
 
 function FormEscolar($id){
@@ -118,12 +152,12 @@ function FormEscolar($id){
         break;
     case 2:
         echo "Ensino Médio";
-        break;  
+        break;
     case 3:
         echo "Ensino Superior";
-        break;  
+        break;
     default:
-        echo "Total";
+        echo "Nenhum";
         break;
 }
 }
@@ -135,12 +169,12 @@ function FormIgreja($id){
         break;
     case 2:
         echo "Católica";
-        break;  
+        break;
     case 3:
         echo "Outra";
-        break;  
+        break;
     default:
-        echo "Total";
+        echo "Nenhum";
         break;
 }
 }
@@ -152,12 +186,12 @@ function FormFuncao($id){
         break;
     case 2:
         echo "Professor";
-        break;  
+        break;
     case 3:
         echo "Estudante";
-        break;  
+        break;
     default:
-        echo "Total";
+        echo "Nenhum";
         break;
 }
 }
@@ -169,14 +203,34 @@ function FormSaber($id){
         break;
     case 2:
         echo "Facebook";
-        break;  
+        break;
     case 3:
         echo "Indicação de Amigo";
-        break;  
+        break;
     default:
-        echo "Total";
+        echo "Nenhum";
         break;
 }
+}
+
+function FormAcesso($id){
+    switch ($id) {
+        case 1:
+            echo "Celular";
+            break;
+        case 2:
+            echo "Tablet";
+            break;
+        case 3:
+            echo "Notebook";
+            break;
+        case 4:
+            echo "Computador";
+            break;
+        default:
+            echo "Nenhum";
+            break;
+    }
 }
 
 function FormPerfilLabel($perfil){
@@ -188,6 +242,83 @@ function FormPerfilLabel($perfil){
             echo "<span style='font-size: 12px' class='label label-success'>Usuário</span>";
             break;
    }
+}
+
+function FormTermosLabel($termos){
+    switch ($termos) {
+        case 1:
+            echo "<span style='font-size: 12px' class='label label-success'>Sim</span>";
+            break;
+        case 2:
+            echo "<span style='font-size: 12px' class='label label-danger'>Não</span>";
+            break;
+    }
+}
+
+function FormTipo($tipo){
+    switch ($tipo) {
+        case 1:
+            echo "Novo";
+            break;
+        case 2:
+            echo "Mudança";
+            break;
+        case 3:
+            echo "Erro de Código";
+            break;
+        case 4:
+            echo "Falha de Sistema";
+            break;
+        case 5:
+            echo "Defeito";
+            break;
+    }
+}
+
+function FormNivel($nivel){
+    switch ($nivel) {
+        case 1:
+            echo "<div style='font-size: 16px;' class='label label-success'>Leve</div>";
+            break;
+        case 2:
+            echo "<div style='font-size: 16px;' class='label label-info'>Normal</div>";
+            break;
+        case 3:
+            echo "<div style='font-size: 16px;' class='label label-warning'>Grave</div>";
+            break;
+        case 4:
+            echo "<div style='font-size: 16px;' class='label label-danger'>Urgente</div>";
+            break;
+    }
+}
+
+function compararDatas($data_inicial, $duracao, $periodo) {
+    $date = $data_inicial;
+    $date = strtotime($date);
+    $new_date = strtotime('+ ' . $duracao . ' ' . $periodo, $date);
+    $data_final = date('Y-m-d', $new_date);
+
+    $diaAtual = strtotime(date('Y-m-d'));
+    $intervalo = ($new_date - $diaAtual) / 86400;
+}
+
+function time2text($time){
+    $response=array();
+    $years = floor($time/(86400*365));
+    $time=$time%(86400*365);
+    $months = floor($time/(86400*30));
+    $time=$time%(86400*30);
+    $days = floor($time/86400);
+    $time=$time%86400;
+    $hours = floor($time/(3600));
+    $time=$time%3600;
+    $minutes = floor($time/60);
+    $seconds=$time%60;
+    if($years>0) $response[]=$years.' ano'. ($years>1?'s':' ');
+    if($months>0) $response[]=$months.' mes'.($months>1?'es':' ');
+    if($days>0) $response[]=$days.' dia' .($days>1?'s':' ');
+
+    return implode(' e ',$response);
 }
 
 
@@ -207,16 +338,17 @@ function url_amigavel($variavel){
     $variavel = htmlentities($variavel);
   $variavel = preg_replace("/&(.)(acute|cedil|circ|ring|tilde|uml);/", "$1", $variavel);
   $variavel = preg_replace("/([^a-z0-9]+)/", "-", html_entity_decode($variavel));
+  $variavel = preg_replace(",", "", $variavel);
   return trim($variavel, "-");
 }
 
 
 function plural($entrada, $primeiro, $segundo) {
     if($entrada <= 1) {
-        echo $primeiro;      
+        echo $primeiro;
     } else {
         echo $segundo;
-    }   
+    }
 
 }
 

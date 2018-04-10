@@ -5,19 +5,19 @@
         <title>Pagamento</title>
     </head>
     <body>
-        <h2>Raízes Surdos Brasil</h2>
+        <h2>A Bíblia em Libras</h2>
         <h3>Seu pagamento foi enviado com sucesso.</h3>
         <p>
-            Olá, <?php echo $user_nome; ?> <br />
-            Muito obrigado por ser cliente no nosso site RSB.
+            Olá, <?php echo $nome; ?> <br />
+            Muito obrigado por ser assinante no nosso site A Bíblia em Libras.
         </p>
         <hr />
         <p>
-            Para concluir seu pagamento e tem que enviar seu comprovante de pagamento na sua área do cliente para liberar o investimento, clique no link abaixo.
+           Agora pode acessar na área do Usuário, clique no link abaixo.
         </p>
         <p>
-            <a style="padding: 5px; background-color: #007bb6; color: #fff;" href="<?php echo base_url("investimento/comprovante/" . md5($user_email)); ?>">Confere seu pagamento na área do cliente.</a>
+            <a style="padding: 5px; background-color: #007bb6; color: #fff;" href="<?php echo base_url("home/login"); ?>"> Clique aqui para logar</a>
         </p>
-        <h4>Seja bem-vindo ao site RSB e faça bom investimento!</h4>
+        <h4>Seja bem-vindo ao site A Bíblia em Libras e e tenha a Palavra de Deus em Libras!</h4>
     </body>
 </html>

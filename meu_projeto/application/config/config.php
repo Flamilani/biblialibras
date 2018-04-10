@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/proj_biblia/meu_projeto';
-// $config['base_url'] = 'https://abibliaemlibras.com.br/teste';
+//$config['base_url'] = 'https://abibliaemlibras.com.br';
 
 /*
 |--------------------------------------------------------------------------
@@ -380,7 +380,7 @@ $config['encryption_key'] = '';
 */
 $config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_sessions';
-$config['sess_expiration'] = 7200;
+$config['sess_expiration'] = 1800;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= FALSE;
 $config['sess_use_database']	= TRUE;

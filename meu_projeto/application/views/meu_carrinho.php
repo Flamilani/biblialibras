@@ -4,23 +4,23 @@
                     <h3 class="text-center">Meu Carrinho</h3><br><br>
                      <?php if(null != $this->session->userdata('logado')): ?>
                     <?php if($this->cart->total_items() < 3): ?>
-                     <h5><div class="alert alert-info text-center" role="alert">Você precisa comprar pelo menos 3 livros. <a href="<?php echo base_url('home/livros'); ?>">Compre mais livros aqui.</a>
-                                </div></h5>
+                     <h4><div class="alert alert-info text-center" role="alert">Você precisa comprar pelo menos 3 livros. <a href="<?php echo base_url('home/livros'); ?>">Compre mais livros aqui.</a>
+                                </div></h4>
                     <?php else: ?>
-                         <h5><div class="alert alert-success text-center" role="alert">Você já tem 3 livros e pode finalizar sua compra ou <a href="<?php echo base_url('home/livros'); ?>">continua comprando mais livros</a>
-                                </div></h5>
+                         <h4><div class="alert alert-success text-center" role="alert">Você já tem 3 livros e pode finalizar sua compra ou <a href="<?php echo base_url('home/livros'); ?>">continua comprando mais livros</a>
+                                </div></h4>
                     <?php endif; ?>
                   <?php endif; ?>
                     <div class="panel panel-primary">
                         <div class="panel-heading">        
-                           <h5>
+                           
                              <?php if (!empty($this->cart->contents())): ?>       
                                 <?php echo $this->cart->total_items(); ?>
                             <?php plural($this->cart->total_items(), 'Livro Escolhido', 'Livros Escolhidos'); ?>
                                 <?php else: ?>
                                 Nenhum Livro Escolhido
                                         <?php endif; ?>
-                            </h5>
+                           
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">

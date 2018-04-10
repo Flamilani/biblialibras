@@ -7,6 +7,9 @@ class Funciona extends CI_Controller {
         parent::__construct();   
         $this->load->model('funciona_model');
         $this->load->model('users_model');
+        $this->load->model('livros_model');
+        $this->load->model('pedidos_model');
+        $this->load->model('plano_model');
 
       if(!$this->session->userdata('logadmin')) {
             redirect(base_url('admin/login'));
@@ -15,10 +18,17 @@ class Funciona extends CI_Controller {
 
     public function index() {    
         $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');     
-        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
+        $data['perfil'] = $this->users_model->exibir_Perfil($user);    
         $data['funciona'] = $this->funciona_model->admin_Funciona();
+        $data['count_livros'] = $this->livros_model->countAdminLivros();   
+        $data['count_users'] = $this->users_model->countUsers();   
+        $data['count_ativos'] = $this->users_model->countUsersAtivos();   
+        $data['count_pedidos'] = $this->pedidos_model->countAdminPedidos(); 
+        $data['count_assinaturas'] = $this->plano_model->countAdminAssinaturas();   
+        $data['count_pagos'] = $this->plano_model->countAdminPagos();   
+        $data['count_planos'] = $this->plano_model->countAdminPlanos();  
         $this->load->view('admin/inc/html-header');
-        $this->load->view('admin/inc/header', $data_perfil);
+        $this->load->view('admin/inc/header', $data);
         $this->load->view('admin/funciona', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');

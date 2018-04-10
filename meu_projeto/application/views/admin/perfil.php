@@ -1,7 +1,7 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                     <h3 class="page-header"><a href="<?php echo base_url("admin/usuarios") ?>">Usuários</a> > Perfil: <?php echo $perfil[0]->nome; ?> <?php echo $perfil[0]->sobrenome; ?> - ID <?php echo zerofill($perfil[0]->id); ?> 
+                     <h3 class="page-header"><a href="<?php echo base_url("admin/usuarios") ?>"> <i class="fa fa-user fa-fw"></i> Usuários</a> > Perfil: <?php echo $perfil[0]->nome; ?> <?php echo $perfil[0]->sobrenome; ?> - ID <?php echo zerofill($perfil[0]->id); ?> 
                        <div class="pull-right"><?php echo FormPerfilLabel($perfil[0]->perfil); ?></div></h3> 
  
                 </div>
@@ -34,9 +34,9 @@
                          Editar Usuário  <b style="font-size: 15px;" class="pull-right label <?php echo ($perfil[0]->status) ? 'label-success' : 'label-warning' ?>"><?php echo ($perfil[0]->status) ? 'Ativo' : 'Inativo' ?></b>
                         </div>
                         <div class="panel-body">
-  <?php $nome = array('name' => 'nome', 'id' => 'nome', 'type' => 'text', 'nome', 'value' => $perfil[0]->nome, 'class' => 'form-control');
+  <?php $nome = array('name' => 'nome', 'id' => 'nome', 'type' => 'text', 'value' => $perfil[0]->nome, 'class' => 'form-control');
     $sobrenome = array('name' => 'sobrenome', 'type' => 'text', 'id' => 'sobrenome', 'value' => $perfil[0]->sobrenome, 'class' => 'form-control');
-    $email = array('name' => 'email', 'type' => 'email', 'id' => 'email', 'value' => $perfil[0]->email, 'class' => 'form-control', 'placeholder' => 'E-mail');
+    $email = array('name' => 'email', 'type' => 'email', 'id' => 'email', 'value' => $perfil[0]->email, 'class' => 'form-control');
     $senha = array('name' => 'senha', 'type' => 'password', 'id' => 'senha', 'class' => 'form-control');
     $telefone = array('name' => 'telefone', 'type' => 'tel', 'id' => 'telefone', 'value' => $perfil[0]->telefone, 'class' => 'form-control');
     $celular = array('name' => 'celular', 'type' => 'tel', 'id' => 'celular', 'value' => $perfil[0]->celular, 'class' => 'form-control'); 
@@ -139,6 +139,14 @@
                                 </div>
                             </div>     
                                  <div class="row">
+                              <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
+                            <label for="sexo">Sexo</label>                          
+                             <select class="form-control" name="sexo" id="sexo">
+                             <option value="0" disabled selected> Selecione </option>
+                            <option value="1" <?php if (isset($perfil[0]->sexo) && $perfil[0]->sexo == '1') echo 'selected'; ?>> Masculino </option>
+                            <option value="2" <?php if (isset($perfil[0]->sexo) && $perfil[0]->sexo == '2') echo 'selected'; ?>> Feminino </option>                       
+                            </select>       
+                        </div>
                         <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
                             <label for="escolaridade">Escolaridade</label>                          
                              <select class="form-control" name="escolaridade" id="escolaridade">
@@ -166,7 +174,10 @@
                             <option value="3" <?php if (isset($perfil[0]->igreja) && $perfil[0]->igreja == '3') echo 'selected'; ?>> Outra </option>
                             </select>                          
                         </div>                                      
-                        <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
+                                
+                    </div>                  
+                    <div class="row">   
+                      <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
                             <label for="funcao">O que faz na sua igreja?</label>
                             <select class="form-control" name="funcao" id="funcao">
                             <option value="0" disabled selected> Selecione </option>
@@ -174,11 +185,9 @@
                             <option value="2" <?php if (isset($perfil[0]->funcao) && $perfil[0]->funcao == '2') echo 'selected'; ?>> Professor </option>
                             <option value="3" <?php if (isset($perfil[0]->funcao) && $perfil[0]->funcao == '3') echo 'selected'; ?>> Estudante </option>
                             </select>       
-                        </div>                        
-                    </div>                  
-                    <div class="row">               
+                        </div>                          
                     <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
-                            <label for="saber">Como ficou sabendo de A Bíblia em Libras?</label>
+                            <label for="saber">Como soube de A Bíblia em Libras?</label>
                             <select class="form-control" name="saber" id="saber">
                             <option value="0" disabled selected> Selecione </option>
                             <option value="1" <?php if (isset($perfil[0]->saber) && $perfil[0]->saber == '1') echo 'selected'; ?>> Google </option>
@@ -186,8 +195,18 @@
                             <option value="3" <?php if (isset($perfil[0]->saber) && $perfil[0]->saber == '3') echo 'selected'; ?>> Indicação de Amigo </option>
                             </select>  
                         </div>
+                        <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
+                            <label for="saber">Qual usa mais para acessar no site?</label>
+                            <select class="form-control" name="saber" id="saber">
+                                <option value="0" disabled selected> Selecione </option>
+                                <option value="1" <?php if (isset($perfil[0]->acesso) && $perfil[0]->acesso == '1') echo 'selected'; ?>> Celular </option>
+                                <option value="2" <?php if (isset($perfil[0]->acesso) && $perfil[0]->acesso == '2') echo 'selected'; ?>> Tablet </option>
+                                <option value="3" <?php if (isset($perfil[0]->acesso) && $perfil[0]->acesso == '3') echo 'selected'; ?>> Notebook </option>
+                                <option value="4" <?php if (isset($perfil[0]->acesso) && $perfil[0]->acesso == '4') echo 'selected'; ?>> Computador </option>
+                            </select>
+                        </div>
                         <div class="form-group controls col-xs-12 col-md-3 col-lg-3 pull-right">
-                            <label for="perfil">Acesso</label>                            
+                            <label for="perfil">Perfil</label>
                             <select class="form-control" name="perfil" id="perfil">
                              <option value="0" disabled selected> Selecione </option>
                             <option value="1" <?php if (isset($perfil[0]->perfil) && $perfil[0]->perfil == '1') echo 'selected'; ?>> Admin </option>
@@ -213,6 +232,167 @@
            
              </div>
             <!-- /.row -->
+         
+  <ul class="nav nav-pills">
+     <li class="active"><a data-toggle="pill" href="#home">Logins (<?php echo count($logins); ?>)</a></li>
+    <li><a data-toggle="pill" href="#menu1">Acesso a Livros (<?php echo count($acessos); ?>)</a></li>
+    <li><a data-toggle="pill" href="#menu2">Vídeos Concluídos (<?php echo count($registros); ?>)</a></li>
+    
+  </ul>
+  
+  <div class="tab-content">
+
+    <div id="home" class="tab-pane fade in active">
+           <h4>Logins</h4>
+       <div class="row">
+
+        <div class="col-lg-12">
+
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <?php echo count($logins); ?> <?php plural(count($logins), 'Login', 'Logins') ?>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="tabela1 table table-striped table-bordered table-hover" id="tabela1">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>IP</th>
+                                    <th>Data</th>
+                                    <th>Descrição</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if (!empty($logins)): ?>
+                                    <?php foreach ($logins as $aud): ?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo $aud->id_auditoria; ?></td>                                           
+                                            <td class="text-center"><?php echo $aud->ip; ?></td>
+                                            <td class="text-center"><?php echo FormDataHora($aud->data_auditoria); ?></td>
+                                            <td class="text-center"><?php echo $aud->descricao; ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+  
+    </div>
+    <div id="menu1" class="tab-pane fade">
+            <h4>Acesso a Livros</h4>
+     
+    <div class="row">
+
+        <div class="col-lg-12">
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <?php echo count($acessos); ?> <?php plural(count($acessos), 'Acesso', 'Acessos') ?>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="tabela1 table table-striped table-bordered table-hover" id="tabela1">
+                            <thead>
+                            <tr>
+                                <th>ID</th>                              
+                                <th>Plano</th>
+                                <th>Livro</th>
+                                <th>Data</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php if (!empty($acessos)): ?>
+                                <?php foreach ($acessos as $acess): ?>
+                                    <tr class="odd gradeX">
+                                        <td><?php echo $acess->id_acesso; ?></td>                                        
+                                        <td class="text-center"><?php echo $acess->nome_plano; ?> (<?php echo $acess->duracao; ?> <?php echo FormPeriodo($acess->periodo); ?>)</td>
+                                        <td class="text-center"><?php echo $acess->titulo; ?></td>
+                                        <td class="text-center"><?php echo FormDataHora($acess->data_i); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+    
+    </div>
+    <div id="menu2" class="tab-pane fade">
+     <h4>Vídeos Concluídos</h4>
+     
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <?php echo count($registros); ?> <?php plural(count($registros), 'Registro', 'Registros') ?>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="tabela1 table table-striped table-bordered table-hover" id="tabela1">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>                                   
+                                    <th>Livro</th>
+                                    <th>Vídeo</th>
+                                    <th>Data</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if (!empty($registros)): ?>
+                                    <?php foreach ($registros as $reg): ?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo $reg->id_hist; ?></td>                                         
+                                            <td class="text-center"><?php echo $reg->titulo; ?></td>
+                                            <td class="text-center"><?php echo $reg->titulo_v; ?></td>
+                                            <td class="text-center"><?php echo FormDataHora($reg->data_v); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    </div>
+  </div>
+
+
         </div>
         <!-- /#page-wrapper -->
 <br><br>
@@ -226,7 +406,7 @@
          $('#cep').mask("00000-000");
          $("#data_nasc").mask("00/00/0000");
          $("#input-demo-numero").mask("00000");
-         $("#telefone").mask("(00) 0000-0000");
+         $("#telefone").mask("(00) 00000-0000");
          $("#celular").mask("(00) 00000-0000");
          $("#cpf").mask("000.000.000-00", {reverse: true});
          $("#data_nasc").mask("00/00/0000"); 

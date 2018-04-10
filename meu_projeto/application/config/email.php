@@ -3,9 +3,9 @@
 $config['useragent']        = 'PHPMailer';              // Mail engine switcher: 'CodeIgniter' or 'PHPMailer'
 $config['protocol']         = 'smtp';                   // 'mail', 'sendmail', or 'smtp'
 $config['mailpath']         = '/usr/sbin/sendmail';
-$config['smtp_host']        = 'smtp.gmail.com';
-$config['smtp_user']        = 'flaviomilani83@gmail.com';
-$config['smtp_pass']        = 'az1290ml';
+$config['smtp_host']        = 'mx1.hostinger.com.br';
+$config['smtp_user']        = 'contato@abibliaemlibras.com.br';
+$config['smtp_pass']        = 'vipgil';
 $config['smtp_port']        = 587;
 $config['smtp_timeout']     = 30;                       // (in seconds)
 $config['smtp_crypto']      = 'tls';                       // '' or 'tls' or 'ssl'

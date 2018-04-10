@@ -2,7 +2,7 @@
             <div class="row">
 
                 <div class="col-lg-12">
-               <h3 class="page-header"><a href="<?php echo base_url("admin/livros") ?>">Livros</a> > <a href="<?php echo base_url("admin/livros/videos/" . $video[0]->id_livro) ?>">Vídeos</a> > <?php echo $video[0]->titulo; ?> - ID <?php echo $video[0]->id_video; ?></h3> 
+               <h3 class="page-header"><a href="<?php echo base_url("admin/livros") ?>"> <i class="fa fa-book fa-fw"></i> Livros</a> > <a href="<?php echo base_url("admin/livros/videos/" . $video[0]->id_livro) ?>">Vídeos</a> > <?php echo $video[0]->titulo; ?> - ID <?php echo $video[0]->id_video; ?></h3> 
 
                 </div>
                 <!-- /.col-lg-12 -->
@@ -26,7 +26,7 @@
                              <?php 
     $titulo = array('name' => 'titulo', 'type' => 'text', 'id' => 'titulo', 'value' => $video[0]->titulo, 'class' => 'form-control', 'placeholder' => 'Título');
     $ordem = array('name' => 'ordem', 'type' => 'number', 'id' => 'ordem', 'value' => $video[0]->ordem, 'class' => 'form-control', 'placeholder' => '000');
-    $capitulo = array('name' => 'id_capitulo', 'type' => 'number', 'id' => 'id_capitulo', 'min'=>'1', 'max'=>'50', 'value' => $video[0]->id_capitulo, 'class' => 'form-control', 'placeholder' => '0');
+    $capitulo = array('name' => 'id_capitulo', 'type' => 'number', 'id' => 'id_capitulo', 'min'=>'1', 'max'=>'999', 'value' => $video[0]->id_capitulo, 'class' => 'form-control', 'placeholder' => '0');
      $conteudo = array('name' => 'editor1', 'id' => 'editor1', 'value' => $video[0]->conteudo, 'rows' => '10', 'cols' => '80'); 
       $button = array('name' => 'btn_adicionar', 'id' => 'btn_adicionar', 'type' => 'submit', 'class' => 'btn btn-warning', 'value' => 'Salvar como rascunho');
      $buttonPubl = array('name' => 'btn_publicar', 'id' => 'btn_publicar', 'type' => 'submit', 'class' => 'btn btn-success', 'value' => 'Publicar'); ?>
@@ -49,14 +49,15 @@
                             <div class="col-md-6"> 
                                <div class="form-group">
                                    <?php echo form_label('Capítulo', 'id_capitulo') ?> <br>
-                             <select class="form-control" name="id_capitulo" id="id_capitulo">
+                                     <?php echo form_input($capitulo); ?>   
+<!--                              <select class="form-control" name="id_capitulo" id="id_capitulo">
                                    <option value="0">Selecione</option>    
                                    <?php     
                                       $count = $count_videos[0]->capitulos;
                                    for($i = 1; $i <= $count; $i++) { ?>
          <option <?php echo $i == $video[0]->id_capitulo ? 'selected' : '' ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                        <?php } ?>
-                                        </select>
+                                        </select> -->
                                     </div>
                                 </div>
                             </div>      

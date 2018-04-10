@@ -1,7 +1,7 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">Usuários</h3>
+                    <h3 class="page-header"> <i class="fa fa-user fa-fw"></i> Usuários</h3>
 
                 </div>
                 <!-- /.col-lg-12 -->
@@ -32,7 +32,7 @@
                           <button class="btn btn-info" id="cadastro_livro">Cadastrar Usuário</button>
                         </div>
                         <div class="panel-body caixa_livro">
-  <?php $nome = array('name' => 'nome', 'id' => 'nome', 'type' => 'text', 'nome', 'value' => set_value('nome'), 'class' => 'form-control', 'placeholder' => 'Nome');
+  <?php $nome = array('name' => 'nome', 'id' => 'nome', 'type' => 'text', 'value' => set_value('nome'), 'class' => 'form-control', 'placeholder' => 'Nome');
     $sobrenome = array('name' => 'sobrenome', 'type' => 'text', 'id' => 'sobrenome', 'value' => set_value('sobrenome'), 'class' => 'form-control', 'placeholder' => 'Sobrenome');
     $email = array('name' => 'email', 'type' => 'email', 'id' => 'email', 'value' => set_value('email'), 'class' => 'form-control', 'placeholder' => 'E-mail');
      $senha = array('name' => 'senha', 'type' => 'password', 'id' => 'senha', 'class' => 'form-control', 'placeholder' => 'Senha');
@@ -136,6 +136,14 @@
                                 </div>
                             </div>     
                                  <div class="row">
+                                  <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
+                            <label for="sexo">Sexo</label>
+                            <select class="form-control" name="sexo" id="sexo">
+                                <option value="0">Selecione</option>
+                                <option value="1">Masculino</option>
+                                <option value="2">Feminino</option>
+                            </select>
+                        </div>
                         <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
                             <label for="escolaridade">Escolaridade</label>
                             <select class="form-control" name="escolaridade" id="escolaridade">
@@ -163,7 +171,10 @@
                                 <option value="3">Outra</option>
                             </select>
                         </div>                                      
-                        <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
+                                         
+                    </div>                  
+                    <div class="row">   
+                           <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
                             <label for="funcao">O que faz na sua igreja?</label>
                             <select class="form-control" name="funcao" id="funcao">
                                 <option value="0">Selecione</option>
@@ -171,19 +182,27 @@
                                 <option value="2">Professor</option>
                                 <option value="3">Estudante</option>
                             </select>
-                        </div>                        
-                    </div>                  
-                    <div class="row">               
+                        </div>            
                     <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
-                            <label for="saber">Como ficou sabendo de A Bíblia em Libras?</label>
+                            <label for="saber">Como soube de A Bíblia em Libras?</label>
                             <select class="form-control" name="saber" id="saber">
                                 <option value="0">Selecione</option>
                                 <option value="1">Google</option>
                                 <option value="2">Facebook</option>
                                 <option value="3">Indicação de Amigo</option>
                             </select>
-                        </div>                      
-                   </div> 
+                        </div>
+                        <div class="form-group controls col-xs-12 col-md-3 col-lg-3">
+                            <label for="saber">Qual usa mais para acessar no site?</label>
+                            <select class="form-control" name="acesso" id="acesso">
+                                <option value="0">Selecione</option>
+                                <option value="1">Celular</option>
+                                <option value="2">Tablet</option>
+                                <option value="3">Notebook</option>
+                                <option value="4">Computador</option>
+                            </select>
+                        </div>
+                    </div>
              
        <?php echo form_submit($buttonPubl); ?>
        <?php echo form_submit($button); ?>
@@ -199,26 +218,32 @@
                 <!-- /.col-lg-12 -->
 
               <!-- /.row -->
+                  <?php $rowsPlanoQtd = $this->db->query("SELECT * FROM planos ps INNER JOIN plano p ON ps.id_planos = p.id_planos INNER JOIN assinaturas a ON a.id_plano = p.id_plano"); ?>
+         <?php $resPqtd = $rowsPlanoQtd->result(); ?>
+              <h3 class="text-center"><span class="label label-warning"> <?php echo $count_cadastrados; ?> <?php plural($count_cadastrados, 'Inativo', 'Inativos') ?></span>
+            <span class="label label-success">   <?php echo $count_usuarios; ?> <?php plural($count_usuarios, 'Ativo', 'Ativos') ?></span>
+            <span class="label label-info">   <?php echo count($resPqtd); ?> <?php plural(count($count_usuarios), 'Plano', 'Planos') ?></span>
+        </h3><br>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           <?php echo $count_users; ?> <?php plural($count_users, 'Usuário', 'Usuários') ?>
+                           <?php echo $count_users; ?> <?php plural($count_users, 'Cadastrado', 'Cadastrados') ?>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-            <table width="100%" class="tabela1 table table-striped table-bordered table-hover" id="tabela1">
+            <table style="font-size: 14px;" width="100%" class="tabela1 table table-striped table-bordered table-hover" id="tabela1">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Nome</th>
-                                        <th>CPF</th>
-                                        <th>Email</th>
-                                        <th>Telefone</th>
-                                        <th>WhatsApp</th>
+                                        <th>Contato</th>
+                                        <th>Registro</th>
+                                        <th>Plano</th>
+                                        <th>Termos</th>
                                         <th>Acesso</th>
                                         <th>Status</th>
-                                        <th>Ações</th>
+                                        <th>Detalhes</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -227,13 +252,23 @@
                                 <tr class="odd gradeX">
                           <td><?php echo zerofill($user->id); ?><?php echo form_hidden($user->id); ?></td>                                                 
                                        <td><?php echo $user->nome; ?> <?php echo $user->sobrenome; ?></td>
-                                        <td class="text-center"><?php echo $user->cpf; ?></td> 
-                                        <td class="text-center"><?php echo $user->email; ?></td>
-                                        <td class="text-center"><?php echo $user->telefone; ?></td>
-                                        <td class="text-center"><?php echo $user->celular; ?></td>
-                                        <td class="text-center"><?php echo FormPerfilLabel($user->perfil); ?></td>
-                                            <td class="text-center">
-       <b data="<?php echo $user->id; ?>" class="status_checks btn btn-sm <?php echo ($user->status) ? 'btn-success' : 'btn-warning' ?>"><?php echo ($user->status) ? '<span title="Ativo" class="glyphicon glyphicon-ok"></span>' : '<span title="Inativo" class="glyphicon glyphicon-minus"></span>' ?></b>                                            
+                                        <td class="text-center"><?php echo $user->email; ?><br><?php echo $user->celular; ?></td>
+                                        <td class="text-center"><?php echo FormDataP($user->registro); ?><br><?php echo FormHora($user->registro); ?></td>
+                                        <td class="text-center">
+    <?php $rowsPlano = $this->db->query("SELECT * FROM planos ps INNER JOIN plano p ON ps.id_planos = p.id_planos INNER JOIN assinaturas a ON a.id_plano = p.id_plano WHERE a.id_user = '{$user->id}' ORDER BY a.id_assinatura DESC LIMIT 1"); ?>
+         <?php $resP = $rowsPlano->result(); ?>
+                                        <?php if(isset($resP[0]->nome_plano) && $resP[0]->nome_plano != ''):
+                                                echo $resP[0]->nome_plano . '<br />';
+                                        echo '(' . $resP[0]->duracao . ' ';
+                                        echo FormPeriodo($resP[0]->periodo) . ')'; ?>
+                                       <?php else: ?>
+                                                <span style="font-size: 12px;" class="label label-danger">Sem Plano</span>
+                                       <?php endif; ?>
+                                        </td>
+                                    <td class="text-center"><?php echo FormTermosLabel($user->termos); ?></td>
+                                    <td class="text-center"><?php echo FormPerfilLabel($user->perfil); ?></td>
+                                    <td class="text-center">
+       <b data="<?php echo $user->id; ?>" class="status_checks btn btn-xs <?php echo ($user->status) ? 'btn-success' : 'btn-warning' ?>"><?php echo ($user->status) ? 'Ativo <span title="Ativo" class="glyphicon glyphicon-ok"></span>' : 'Inativo <span title="Inativo" class="glyphicon glyphicon-minus"></span>' ?></b>                                            
                                           </td>
                                         <td class="text-center">
             <a href="<?php echo base_url('admin/usuarios/perfil/' . $user->id); ?>" title="Editar" class="btn btn-sm btn-primary"><b><i class="fa fa-edit"></i></b></a>
@@ -262,6 +297,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
     	 $('#cep').mask("00000-000");
          $("#data_nasc").mask("00/00/0000");
          $("#input-demo-numero").mask("00000");
@@ -317,7 +353,7 @@
         });
     });
         
-          $('.tabela1').DataTable({
+          $('.tabela').DataTable({
             language: {
                 processing: "Processando",
                 search: "Pesquisa",
@@ -328,7 +364,7 @@
                 infoPostFix: "",
                 loadingRecords: "Carregando...",
                 zeroRecords: "Nenhum registro a exibir.",
-                emptyTable: "Não há registros disponíveis na tabela",
+                emptyTable: "Não há registros disponíveis na tabela",                
                 paginate: {
                     first: "<<",
                     previous: "<",
@@ -342,5 +378,6 @@
             }
         });
     });
+
 
 </script>

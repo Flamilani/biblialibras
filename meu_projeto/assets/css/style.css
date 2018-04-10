@@ -2,7 +2,15 @@
     font-family: "GoudyCatalog BT";
     src: local("GoudyCat.ttf"), url("GoudyCat.ttf");
 }
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-family: GoudyCatalog BT;
+    text-transform: none;
+}
 
+.container.ladosTela, .container.lados {
+    min-height: calc(80vh - 100px);
+}
 
 a:hover {
     color: #ccc !important;
@@ -10,7 +18,7 @@ a:hover {
 }
 
 section {
-    padding-top: 60px !important;
+    padding-top: 70px !important;
 }
 
 section h2 {
@@ -41,10 +49,6 @@ table.dataTable {
     position: relative;
     padding: 15px;
     background: #fff;
-}
-
-.front h2, .front h3 {
-    font: 36px GoudyCatalog BT;
 }
 
 .loginBtn {
@@ -111,6 +115,9 @@ div#maincontent.container {
     border-radius: 0px;
     background-color: #2C3E50;
     border: 1px solid #2C3E50;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
 }
 
 .navbar.areaUserLink a {
@@ -118,11 +125,15 @@ div#maincontent.container {
 }
 
 footer .footer-above {
-    padding-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 15px;
 }
 
 footer .footer-col {
-    margin-bottom: 30px;
+    padding-top: 10px;
+    font-size: 15px;
+    line-height: 40px;
+
 }
 
 .overHorizontal {
@@ -163,7 +174,6 @@ footer .footer-col {
 
 .btnComprar {
     background-color: green;
-    font-size: 20px;
 }
 
 .btnComprar:hover {
@@ -171,10 +181,20 @@ footer .footer-col {
     color: green !important;
 }
 
+.btnComprar:active {
+    background-color: lightgreen !important;
+    color: green !important;
+}
+
 .img-responsive {
     display: block;
     margin: auto ;
     width: 280px;
+    height: auto;
+}
+
+.img-peq {
+    width: 180px;
     height: auto;
 }
 
@@ -199,6 +219,15 @@ section.funciona {
         width: 100px !important;
         height: auto;
     }
+}
+
+.checkbox label {
+    padding: 3px;
+    margin-left: 25px;
+}
+
+.checkbox label:hover {
+    background-color: #c7eaff;    
 }
 
 /* COMO FUNCIONA */
@@ -229,9 +258,14 @@ section.funciona {
     margin-top: 50px !important;
 }
 
+footer .footer-col {
+    margin-bottom: 20px;
+}
+
 .social img {
     width: 35px;
     height: auto;
+    margin-right: 5px;
 }
 
 .social img:hover {
@@ -279,10 +313,20 @@ section.funciona {
     text-transform: uppercase;
 }
 
+@media only screen and (max-width: 1200px) { 
+        #livros .caption {
+            font-size: 10px !important;
+        }
+    }
+
 @media only screen and (max-width: 992px) {
     .navbarRight {
         font-size: 10px !important;
     }
+
+    #livros .caption {
+            font-size: 8px !important;
+        }
 
 }
 
@@ -291,8 +335,26 @@ section.funciona {
     div#maincontent.container {
         padding-top: 100px !important;
     }
+
+    .loginBtn {
+        margin-right: 15px;
+        margin-left: 14px;
+        padding-top: 15px;
+        float: left;
+        font-size: 12px;
 }
 
+#livros .caption {
+            font-size: 7px !important;
+        }
+}
+
+@media only screen and (min-width: 900px) {
+    .container.QuatroColunas {
+        max-width: 1270px;
+        width: auto;
+    }
+}
 
 iframe[src*=vimeo] {
     width: 100%;
@@ -336,6 +398,10 @@ iframe[src*=vimeo] {
 }
 
  /* ADMIN */
+
+ .tab-content {
+    padding-top: 0px;
+ }
 
  .fundoAdmin {
    /* background-color: #2C3E50; */
@@ -404,6 +470,16 @@ iframe[src*=vimeo] {
     background-position: center;
 }
 
+.loading {
+    display: none;
+}
+
+.loading img {
+    width: 15%;
+    margin-left: 15px;
+    margin-right: 4%;
+}
+
 .tituloCap {
     line-height: 53px;
 }
@@ -451,12 +527,69 @@ iframe[src*=vimeo] {
      margin-top: 120px;
 }
 
+
+ /* PLANOS */
+
+.boxPlano {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+.boxLados {
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.panel-group .panel-heading
+{
+    cursor: pointer;
+}
+
+.displayLivros {
+    display: none;
+}
+
+.displayButton {
+    margin-bottom: 10px;
+}
+
+
 /*  ASSINATURA */
 
+.tabelaAssina {
+    font-size: 17px;
+    text-align: center;
+}
+
+.tabAssinatura {
+    background-color: #FFF;
+    padding: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.topPlanos {
+    padding-top: 20px !important;
+}
 
 .headTop {
-    margin-top: 120px;
-    margin-bottom: 30px;
+    margin-top: 100px;
+}
+
+.headBottom {
+    margin-bottom: 40px;
+}
+
+.tituloCima {
+  margin-top: 70px;
+}
+
+.cima {
+    margin-top: 100px;
 }
 
 .homeTop {
@@ -478,6 +611,12 @@ iframe[src*=vimeo] {
     margin-right: 5px !important;
 }
 
+textarea#mensagem {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 /*  LOGIN   */
 .loginTela {
     margin-top: 120px;
@@ -486,6 +625,7 @@ iframe[src*=vimeo] {
     padding-right: 20px;
     width: 100%;
     max-width: 500px;
+    min-height: calc(73vh - 100px);
 }
 
 .loginTela .row {
@@ -542,3 +682,60 @@ iframe[src*=vimeo] {
     width: 300px;
     height: 300px;
 }
+
+.panel-body {
+    overflow: auto;
+}
+
+.backtop {
+    position: fixed; 
+    display: none; cursor: pointer; 
+    bottom: 15px; 
+    right: 25px; 
+    text-transform: uppercase; 
+    color: #fff; 
+    font-size: 0.8em; 
+    padding: 10px; 
+    background: rgba(0,0,0,0.5);
+    border-radius: 8px;
+    z-index:999;
+}
+
+.backtop:hover {
+    background: #CCC;
+}
+
+#planos .caption {
+    font-size: 13px;
+} 
+
+#sb-container {
+    z-index: 9999 !important;
+}
+
+.menuHome {
+    background-color: #269abc;
+    margin-top: 7px !important;
+    text-transform: uppercase;
+}
+.menuHomeSub {
+    background-color: #269abc;
+    text-transform: none;
+}
+
+.menuHomeu a:hover {
+    background-color: #269abc !important;
+}
+
+
+.nav-tabs { border-bottom: 2px solid #DDD; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+    .nav-tabs > li > a { border: none; color: #666; }
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #4285F4 !important; background: transparent; }
+        .nav-tabs > li > a::after { content: ""; background: #4285F4; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
+.tab-pane { padding: 15px 0; }
+
+
+.card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }

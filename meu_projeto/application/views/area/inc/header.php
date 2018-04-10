@@ -8,15 +8,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo base_url("area") ?>">Área do Aluno</a>
+      <a class="navbar-brand" href="<?php echo base_url("area") ?>">Área do Usuário</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse areaUserLink" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="<?php echo base_url("area/pedidos") ?>">Meus pedidos</a></li>
-        <li><a href="<?php echo base_url("home/livros") ?>">Comprar mais Livros</a></li>
-        <li><a href="<?php echo base_url("home") ?>">Ver Site</a></li>
+        <li><a href="<?php echo base_url("home") ?>"> <i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
 
       </ul>     
       <ul class="nav navbar-nav navbar-right">
@@ -29,7 +27,7 @@
             <li class="sessionUserDrop"><?php echo $this->session->userdata('user')->nome; ?> <?php echo $this->session->userdata('user')->sobrenome; ?></li>
             <li class="sessionUserDrop"><?php echo $this->session->userdata('user')->email; ?></li>
             <li role="separator" class="divider"></li>
-            <li><a href="<?php echo base_url('area/editar_perfil'); ?>">Editar perfil</a></li>
+            <li><a href="<?php echo base_url('area/meu_perfil/' . $this->session->userdata('user')->id); ?>">Editar Perfil</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="<?php echo base_url('area/logout'); ?>">Sair</a></li>
           </ul>

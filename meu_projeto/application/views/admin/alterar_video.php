@@ -1,7 +1,7 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header"><a href="<?php echo base_url("admin/livros") ?>">Livros</a> > <a href="<?php echo base_url("admin/livros/videos/" . $video[0]->id_livro) ?>">Vídeos</a> > <?php echo $video[0]->titulo; ?> - ID <?php echo $video[0]->id_video; ?></h3> 
+                    <h3 class="page-header"><a href="<?php echo base_url("admin/livros") ?>"> <i class="fa fa-book fa-fw"></i> Livros</a> > <a href="<?php echo base_url("admin/livros/videos/" . $video[0]->id_livro) ?>">Vídeos</a> > <?php echo $video[0]->titulo; ?> - ID <?php echo $video[0]->id_video; ?></h3> 
 
                 </div>
                 <!-- /.col-lg-12 -->

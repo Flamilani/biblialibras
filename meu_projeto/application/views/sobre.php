@@ -1,7 +1,7 @@
 <!-- About Section -->
 <?php if(isset($sobre[0]->status) && $sobre[0]->status == 1): ?>
-<section class="success" id="about">
-    <div class="container headPage">
+<section class="success" id="sobre">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center front">
                 <h2><?php echo $sobre[0]->titulo; ?></h2>                
@@ -12,7 +12,7 @@
         <div class="row">            
             <div class="col-xs-12 col-md-6 col-lg-6">
                 <?php if(isset($sobre[0]->midia) && $sobre[0]->midia == 'imagem'): ?>
-               <img class="" src="<?php echo $sobre[0]->imagem; ?>" alt="">
+               <img class="" src="<?php echo $sobre[0]->imagem; ?>" alt="" />
       <?php elseif(isset($sobre[0]->midia) && $sobre[0]->midia == 'video'): ?>     
              <div class="boxVideo">
                 <?php echo $sobre[0]->video; ?>
@@ -29,5 +29,12 @@
     </div>
 </section>
 <?php else: ?>
+<?php endif; ?>
+<?php if($this->uri->segment(2) == 'sobre') { ?>
+<script>
+     $(document).ready(function() {       
+        $('#sobre').addClass("cima");
+     });
+</script>     
 
-    <?php endif; ?>
+<?php } ?>

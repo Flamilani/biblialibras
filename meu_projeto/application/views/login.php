@@ -14,6 +14,38 @@
         });
             </script>
 <?php } ?>
+      <?php if($this->session->flashdata('recuperar')) { ?>
+          <script type="text/javascript">
+              $(function () {
+                  $.notify(
+                      {
+                          icon: 'glyphicon glyphicon-warning-sign',
+                          title: '<b>Alerta:</b>',
+                          message: 'Dados são incorretos!'
+                      },
+                      {
+                          type: 'warning'
+                      }
+                  );
+              });
+          </script>
+      <?php } ?>
+      <?php if($this->session->flashdata('login')) { ?>
+          <script type="text/javascript">
+              $(function () {
+                  $.notify(
+                      {
+                          icon: 'glyphicon glyphicon-warning-sign',
+                          title: '<b>Alerta:</b>',
+                          message: 'Você foi deslogado, pois tem login simultâneo!'
+                      },
+                      {
+                          type: 'warning'
+                      }
+                  );
+              });
+          </script>
+      <?php } ?>
   <?php if($this->session->flashdata('logout')) { ?>
      <script type="text/javascript">
             $(function () {
@@ -50,7 +82,7 @@
     <div class="container headTop loginTela">
         <div class="row">
             <div class="col-lg-12 text-center front">
-                <h3>Login</h3><br><br>
+                <h2>Login</h2><br><br>
               <!--   <hr class="star-primary"> -->
             </div>
         </div>
@@ -79,7 +111,7 @@
                         </div>
                     </div>
                     <br />
-                  <?php echo form_submit($button); ?>
+                  <?php echo form_submit($button); ?> <a class="pull-right" href="<?php echo base_url('home/recuperar_senha'); ?>">Esqueci minha senha</a>
                 <?php form_close(); ?>
                   </div><br>
            

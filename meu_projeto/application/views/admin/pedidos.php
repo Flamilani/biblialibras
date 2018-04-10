@@ -37,8 +37,8 @@
                                         <th>Usuário</th>
                                         <th>Itens</th>
                                         <th>Valor Total</th>
-                                        <th>Pago</th>
                                         <th>Data Pedido</th>
+                                        <th>Pago</th>
                                         <th>Status</th>
                                         <th>Ações</th>
                                     </tr>
@@ -50,19 +50,19 @@
                      <?php $count = $rows->result(); ?>
                                 <tr class="odd gradeX">
                                 <td><?php echo $pedido->id_pedido; ?><?php echo form_hidden($pedido->id_pedido); ?></td>                                                 
-                                        <td><?php echo $pedido->nome; ?> <?php echo $pedido->sobrenome; ?> ( <?php echo zerofill($pedido->id); ?> )
+                                        <td><?php echo $pedido->nome; ?> ( <?php echo zerofill($pedido->id); ?> )
                                           <a title="Ver Perfil de <?php echo $pedido->nome; ?> <?php echo $pedido->sobrenome; ?>" class="btn btn-primary btn-sm pull-right" href="<?php echo base_url('admin/usuarios/perfil/' . $pedido->id); ?>"><span class="glyphicon glyphicon-eye-open"></span></a></td>
                                         <td class="text-center">                         
     <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/pedidos/itens/' . $pedido->id_pedido); ?>"><?php echo count($count); ?> itens</a>
                                           </td>
                                         <td class="text-center"><?php echo reais($pedido->produtos); ?></td>      
-                                        <td class="text-center"><?php echo $pedido->id_pago; ?></td> 
                                         <td class="text-center"><?php echo FormData($pedido->data_pedido); ?></td>
+                                        <td class="text-center"><?php echo $pedido->id_pago; ?></td> 
                                             <td class="text-center">
-       <b data="<?php echo $pedido->id_pedido; ?>" class="status_checks btn btn-sm <?php echo ($pedido->status) ? 'btn-success' : 'btn-warning' ?>"><?php echo ($pedido->status) ? 'Ativo <span title="Ativo" class="glyphicon glyphicon-ok"></span>' : 'Inativo <span title="Inativo" class="glyphicon glyphicon-minus"></span>' ?></b>                                            
+       <b data="<?php echo $pedido->id_pedido; ?>" class="status_checks btn btn-sm <?php echo ($pedido->status_pedido) ? 'btn-success' : 'btn-warning' ?>"><?php echo ($pedido->status_pedido) ? 'Ativo <span title="Ativo" class="glyphicon glyphicon-ok"></span>' : 'Inativo <span title="Inativo" class="glyphicon glyphicon-minus"></span>' ?></b>                                            
                                           </td>
                                         <td class="text-center">
-            <a href="<?php echo base_url('admin/pedidos/alterar/' . $pedido->id_pedido); ?>" title="Editar" class="btn btn-sm btn-primary"><b><i class="fa fa-edit"></i></b></a>
+           <!--  <a href="<?php echo base_url('admin/pedidos/alterar/' . $pedido->id_pedido); ?>" title="Editar" class="btn btn-sm btn-primary"><b><i class="fa fa-edit"></i></b></a> -->
 
   <a href="<?php echo base_url('admin/pedidos/deletar/' . $pedido->id_pedido); ?>" onclick="return confirmarExclusao(<?php echo $pedido->id_pedido; ?>)" title="Deletar" class="btn btn-sm btn-danger"><b><i class="fa fa-trash-o"></i></b></a>
                                       </td>
@@ -83,10 +83,6 @@
         </div>
         <!-- /#page-wrapper -->
 
-<!-- Uso de Modal-->
-<?php require_once('modal/modal_deletar.php'); ?>
-<!-- Uso de Modal-->
-
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -96,17 +92,17 @@
 
         $(document).on('click', '.status_checks', function ()
            {
-        var status = ($(this).hasClass("btn-success")) ? '0' : '1';
+           var status = ($(this).hasClass("btn-success")) ? '0' : '1';
         var msg = (status === '0') ? 'Inativo' : 'Ativo';
         if (confirm("Tem certeza que quer alterar para " + msg + "?"))
         {
             var current_element = $(this);
             var id = $(current_element).attr('data');
-            url = "<?php echo base_url() . 'admin/livros/alterar_status' ?>";
+            url = "<?php echo base_url() . 'admin/pedidos/alterar_pedido_status' ?>";
             $.ajax({
                 type: "POST",
                 url: url,
-                data: {"id_livro": id, "status": status},
+                data: {"id_pedido": id, "status": status},
                 success: function (data) {
                     location.reload();
                 }});

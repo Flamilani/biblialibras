@@ -10,24 +10,18 @@
                         <br>Beverly Hills, CA 90210</p>
                 </div> -->
                 <div class="footer-col">
-                    <h3>Redes Sociais</h3>
                     <ul class="list-inline">
-                        <li>
-                            <a href="https://www.facebook.com/ABibliaEmLibras" target="_blank" class="social"><img src="<?php echo base_url('assets/img/facebook.png'); ?>"></a>
-                        </li>
-                       <li>
-                           <a href="#" class="social"><img src="<?php echo base_url('assets/img/youtube.png'); ?>"></a>
-                        </li>
-                        <!--  <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Dribble</span><i class="fa fa-fw fa-dribbble"></i></a>
-                        </li> -->
-                    </ul>
+                        <li style="margin-left: 10px; float: left;"> <a href="<?php echo base_url('home/privacidade'); ?>">Política de Privacidade</a> </li>
+                       <li style="float: left;"> | </li>
+                        <li style="float: left;"> <a href="<?php echo base_url('home/termos'); ?>"> Termos de Uso </a></li>
+                                  <?php if (!empty($sociais)): ?>                    
+                            <?php foreach ($sociais as $social): ?>
+                                 <li style="float: right;">
+                            <a href="<?php echo $social->link; ?>" target="_blank" class="social"><img src="<?php echo base_url('assets/uploads/' . $social->icone); ?>"></a>
+                        </li>                   
+                            <?php endforeach; ?>
+                                      <?php endif; ?>     
+                           </ul>
                 </div>
                <!--  <div class="footer-col col-md-4">
                     <h3>About Freelancer</h3>

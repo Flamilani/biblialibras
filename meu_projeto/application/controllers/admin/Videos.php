@@ -6,6 +6,7 @@ class Videos extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model("videos_model");
+        $this->load->model("users_model");
         $this->load->helper('text');
 
          if(!$this->session->userdata('logadmin')) {
@@ -15,34 +16,46 @@ class Videos extends CI_Controller {
 
    public function index($id)	{ 
     $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
-        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
+        $data['perfil'] = $this->users_model->exibir_Perfil($user);    
            // $this->output->enable_profiler(TRUE);
            //$data['count_capitulos'] = $this->capitulos_model->countAdminCapitulos();   
             $data['videos'] = $this->videos_model->admin_Videos($id);    
+            $data['count_livros'] = $this->livros_model->countAdminLivros();   
+            $data['count_users'] = $this->users_model->countUsers();   
+            $data['count_ativos'] = $this->users_model->countUsersAtivos();   
+            $data['count_pedidos'] = $this->pedidos_model->countAdminPedidos();   
             $this->load->view('admin/inc/html-header');
-            $this->load->view('admin/inc/header', $data_perfil);
+            $this->load->view('admin/inc/header', $data);
             $this->load->view('admin/videos', $data);
             $this->load->view('admin/inc/footer');
             $this->load->view('admin/inc/html-footer');
 	}
 
      public function alterar($id) {
-        $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
-        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
+        $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');
+        $data['perfil'] = $this->users_model->exibir_Perfil($user);    
         $data['livro'] = $this->capitulos_model->detalheVideo($id);
+        $data['count_livros'] = $this->livros_model->countAdminLivros();   
+        $data['count_users'] = $this->users_model->countUsers();   
+        $data['count_ativos'] = $this->users_model->countUsersAtivos();   
+        $data['count_pedidos'] = $this->pedidos_model->countAdminPedidos();   
         $this->load->view('admin/inc/html-header');
-        $this->load->view('admin/inc/header', $data_perfil);
+        $this->load->view('admin/inc/header', $data);
         $this->load->view('admin/alterar_video', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
     }
 
     public function alterar_imagem($id) {
-        $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
-        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
+        $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');
+        $data['perfil'] = $this->users_model->exibir_Perfil($user);    
         $data['livro'] = $this->capitulos_model->detalheLivro($id);
+        $data['count_livros'] = $this->livros_model->countAdminLivros();   
+        $data['count_users'] = $this->users_model->countUsers();   
+        $data['count_ativos'] = $this->users_model->countUsersAtivos();   
+        $data['count_pedidos'] = $this->pedidos_model->countAdminPedidos();   
         $this->load->view('admin/inc/html-header');
-        $this->load->view('admin/inc/header', $data_perfil);
+        $this->load->view('admin/inc/header', $data);
         $this->load->view('admin/alterar_imagem_livro', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
@@ -97,10 +110,10 @@ class Videos extends CI_Controller {
             }
            
             if ($this->videos_model->adicionarVideo($titulo, $conteudo, $imagem, $valor, $status, $ordem)) {
-                $this->session->set_flashdata("success", "O livro foi adicionado com sucesso.");
+                $this->session->set_flashdata("success", "O vídeo foi adicionado com sucesso.");
                 redirect(base_url('admin/livros'));
             } else {
-                echo "Erro ao cadastrar o livro";
+                echo "Erro ao cadastrar o vídeo";
             }
         }
     }
@@ -156,7 +169,7 @@ class Videos extends CI_Controller {
 
     public function adicionarVideo() {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'Capítulo', 'required');
+        $this->form_validation->set_rules('titulo', 'Título', 'required');
         if ($this->form_validation->run() == false) {
             $this->index();
         } else {
@@ -164,8 +177,7 @@ class Videos extends CI_Controller {
                 $conteudo = $this->input->post('editor1');
                 $video = $this->input->post('video');       
                 $id_livro = $this->input->post('id_livro');
-                $ordem = $this->input->post('ordem');
-                $id_capitulo = $this->input->post('id_capitulo');
+                $ordem = $this->input->post('ordem');              
 
                 if ($this->input->post('btn_publicar') == true) {
                     $status = 1;
@@ -173,7 +185,7 @@ class Videos extends CI_Controller {
                     $status = 0;
                 }
 
-                if($this->videos_model->adicionar_video($titulo, $conteudo, $video, $id_livro, $status, $ordem, $id_capitulo)) {
+                if($this->videos_model->adicionar_video($titulo, $conteudo, $video, $id_livro, $status, $ordem)) {
                     $this->videos_model->adicionar_video_capitulo($id_capitulo, $id_livro, $status);
                     $this->session->set_flashdata("success", "O vídeo foi adicionado com sucesso.");
                 redirect(base_url('admin/livros/videos/' . $id_livro));

@@ -1,7 +1,7 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header"><a href="<?php echo base_url('admin/pedidos'); ?>">Pedidos</a> > Itens de Pedido ( ID <?php echo zerofill($itens[0]->id_pedido); ?> ) - Usuário: </h3>
+                    <h3 class="page-header"><a href="<?php echo base_url('admin/pedidos'); ?>">Pedidos</a> > Itens de Pedido ID <?php echo $itens[0]->id_pedido; ?> - Usuário: <?php echo $itens[0]->nome; ?> <?php echo $itens[0]->sobrenome; ?> ( <?php echo zerofill($itens[0]->id); ?> ) </h3>
 
                 </div>
                 <!-- /.col-lg-12 -->
@@ -50,7 +50,7 @@
                                         <td class="text-center"><?php echo reais($item->preco); ?></td>      
                                         <td class="text-center"><?php echo FormData($item->data_item); ?></td>
                                             <td class="text-center">
-       <b data="<?php echo $item->id_item; ?>" class="status_checks btn btn-sm <?php echo ($item->situacao) ? 'btn-success' : 'btn-warning' ?>"><?php echo ($item->situacao) ? 'Ativo <span title="Ativo" class="glyphicon glyphicon-ok"></span>' : 'Inativo <span title="Inativo" class="glyphicon glyphicon-minus"></span>' ?></b>                                            
+       <b data="<?php echo $item->id_item; ?>" class="btn btn-sm <?php echo ($item->status_pedido) ? 'btn-success' : 'btn-warning' ?>"><?php echo ($item->status_pedido) ? 'Ativo <span title="Ativo" class="glyphicon glyphicon-ok"></span>' : 'Inativo <span title="Inativo" class="glyphicon glyphicon-minus"></span>' ?></b>                                            
                                           </td>
                                         <td class="text-center">
             <a href="<?php echo base_url('admin/pedidos/alterar/' . $item->id_item); ?>" title="Editar" class="btn btn-sm btn-primary"><b><i class="fa fa-edit"></i></b></a>

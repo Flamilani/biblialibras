@@ -2,7 +2,7 @@
             <div class="row">
 
                 <div class="col-lg-12">
-<h3 class="page-header"><a href="<?php echo base_url('admin/livros'); ?>">Livros</a> > Vídeos:  
+<h3 class="page-header"><a href="<?php echo base_url('admin/livros'); ?>"> <i class="fa fa-book fa-fw"></i> Livros</a> > Vídeos:  
   <?php echo $titulo_livro[0]->titulo; ?> </h3>
 
                 </div>
@@ -29,10 +29,9 @@
                         </div>
                         <div class="panel-body caixa_livro">
   <?php $titulo = array('name' => 'titulo', 'id' => 'titulo', 'type' => 'text', 'titulo', 'value' => set_value('titulo'), 'class' => 'form-control', 'placeholder' => 'Título');
-    $valor = array('name' => 'valor', 'type' => 'text', 'id' => 'valor', 'value' => set_value('valor'), 'class' => 'form-control', 'placeholder' => '0,00');
     $conteudo = array('name' => 'editor1', 'type' => 'text', 'id' => 'editor1', 'value' => set_value('editor1'), 'class' => 'form-control', 'rows' => '3');
    $ordem = array('name' => 'ordem', 'type' => 'number', 'id' => 'ordem', 'value' => '000', 'class' => 'form-control', 'placeholder' => '000');
-      $capitulo = array('name' => 'id_capitulo', 'type' => 'number', 'id' => 'id_capitulo', 'min'=>'1', 'max'=>'50', 'value' => set_value('capitulo'), 'class' => 'form-control', 'placeholder' => '0');
+      $capitulo = array('name' => 'id_capitulo', 'type' => 'number', 'id' => 'id_capitulo', 'min'=>'1', 'max'=>'999', 'value' => set_value('capitulo'), 'class' => 'form-control', 'placeholder' => '0');
      $button = array('name' => 'btn_adicionar', 'id' => 'btn_adicionar', 'type' => 'submit', 'class' => 'btn btn-warning', 'value' => 'Salvar como rascunho');
      $buttonPubl = array('name' => 'btn_publicar', 'id' => 'btn_publicar', 'type' => 'submit', 'class' => 'btn btn-success', 'value' => 'Publicar'); ?>
 <?php $url = $this->uri->segment(4); ?>
@@ -51,22 +50,7 @@
                                         </div>     
                                     </div>
                             </div>
-                            <div class="row">
-                             
-                             <div class="col-md-6"> 
-                                <div class="form-group">
-                                   <?php echo form_label('Capítulo', 'id_capitulo') ?> <br>
-                             <select class="form-control" name="id_capitulo" id="id_capitulo">
-                                   <option value="0">Selecione</option>    
-                                   <?php     
-                                      $count = $count_videos[0]->capitulos;
-                                   for($i = 1; $i <= $count; $i++) { ?>
-                                   <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                       <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>  
-                              </div>  
+                           
                             <div class="row">
                                <div class="col-md-6">   
                                 <div class="form-group">
@@ -104,7 +88,6 @@
                                         <th>Ordem</th>
                                         <th>Título</th>
                                         <th>Vídeo</th>
-                                        <th>Capítulo</th>
                                         <th>Status</th>
                                         <th>Ações</th>
                                     </tr>
@@ -115,7 +98,13 @@
                                 <tr class="odd gradeX">
                                   <td class="text-center"><?php echo $video->ordem; ?></td>
                                         <td><?php echo $video->titulo; ?><?php echo form_hidden($video->id_video); ?></td>                                       
-                                          
+                                        <!--  <td class="text-center">
+                                          <?php if($video->id_capitulo != 0): ?>
+                                          <?php echo $titulo_livro[0]->sigla; ?> <?php echo $video->id_capitulo; ?>
+                                            <?php else: ?>
+                                              Sem capítulo
+                                            <?php endif; ?>
+                                          </td>  -->
                                           <td class="text-center">
      <?php if(isset($video->video) && $video->video != null): ?>
           <a href="<?php echo base_url('admin/livros/alterar_video/' . $video->id_video); ?>" title="Editar Vídeo" class="btn btn-sm btn-success">Alterar Vídeo</a>
@@ -124,9 +113,9 @@
    <a href="<?php echo base_url('admin/livros/alterar_video/' . $video->id_video); ?>" title="Editar" class="btn btn-sm btn-primary">Inserir Vídeo</a>
  <?php endif; ?>
                                           </td>
-                                          <td class="text-center">Capítulo <?php echo $video->cap; ?></td>        
+                                                  
                                             <td class="text-center">
-       <b data="<?php echo $video->id_video; ?>" class="status_checks btn btn-sm <?php echo ($video->status_video) ? 'btn-success' : 'btn-warning' ?>"><?php echo ($video->status_video) ? 'Ativo <span title="Ativo" class="glyphicon glyphicon-ok"></span>' : 'Inativo <span title="Inativo" class="glyphicon glyphicon-minus"></span>' ?></b>                                            
+       <b data="<?php echo $video->id_video; ?>" class="status_checks btn btn-sm <?php echo ($video->status) ? 'btn-success' : 'btn-warning' ?>"><?php echo ($video->status) ? 'Ativo <span title="Ativo" class="glyphicon glyphicon-ok"></span>' : 'Inativo <span title="Inativo" class="glyphicon glyphicon-minus"></span>' ?></b>                                            
                                           </td>
                                         <td class="text-center">
             <a href="<?php echo base_url('admin/livros/alterar_video_id/' . $video->id_video); ?>" title="Editar" class="btn btn-sm btn-primary"><b><i class="fa fa-edit"></i></b></a>
@@ -167,7 +156,7 @@ el.addEventListener("keyup", updatetext , false);
 
       $('#valor').mask('0.000,00', {reverse: true});
 
-      $("#capitulo").mask("00");
+      $("#id_capitulo").mask("000");
 
       Shadowbox.init();
 

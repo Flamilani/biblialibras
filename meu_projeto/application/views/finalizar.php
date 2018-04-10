@@ -1,6 +1,3 @@
-<?php
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-?>
    <form action="<?php echo base_url('home/finalizar_compra'); ?>" method="post">
      <div class="container headTop">
       <div class="row">
@@ -39,46 +36,45 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 				<br>
 					 </div>
 					 <div class="col-lg-6 col-md-6 text-center">
-            <div class="form-group text-left">
-            <!--   <label for="forma_pago">Forma de Pagamento</label>
+         <!--    <div class="form-group text-left">
+              <label for="forma_pago">Forma de Pagamento</label>
               <select class="form-control" name="forma_pago" id="forma_pago">
                 <option value="deposito">Depósito</option>
                 <option value="pagseguro">PagSeguro</option>
-              </select> -->
-            </div>
+              </select>
+            </div> -->
             <input name="tipo_pagamento" id="tipo_pagamento" type="hidden" value="deposito" />
          <input name="id_user" id="id_user" type="hidden" value="<?php echo $this->session->userdata('user')->id; ?>" />
-            <div class="deposito box">
+      <!--      <div class="deposito">
 				<div class="panel panel-primary">
 			  <div class="panel-heading"><b>Depósito / Transferência Bancária</b>  </div>
-			  <div class="panel-body">
-			  	<div class="table-responsive">
-			  	<table class="table table-bordered text-center">		  		
+			  		  
+			  	<table class="table">		  		
 	
     				<tr>
     					<td><b>Favorecido</b></td>
-    					<td> <?php echo $dados[0]->banco_favorecido; ?></td>
+    					<td> <?php /*echo $dados[0]->banco_favorecido; */?></td>
     				</tr>
     					<td><b>Banco</b></td>
-    					<td><?php echo $dados[0]->banco_nome_id; ?></td>
+    					<td><?php /*echo $dados[0]->banco_nome; */?></td>
     				<tr>
     					<td><b>Agência</b></td>
-    					<td><?php echo $dados[0]->banco_agencia; ?></td>
+    					<td><?php /*echo $dados[0]->banco_agencia; */?></td>
     				</tr>
     				<tr>
     					<td><b>Conta Corrente</b></td>
-    					<td><?php echo $dados[0]->banco_conta; ?>
-    			<?php if(isset($dados[0]->banco_digito) && empty($dados[0]->banco_digito) == false): ?>  
- 					- <?php echo $dados[0]->banco_digito; ?>			
-    							<?php else: ?>
+    					<td><?php /*echo $dados[0]->banco_conta; */?>
+    			<?php /*if(isset($dados[0]->banco_digito) && empty($dados[0]->banco_digito) == false): */?>
+ 					- <?php /*echo $dados[0]->banco_digito; */?>
+    							<?php /*else: */?>
 							- 0
-    							<?php endif; ?></td>
+    							<?php /*endif; */?></td>
     				</tr>    			
   			    </table>
-			</div>
-			  </div>
+		
+			 
 				</div>
-        </div>
+        </div>-->
 					 </div>
                                     </div>
          

@@ -6,20 +6,35 @@ class Usuarios extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model("users_model");
+        $this->load->model("livros_model");
+        $this->load->model("pedidos_model");
+        $this->load->model("plano_model");
+        $this->load->model("acessos_model");
+        $this->load->model("registros_model");
+        $this->load->model("auditoria_model");
 
          if(!$this->session->userdata('logadmin')) {
             redirect(base_url('admin/login'));
         }
     }
 
-   public function index()	{ 
+   public function index()	{
+       // $this->output->enable_profiler(TRUE);
     $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
-        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
-        // $this->output->enable_profiler(TRUE);
+            $data['perfil'] = $this->users_model->exibir_Perfil($user);    
             $data['count_users'] = $this->users_model->countUsers();   
             $data['users'] = $this->users_model->lista_Users();    
+            $data['count_livros'] = $this->livros_model->countAdminLivros();   
+            $data['count_users'] = $this->users_model->countUsers();   
+            $data['count_cadastrados'] = $this->users_model->qtdCadastrados();  
+            $data['count_usuarios'] = $this->users_model->qtdUsuariosAtivos();  
+            $data['count_ativos'] = $this->users_model->countUsersAtivos();   
+            $data['count_pedidos'] = $this->pedidos_model->countAdminPedidos();   
+            $data['count_assinaturas'] = $this->plano_model->countAdminAssinaturas();   
+            $data['count_pagos'] = $this->plano_model->countAdminPagos();   
+            $data['count_planos'] = $this->plano_model->countAdminPlanos();  
             $this->load->view('admin/inc/html-header');
-            $this->load->view('admin/inc/header', $data_perfil);
+            $this->load->view('admin/inc/header', $data);
             $this->load->view('admin/usuarios', $data);
             $this->load->view('admin/inc/footer');
             $this->load->view('admin/inc/html-footer');
@@ -27,11 +42,20 @@ class Usuarios extends CI_Controller {
 
      public function perfil($id)    { 
         $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
-        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
            // $this->output->enable_profiler(TRUE);
             $data['perfil'] = $this->users_model->exibir_Perfil($id);    
+            $data['count_livros'] = $this->livros_model->countAdminLivros();   
+            $data['count_users'] = $this->users_model->countUsers();   
+            $data['count_ativos'] = $this->users_model->countUsersAtivos();   
+            $data['count_pedidos'] = $this->pedidos_model->countAdminPedidos();  
+            $data['count_assinaturas'] = $this->plano_model->countAdminAssinaturas();   
+            $data['count_pagos'] = $this->plano_model->countAdminPagos();   
+            $data['count_planos'] = $this->plano_model->countAdminPlanos();  
+            $data['acessos'] = $this->acessos_model->exibir_acessosPerfil($id);
+            $data['registros'] = $this->registros_model->exibir_registrosPerfil($id);
+            $data['logins'] = $this->auditoria_model->exibir_auditoriaPerfil($id);
             $this->load->view('admin/inc/html-header');
-            $this->load->view('admin/inc/header', $data_perfil);
+            $this->load->view('admin/inc/header', $data);
             $this->load->view('admin/perfil', $data);
             $this->load->view('admin/inc/footer');
             $this->load->view('admin/inc/html-footer');
@@ -39,10 +63,17 @@ class Usuarios extends CI_Controller {
 
      public function alterar_senha($id) {
         $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
-        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
+        $data['perfil'] = $this->users_model->exibir_Perfil($user);    
         $data['perfil'] = $this->users_model->exibir_Perfil($id);
+        $data['count_livros'] = $this->livros_model->countAdminLivros();   
+        $data['count_users'] = $this->users_model->countUsers();   
+        $data['count_ativos'] = $this->users_model->countUsersAtivos();   
+        $data['count_pedidos'] = $this->pedidos_model->countAdminPedidos();  
+        $data['count_assinaturas'] = $this->plano_model->countAdminAssinaturas();   
+        $data['count_pagos'] = $this->plano_model->countAdminPagos();   
+        $data['count_planos'] = $this->plano_model->countAdminPlanos();  
         $this->load->view('admin/inc/html-header');
-        $this->load->view('admin/inc/header', $data_perfil);
+        $this->load->view('admin/inc/header', $data);
         $this->load->view('admin/alterar_senha', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
@@ -50,10 +81,17 @@ class Usuarios extends CI_Controller {
 
     public function alterar_imagem($id) {
         $user = (isset($this->session->userdata('admin')->id) ? $this->session->userdata('admin')->id : '');    
-        $data_perfil['perfil'] = $this->users_model->exibir_Perfil($user);    
+        $data['perfil'] = $this->users_model->exibir_Perfil($user);    
         $data['livro'] = $this->livros_model->detalheLivro($id);
+        $data['count_livros'] = $this->livros_model->countAdminLivros();   
+        $data['count_users'] = $this->users_model->countUsers();   
+        $data['count_ativos'] = $this->users_model->countUsersAtivos();   
+        $data['count_pedidos'] = $this->pedidos_model->countAdminPedidos();
+        $data['count_assinaturas'] = $this->plano_model->countAdminAssinaturas();   
+        $data['count_pagos'] = $this->plano_model->countAdminPagos();   
+        $data['count_planos'] = $this->plano_model->countAdminPlanos();  
         $this->load->view('admin/inc/html-header');
-        $this->load->view('admin/inc/header', $data_perfil);
+        $this->load->view('admin/inc/header', $data);
         $this->load->view('admin/alterar_imagem_livro', $data);
         $this->load->view('admin/inc/footer');
         $this->load->view('admin/inc/html-footer');
@@ -75,7 +113,6 @@ class Usuarios extends CI_Controller {
             $dados['celular'] = $this->input->post('celular');
             $dados['data_nasc'] = $this->input->post('data_nasc');
             $dados['cpf'] = $this->input->post('cpf');
-            $dados['tipo'] = $this->input->post('tipo');
             $dados['endereco'] = $this->input->post('endereco');
             $dados['numero'] = $this->input->post('numero');
             $dados['compl'] = $this->input->post('compl');
@@ -88,6 +125,8 @@ class Usuarios extends CI_Controller {
             $dados['igreja'] = $this->input->post('igreja');
             $dados['funcao'] = $this->input->post('funcao');
             $dados['saber'] = $this->input->post('saber');
+            $dados['acesso'] = $this->input->post('acesso');
+            $dados['sexo'] = $this->input->post('sexo');
 
              if ($this->input->post('btn_publicar') == true) {
                     $dados['status'] = 1;
@@ -104,7 +143,7 @@ class Usuarios extends CI_Controller {
         }
     }
 
-    public function assinar() {
+    public function __assinar() {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('nome', 'Nome', 'required');
         if ($this->form_validation->run() == false) {
@@ -171,12 +210,10 @@ class Usuarios extends CI_Controller {
             $dados['nome'] = $this->input->post('nome');
             $dados['sobrenome'] = $this->input->post('sobrenome');
             $dados['email'] = $this->input->post('email');
-            $dados['senha'] = $this->input->post('senha');
             $dados['telefone'] = $this->input->post('telefone');
             $dados['celular'] = $this->input->post('celular');
             $dados['data_nasc'] = $this->input->post('data_nasc');
             $dados['cpf'] = $this->input->post('cpf');
-            $dados['tipo'] = $this->input->post('tipo');
             $dados['endereco'] = $this->input->post('endereco');
             $dados['numero'] = $this->input->post('numero');
             $dados['compl'] = $this->input->post('compl');
@@ -189,6 +226,8 @@ class Usuarios extends CI_Controller {
             $dados['igreja'] = $this->input->post('igreja');
             $dados['funcao'] = $this->input->post('funcao');
             $dados['saber'] = $this->input->post('saber');
+            $dados['acesso'] = $this->input->post('acesso');
+            $dados['sexo'] = $this->input->post('sexo');
 
              if ($this->input->post('btn_publicar') == true) {
                     $dados['status'] = 1;
