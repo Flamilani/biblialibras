@@ -10,9 +10,7 @@
         <?php echo validation_errors('<div class="alert alert-warning alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <i class="icon fa fa-warning"></i>', '</div>'); ?> 
-  <?php $nome = array('name' => 'nome', 'id' => 'nome', 'type' => 'nome', 'class' => 'form-control', 'placeholder' => 'Nome', 'data-error' => 'Informe seu nome.', 'required' => 'required'); ?>
-  <?php $sobrenome = array('name' => 'sobrenome', 'id' => 'sobrenome', 'type' => 'nome', 'class' => 'form-control', 'placeholder' => 'Sobrenome', 'data-error' => 'Informe seu sobrenome.', 'required' => 'required'); ?>
-    <?php $data = array('name' => 'data_nasc', 'id' => 'data_nasc', 'type' => 'data', 'class' => 'form-control', 'placeholder' => 'Data de Nascimento', 'data-error' => 'Informe sua data de nascimento.', 'required' => 'required'); ?>
+
  <?php $cpf = array('name' => 'cpf', 'id' => 'cpf', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'CPF', 'data-error' => 'Informe seu nº de CPF.', 'required' => 'required'); ?>
   <?php $email = array('name' => 'email', 'id' => 'email', 'type' => 'email', 'class' => 'form-control', 'placeholder' => 'E-mail', 'data-error' => 'Informe seu e-mail.', 'required' => 'required'); ?>
   <?php $telefone    = array('name' => 'telefone', 'id' => 'telefone', 'type' => 'tel', 'class' => 'form-control', 'placeholder' => 'Seu número de telefone', 'data-error' => 'Informe seu nº de telefone.', 'required' => 'required'); ?>
@@ -35,20 +33,32 @@
          <?php echo form_open(base_url('users/registrar'), array('id'=>'SendAssinatura')); ?>   
                     <div class="row">
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-3 col-lg-3">
-                              <div class="form-group has-feedback">              
+                              <div class="form-group has-feedback">
+                          <?php 
+                      $nome = array('name' => 'nome', 
+                                    'id' => 'nome', 
+                                    'type' => 'nome', 
+                                    'class' => 'form-control', 
+                                    'placeholder' => 'Nome', 
+                                    'data-error' => 'Informe seu nome.', 
+                                    'required' => 'required'); 
+                                    ?>              
                             <?php echo form_label('Nome', 'nome') . form_input($nome); ?>
                              <span class="help-block with-errors"></span>
                             </div>                      
                          </div>
                             <div class="form-group floating-label-form-group controls col-xs-12 col-md-3 col-lg-3">
-                              <div class="form-group has-feedback">              
+                              <div class="form-group has-feedback">     
+                          <?php $sobrenome = array('name' => 'sobrenome', 'id' => 'sobrenome', 'type' => 'nome', 'class' => 'form-control', 'placeholder' => 'Sobrenome', 'data-error' => 'Informe seu sobrenome.', 'required' => 'required'); ?>       
                             <?php echo form_label('Sobrenome', 'sobrenome') . form_input($sobrenome); ?>
                              <span class="help-block with-errors"></span>
                             </div>                      
                          </div>
+
                         <div class="form-group floating-label-form-group controls col-xs-12 col-md-6 col-lg-6">
                            <div class="form-group has-feedback">  
-                     <?php echo form_label('Data de Nascimento', 'data_nasc'); ?>   
+                     <?php echo form_label('Data de Nascimento', 'data_nasc'); ?>  
+<?php $data = array('name' => 'data_nasc', 'id' => 'data_nasc', 'type' => 'data', 'class' => 'form-control', 'placeholder' => 'Data de Nascimento', 'data-error' => 'Informe sua data de nascimento.', 'required' => 'required'); ?> 
                             <?php echo form_input($data); ?>   
                          <span class="help-block with-errors"></span>
                       </div> 

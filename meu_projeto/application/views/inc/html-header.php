@@ -34,7 +34,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
+<!--     <script>
 // <!--
 var mensagem="";
 function clickIE() {if (document.all) {(mensagem);return false;}}
@@ -72,7 +72,7 @@ document.oncontextmenu=new Function("return false")
             });
 
     </script>
-        
+         -->
    
 </head>
 <body id="page-top" class="index" oncontextmenu="return false" ondragstart="return false" onselectstart="return false">  

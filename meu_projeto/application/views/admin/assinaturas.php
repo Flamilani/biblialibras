@@ -54,8 +54,12 @@
                                              <select class="form-control" name="id_plano" id="id_plano">
                                    <option value="0">Selecione</option>
                                    <option value="800"> &asymp; Livre</option>    
-                                   <?php foreach ($planos as $pls): ?>             
-                    <option value="<?php echo $pls->id_planos; ?>" disabled><b><?php echo $pls->nome_plano; ?></b></option>
+                                   <?php foreach ($planos as $pls): ?>
+                                   <?php if($pls->id_planos == 0): ?>             
+                    <option value="<?php echo $pls->id_planos; ?>"><b><?php echo $pls->nome_plano; ?></b></option>
+                                  <?php else: ?>
+                                    <option value="<?php echo $pls->id_planos; ?>" disabled><b><?php echo $pls->nome_plano; ?></b></option>
+                                  <?php endif; ?>
     <?php $rowsPlano = $this->db->query("SELECT * FROM plano WHERE status = 1 AND id_planos = {$pls->id_planos}"); ?>   
             <?php $selPl = $rowsPlano->result(); ?>                  
             <?php foreach ($selPl as $pl): ?>   
